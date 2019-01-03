@@ -70,9 +70,11 @@ moba_hare.conversations_excluded_for_evaluation = ['example_convo']
 
 ### Training
 
-At some point, you might want to do some training yourself. This can for example be the case because you are applying HaRe in another domain than the pretrained models, and harassment looks slightly different there, or because you even want to detect something different than harassment. Whatever your goals are, it is probably most effective to repurpose the existing HaRe models ('transfer learning'). 
+At some point, you might want to do some training yourself. This can for example be the case because you are applying HaRe in another domain than the pretrained models, and harassment looks slightly different there, or because you even want to detect something different than harassment.
 
-To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
+#### Transfer learning
+
+Whatever your goals are, it is probably most effective to repurpose the existing HaRe models ('transfer learning'). To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
 
 ```python
 from hare import load_pretrained, Utterance
@@ -99,6 +101,8 @@ moba_hare.retrain()
 moba_hare.save(name='moba_extended')
 ```
 
+#### Starting from scratch and word embeddings
+
 If you don't want to use transfer learning with an existing model, you can also start from scratch. The procedure is largely the same, except that you don't use the `load_pretrained` function, and use `train` instead of `retrain`:
 
 ```python
@@ -121,7 +125,7 @@ new_hare.train()
 
 It will probably highly effective to use so-called word embeddings during training. You can see these embeddings as a dictionary that translates from a word's characters to an estimate of its meaning. Research has shown that classifying these 'meanings' is much more successful that classifying the raw words. [reference] . To use them, simply point your HaRe object to the embedding file in the `embeddings` folder before training:
 
-```
+```python
 new_hare.embedding_file = 'english_large'
 new_hare.train()
 ```
