@@ -72,7 +72,7 @@ moba_hare.conversations_excluded_for_evaluation = ['example_convo']
 
 At some point, you might want to do some training yourself. This can for example be the case because you are applying HaRe in another domain than the pretrained models, and harassment looks slightly different there, or because you even want to detect something different than harassment.
 
-#### 2.3.1 Transfer learning
+#### 2.3.1 Recommended: transfer learning
 
 Whatever your goals are, it is probably most effective to repurpose the existing HaRe models ('transfer learning'). To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
 
@@ -101,7 +101,7 @@ moba_hare.retrain()
 moba_hare.save(name='moba_extended')
 ```
 
-#### 2.3.2 Starting from scratch and word embeddings
+#### 2.3.2 Starting from scratch with word embeddings
 
 If you don't want to use transfer learning with an existing model, you can also start from scratch. The procedure is largely the same, except that you don't use the `load_pretrained` function, and use `train` instead of `retrain`:
 
