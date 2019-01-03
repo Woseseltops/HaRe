@@ -9,9 +9,9 @@ HaRe (Harassment Recognizer) is a command line tool and Python library to automa
 
 ### Basic usage
 
-The easiest way to use HaRe is by simply loading a pretrained HaRe model included with this repo, like the one named 'moba':
+The easiest way to use HaRe is by simply loading a pretrained HaRe model included with this repo in the `models` folder, like the one named 'moba':
 
-```
+```python
 from hare import load_pretrained
 
 moba_hare = load_pretrained('moba')
@@ -19,7 +19,7 @@ moba_hare = load_pretrained('moba')
 
 You can then use this object to monitor conversations in progress:
 
-```
+```python
 moba_hare.start_conversation(conversation_id='example_convo')
 moba_hare.add_utterance(speaker='a',content='hello')
 moba_hare.add_utterance(speaker='b',content='hi everyone')
@@ -27,7 +27,7 @@ moba_hare.add_utterance(speaker='b',content='hi everyone')
 
 You can also add multiple sentences at once; for example a whole conversation if it has already finished.
 
-```
+```python
 from hare import Utterance
 
 moba_hare.add_utterances([Utterance(speaker='a',content='good luck'),
@@ -36,51 +36,35 @@ moba_hare.add_utterances([Utterance(speaker='a',content='good luck'),
 
 At any point in time, you can then request the current status of the conversation according to this HaRe model:
 
-```
+```python
 moba_hare.get_status()
 ```
 
-You can also request this status at each point in the conversation so far:
+If you want to reuse this HaRe model for another conversation, make sure to create a new conversation before you start adding utterances. You can later use `switch_conversation` to indicate which conversation is currently active.
 
-```
-moba_hare.get_status_history()
-```
-
-If you want to reuse this HaRe model for another conversation, make sure to create a new conversation before you start adding utterances:
-
-```
+```python
 moba_hare.start_conversation(conversation_id='second_convo')
-```
-
-You can switch between conversations that are currently active if needed:
-
-```
+moba_hare.start_conversation(conversation_id='third_convo')
 moba_hare.switch_conversation(conversation_id='example_convo')
-```
-
-You can list the currently active conversations like this:
-
-```
-moba_hare.all_conversation_ids
 ```
 
 ### Evaluating
 
 If you have a labeled dataset (that is: for each conversation an indication which participants are considered toxic), HaRe can calculate to what extent its judgments match the labels. A label can range from the default 0 (not toxic at all) to 1 (maximally toxic). Let's label speaker `c`: 
 
-```
+```python
 moba_hare.label_speaker('c',0.9)
 ```
 
 There are several evaluation metrics, depending on what is important to you (detecting ALL harassment, detecting harassment quickly, no false positives, etc):
 
-```
+```python
 moba_hare.calculate_accuracy()
 ```
 
 These metrics are calculated on the basis on all conversations the HaRe object is aware of that have at least 1 labeled participant. If you want to exclude a label from evaluation, simply add it to the `conversations_excluded_for_evaluation` list:
 
-```
+```python
 moba_hare.conversations_excluded_for_evaluation = ['example_convo']
 ```
 
@@ -90,10 +74,56 @@ At some point, you might want to do some training yourself. This can for example
 
 To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
 
-```
-moba_hare.conversations_excluded_for_training = ['']
+```python
+from hare import load_pretrained, Utterance
+
+moba_hare = load_pretrained('moba')
+
+moba_hare.start_conversation(conversation_id='convo_001')
+moba_hare.label_speaker('b',1)
+moba_hare.add_utterances([Utterance(speaker='a',content='good luck'),
+                          Utterance(speaker='b',content='ur all n00bs')])
+
+moba_hare.start_conversation(conversation_id='convo_002')
+moba_hare.label_speaker('b',1)
+moba_hare.add_utterances([Utterance(speaker='a',content='hi'),
+                          Utterance(speaker='b',content='SHUT UP!')])
+
+moba_hare.conversations_excluded_for_training = ['convo_002']
 ```
 
-# Todo
+Then, use the `retrain` command to take the old model and refit it to you new dataset. You can then use `save` to store it as a pretrained model in the `models` folder. You can later access this model with `load_pretrained` like the other pretrained models in that same folder.
 
-Maybe not mention every command here, this is not the docs.
+```python
+moba_hare.retrain()
+moba_hare.save(name='moba_extended')
+```
+
+If you don't want to use transfer learning with an existing model, you can also start from scratch. The procedure is largely the same, except that you don't use the `load_pretrained` function, and use `train` instead of `retrain`:
+
+```python
+from hare import Hare, Utterance
+
+new_hare = Hare()
+
+new_hare.start_conversation(conversation_id='convo_001')
+new_hare.label_speaker('b',1)
+new_hare.add_utterances([Utterance(speaker='a',content='good luck'),
+                          Utterance(speaker='b',content='ur all n00bs')])
+
+new_hare.start_conversation(conversation_id='convo_002')
+new_hare.label_speaker('b',1)
+new_hare.add_utterances([Utterance(speaker='a',content='hi'),
+                          Utterance(speaker='b',content='SHUT UP!')])
+
+new_hare.train()
+```
+
+It will probably highly effective to use so-called word embeddings during training. You can see these embeddings as a dictionary that translates from a word's characters to an estimate of its meaning. Research has shown that classifying these 'meanings' is much more successful that classifying the raw words. [reference] . To use them, simply point your HaRe object to the embedding file in the `embeddings` folder before training:
+
+```
+new_hare.embedding_file = 'english_large'
+new_hare.train()
+```
+
+Of course, these embeddings should be in the same language as the rest of your dataset.
