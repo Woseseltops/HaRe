@@ -3,11 +3,11 @@ HaRe (Harassment Recognizer) is a command line tool and Python library to automa
 
 [plaatje]
 
-## Using HaRe as command line tool
+## 1. Using HaRe as command line tool
 
-## Using HaRe as Python library
+## 2. Using HaRe as Python library
 
-### Basic usage
+### 2.1 Basic usage
 
 The easiest way to use HaRe is by simply loading a pretrained HaRe model included with this repo in the `models` folder, like the one named 'moba':
 
@@ -48,7 +48,7 @@ moba_hare.start_conversation(conversation_id='third_convo')
 moba_hare.switch_conversation(conversation_id='example_convo')
 ```
 
-### Evaluating
+### 2.2 Evaluating
 
 If you have a labeled dataset (that is: for each conversation an indication which participants are considered toxic), HaRe can calculate to what extent its judgments match the labels. A label can range from the default 0 (not toxic at all) to 1 (maximally toxic). Let's label speaker `c`: 
 
@@ -68,11 +68,11 @@ These metrics are calculated on the basis on all conversations the HaRe object i
 moba_hare.conversations_excluded_for_evaluation = ['example_convo']
 ```
 
-### Training
+### 2.3 Training
 
 At some point, you might want to do some training yourself. This can for example be the case because you are applying HaRe in another domain than the pretrained models, and harassment looks slightly different there, or because you even want to detect something different than harassment.
 
-#### Transfer learning
+#### 2.3.1 Transfer learning
 
 Whatever your goals are, it is probably most effective to repurpose the existing HaRe models ('transfer learning'). To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
 
@@ -101,7 +101,7 @@ moba_hare.retrain()
 moba_hare.save(name='moba_extended')
 ```
 
-#### Starting from scratch and word embeddings
+#### 2.3.2 Starting from scratch and word embeddings
 
 If you don't want to use transfer learning with an existing model, you can also start from scratch. The procedure is largely the same, except that you don't use the `load_pretrained` function, and use `train` instead of `retrain`:
 
