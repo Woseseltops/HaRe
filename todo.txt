@@ -3,6 +3,9 @@ TODO
 * Experiment with neural nets:
   *  Reproduce this https://developers.google.com/machine-learning/guides/text-classification/ step by step
   * Check the scores with the LoL dataset
+    * Interpret the LoL dataset so it can be input to this experiment
+  * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
+  * Look for others studies, like from the workshop Iris mentioned... do they have interesting architectures? https://sites.google.com/view/alw3/past-workshops?authuser=0
 
 * Set up framework in Python (the code works)
   * Study structure of Glem
