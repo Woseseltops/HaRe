@@ -1,0 +1,13 @@
+TODO
+====
+* Experiment with neural nets:
+  *  Reproduce this https://developers.google.com/machine-learning/guides/text-classification/ step by step
+  * Check the scores with the LoL dataset
+
+* Set up framework in Python (the code works)
+  * Study structure of Glem
+  * Create the 2 data folders
+  * Implement the main Hare object
+  * Add all functionality mentioned in the readme
+
+* Make readme available as Jupyter notebook
