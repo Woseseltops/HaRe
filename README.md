@@ -123,7 +123,7 @@ new_hare.add_utterances([Utterance(speaker='a',content='hi'),
 new_hare.train()
 ```
 
-It will probably highly effective to use so-called word embeddings during training. You can see these embeddings as a dictionary that translates from a word's characters to an estimate of its meaning. Research has shown that classifying these 'meanings' is much more successful that classifying the raw words. [reference] . To use them, simply point your HaRe object to the embedding file in the `embeddings` folder before training:
+It will probably be highly effective to use so-called word embeddings during training. You can see these embeddings as a dictionary that translates from a word's characters to an estimate of its meaning. Research has shown that classifying these 'meanings' is much more successful that classifying the raw words. [reference] . To use them, simply point your HaRe object to the embedding file in the `embeddings` folder before training:
 
 ```python
 new_hare.embedding_file = 'english_large'
