@@ -1,10 +1,14 @@
 TODO
 ====
 * Experiment with neural nets:
-  *  Reproduce this https://developers.google.com/machine-learning/guides/text-classification/ step by step
   * Check the scores with the LoL dataset
-    * Interpret the LoL dataset so it can be input to this experiment
+    * https://developers.google.com/machine-learning/guides/text-classification/
+    * Embeddings inladen: https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html
+    * Test other vectors
+    * Add: sentence boundaries
+    * Test with real distr
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
+  * See if this best result can be improved by using Ulmfit http://nlp.fast.ai/ or Bert https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
   * Look for others studies, like from the workshop Iris mentioned... do they have interesting architectures? https://sites.google.com/view/alw3/past-workshops?authuser=0
 
 * Set up framework in Python (the code works)
