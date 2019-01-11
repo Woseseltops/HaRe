@@ -18,3 +18,4 @@ TODO
   * Add all functionality mentioned in the readme
 
 * Make readme available as Jupyter notebook
+* Look up: what exactly is ConvoKit?
