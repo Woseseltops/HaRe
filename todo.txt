@@ -3,8 +3,8 @@ TODO
 * Experiment with neural nets:
   * Check the scores with the LoL dataset
     * https://developers.google.com/machine-learning/guides/text-classification/
-    * Embeddings inladen: https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html
-    * Test other vectors
+    * Test other embedding sizes
+    * Test more
     * Add: sentence boundaries
     * Test with real distr
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
