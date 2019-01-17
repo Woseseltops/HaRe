@@ -1,11 +1,15 @@
 from os import listdir
 from collections import defaultdict
 from numpy import array, asarray, zeros
+
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
+
 from tensorflow.python.keras.preprocessing import sequence, text
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Embedding, Dropout, SeparableConv1D, MaxPooling1D, GlobalAveragePooling1D,Dense
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras import backend
 
 def sequence_vectorize(train_texts, val_texts,number_of_features,max_sequence_length):
 
@@ -29,12 +33,31 @@ def sequence_vectorize(train_texts, val_texts,number_of_features,max_sequence_le
     x_val = sequence.pad_sequences(x_val, maxlen=max_length)
     return x_train, x_val, tokenizer.word_index
 
+def precision(y_true, y_pred):
+    '''Calculates the precision, a metric for multi-label classification of
+    how many selected items are relevant.
+    '''
+    true_positives = backend.sum(backend.round(backend.clip(y_true * y_pred, 0, 1)))
+    predicted_positives = backend.sum(backend.round(backend.clip(y_pred, 0, 1)))
+    precision = true_positives / (predicted_positives + backend.epsilon())
+    return precision
+
+
+def recall(y_true, y_pred):
+    '''Calculates the recall, a metric for multi-label classification of
+    how many relevant items are selected.
+    '''
+    true_positives = backend.sum(backend.round(backend.clip(y_true * y_pred, 0, 1)))
+    possible_positives = backend.sum(backend.round(backend.clip(y_true, 0, 1)))
+    recall = true_positives / (possible_positives + backend.epsilon())
+    return recall
+
 #==== Parameters =====
 
 #Import data
 DATA_FOLDER = '../datasets/LoL/'
 CLASS_NAMES = ['nontoxic','toxic']
-DATA_LIMIT = 4000
+DATA_LIMIT = 30000
 
 #Vectorization settings
 NUMBER_OF_FEATURES = 20000
@@ -71,6 +94,8 @@ for class_index, classname in enumerate(CLASS_NAMES):
 
         if text_index > DATA_LIMIT:
             break
+
+print('loaded',len(texts),'texts')
 
 train_texts, test_texts, train_target, test_target = train_test_split(texts, target, test_size = 0.1, random_state=1,
                                                                       stratify=target)
@@ -134,7 +159,7 @@ model.add(Dense(OUTPUT_UNITS, activation=OUTPUT_ACTIVATION))
 
 print('compiling the model')
 optimizer = Adam(lr=LEARNING_RATE)
-model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['acc'])
+model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['acc',precision,recall])
 
 print('training the model')
 history = model.fit(
@@ -145,4 +170,6 @@ history = model.fit(
     verbose=2,  # Logs once per epoch.
     batch_size=BATCH_SIZE)
 
-print(history)
+results = [x[0] for x in model.predict_classes(test_vectors)]
+
+print(results)
