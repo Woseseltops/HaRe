@@ -5,16 +5,19 @@ RAW_DATA_FOLDER = '/vol/bigdata2/datasets2/LoL/ExtractedData/'
 OUTPUT_DATA_FOLDER = '/vol/tensusers2/wstoop/HaRe/datasets/LoL/'
 
 MERGE_REPORTED_PLAYER = False
-MAXIMUM_NUMBER_OF_PLAYERS = 1500
+MAXIMUM_NUMBER_OF_PLAYERS = None
 
 class PunishmentType(Enum):
 
     warning = 0
     time_ban = 1
 
-PUNISHMENT_TYPE_TO_FOLDER = {None: 'nontoxic/',
-							  PunishmentType.warning:'nontoxic/',
-							  PunishmentType.time_ban:'toxic/'}	
+toxic_file = open(OUTPUT_DATA_FOLDER+'toxic.txt','w')
+nontoxic_file = open(OUTPUT_DATA_FOLDER+'nontoxic.txt','w')
+	
+PUNISHMENT_TYPE_TO_FILE = {None: nontoxic_file,
+							  PunishmentType.warning: toxic_file,
+							  PunishmentType.time_ban:toxic_file}	
 	
 class Player():
 
@@ -37,7 +40,7 @@ number_of_players_processed = 0
 	
 for file in listdir(RAW_DATA_FOLDER):
 
-	if number_of_players_processed >= MAXIMUM_NUMBER_OF_PLAYERS:
+	if MAXIMUM_NUMBER_OF_PLAYERS != None and number_of_players_processed >= MAXIMUM_NUMBER_OF_PLAYERS:
 		break
 
 	print('%nr player processed',number_of_players_processed)
@@ -123,4 +126,4 @@ for file in listdir(RAW_DATA_FOLDER):
 	#Save the whole thing
 	for n, game in enumerate(players_per_game.values()):
 		for player_name, player in game.items():
-			open(OUTPUT_DATA_FOLDER+PUNISHMENT_TYPE_TO_FOLDER[player.punishment_type]+filename_without_extension+'.'+str(n)+'_'+player_name,'w').write('\n'.join(player.chat_messages))
+			PUNISHMENT_TYPE_TO_FILE[player.punishment_type].write(' LINEBREAK '.join(player.chat_messages) + '\n')
