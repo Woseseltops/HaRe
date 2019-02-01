@@ -1,9 +1,9 @@
 from os import listdir
-from collections import defaultdict
+from collections import Counter
 from numpy import array, asarray, zeros
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 
 from tensorflow.python.keras.preprocessing import sequence, text
 from tensorflow.python.keras.models import Sequential
@@ -52,32 +52,64 @@ def recall(y_true, y_pred):
     recall = true_positives / (possible_positives + backend.epsilon())
     return recall
 
+def set_dataset_balance(data,target,balance):
+
+    #Assumes balances >= 0.5
+
+    frequencies = Counter(target).most_common()
+    largest_class_label, largest_class_frequency = frequencies[0]
+    smallest_class_label, smallest_class_frequency = frequencies[-1]
+
+    desired_frequencies = {smallest_class_label:smallest_class_frequency,
+                           largest_class_label: round((smallest_class_frequency/balance)*(1-balance))}
+
+    balanced_data = []
+    balanced_target = []
+
+    nr_of_labels_in_balanced_set = {smallest_class_label: 0 , largest_class_label: 0}
+
+    for item, true_class in zip(data,target):
+
+        #If this is something we still needed, add it
+        if nr_of_labels_in_balanced_set[true_class] < desired_frequencies[true_class]:
+            balanced_data.append(item)
+            balanced_target.append(true_class)
+            nr_of_labels_in_balanced_set[true_class] += 1
+
+            #Check if we're done
+            if nr_of_labels_in_balanced_set[smallest_class_label] == desired_frequencies[smallest_class_label] and \
+                nr_of_labels_in_balanced_set[largest_class_label] == desired_frequencies[largest_class_label]:
+                break
+
+    return balanced_data, balanced_target
+
 #==== Parameters =====
 
 #Import data
 DATA_FOLDER = '../datasets/LoL/'
 CLASS_NAMES = ['nontoxic','toxic']
 DATA_LIMIT = 30000
+DOWNSAMPLING_RATE = 0.5
 
 #Vectorization settings
 NUMBER_OF_FEATURES = 20000
 MAX_SEQUENCE_LENGTH = 500
 
 #Embedding settings
-EMBEDDING_LOCATION = '/vol/bigdata/datasets/glove/glove.6B.50d.txt'
 EMBEDDING_FEATURES = 50
+EMBEDDING_LOCATION = '/vol/bigdata/datasets/glove/glove.6B.'+str(EMBEDDING_FEATURES)+'d.txt'
 
 #Neural net settings
 BLOCKS = 3
 DROPOUT_RATE = 0.2
 KERNEL_SIZE = 30
 FILTERS = 30
-POOL_SIZE = 16
+POOL_SIZE = 3
 OUTPUT_UNITS = 1
 OUTPUT_ACTIVATION = 'sigmoid'
 
 LEARNING_RATE = 1e-3
-EPOCHS = 1000
+EPOCHS = 20
 BATCH_SIZE = 512
 
 texts = []
@@ -95,10 +127,14 @@ for class_index, classname in enumerate(CLASS_NAMES):
         if text_index > DATA_LIMIT:
             break
 
-print('loaded',len(texts),'texts')
+print('loaded',len(texts),'texts, balance',sum(target)/len(target))
 
 train_texts, test_texts, train_target, test_target = train_test_split(texts, target, test_size = 0.1, random_state=1,
                                                                       stratify=target)
+
+train_texts, train_target = set_dataset_balance(train_texts,train_target,DOWNSAMPLING_RATE)
+test_texts, test_target = set_dataset_balance(test_texts,test_target,DOWNSAMPLING_RATE)
+
 train_vectors, test_vectors, word_index = sequence_vectorize(train_texts,test_texts,NUMBER_OF_FEATURES,MAX_SEQUENCE_LENGTH)
 
 print('loading embedding')
@@ -155,6 +191,10 @@ model.add(SeparableConv1D(filters=FILTERS * 2,
 
 model.add(GlobalAveragePooling1D())
 model.add(Dropout(rate=DROPOUT_RATE))
+
+model.add(Dense(300))
+model.add(Dense(300))
+
 model.add(Dense(OUTPUT_UNITS, activation=OUTPUT_ACTIVATION))
 
 print('compiling the model')
@@ -170,6 +210,6 @@ history = model.fit(
     verbose=2,  # Logs once per epoch.
     batch_size=BATCH_SIZE)
 
-results = [x[0] for x in model.predict_classes(test_vectors)]
+results = [x[0] for x in model.predict_proba(test_vectors)]
 
-print(results)
+print('roc_auc',roc_auc_score(test_target,results))
