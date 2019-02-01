@@ -17,12 +17,21 @@ from hare import load_pretrained
 moba_hare = load_pretrained('moba')
 ```
 
-You can then use this object to monitor conversations in progress:
+You can then use this object to monitor conversations in progress. Let's start a conversation and ask HaRe to monitor it:
 
 ```python
-moba_hare.start_conversation(conversation_id='example_convo')
-moba_hare.add_utterance(speaker='a',content='hello')
-moba_hare.add_utterance(speaker='b',content='hi everyone')
+from hare import Conversation
+
+convo = Conversation()
+moba_hare.add_conversation(convo)
+```
+
+At any point in time, you can then request the current status of the conversation according to this HaRe model:
+
+```python
+convo.add_utterance(speaker='a',content='hello')
+convo.add_utterance(speaker='b',content='hi everyone')
+moba_hare.get_status()
 ```
 
 You can also add multiple sentences at once; for example a whole conversation if it has already finished.
@@ -30,22 +39,21 @@ You can also add multiple sentences at once; for example a whole conversation if
 ```python
 from hare import Utterance
 
-moba_hare.add_utterances([Utterance(speaker='a',content='good luck'),
+convo.add_utterances([Utterance(speaker='a',content='good luck'),
                           Utterance(speaker='c',content='ur all n00bs')])
-```
-
-At any point in time, you can then request the current status of the conversation according to this HaRe model:
-
-```python
 moba_hare.get_status()
 ```
 
-If you want to reuse this HaRe model for another conversation, make sure to create a new conversation before you start adding utterances. You can later use `switch_conversation` to indicate which conversation is currently active.
+If you add multiple conversations for Hare to monitor, you will need to specify the conversation index when asking for the status:
 
 ```python
-moba_hare.start_conversation(conversation_id='second_convo')
-moba_hare.start_conversation(conversation_id='third_convo')
-moba_hare.switch_conversation(conversation_id='example_convo')
+second_convo = Conversation()
+convo_index = moba_hare.add_conversation(second_convo)
+
+second_convo.add_utterance(speaker='a',content='hello')
+second_convo.add_utterance(speaker='b',content='hi everyone')
+
+moba_hare.get_status(id=convo_index)
 ```
 
 ### 2.2 Evaluating
@@ -53,7 +61,7 @@ moba_hare.switch_conversation(conversation_id='example_convo')
 If you have a labeled dataset (that is: for each conversation an indication which participants are considered toxic), HaRe can calculate to what extent its judgments match the labels. A label can range from the default 0 (not toxic at all) to 1 (maximally toxic). Let's label speaker `c`: 
 
 ```python
-moba_hare.label_speaker('c',0.9)
+convo.label_speaker('c',0.9)
 ```
 
 There are several evaluation metrics, depending on what is important to you (detecting ALL harassment, detecting harassment quickly, no false positives, etc):
@@ -65,7 +73,7 @@ moba_hare.calculate_accuracy()
 These metrics are calculated on the basis on all conversations the HaRe object is aware of that have at least 1 labeled participant. If you want to exclude a label from evaluation, simply add it to the `conversations_excluded_for_evaluation` list:
 
 ```python
-moba_hare.conversations_excluded_for_evaluation = ['example_convo']
+moba_hare.conversations_excluded_for_evaluation = [0]
 ```
 
 ### 2.3 Training
