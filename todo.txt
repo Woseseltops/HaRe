@@ -1,5 +1,15 @@
 TODO
 ====
+* Set up framework in Python (the code works)
+  * Add training and load_pretrained parts
+    * Also store tokenizer
+    * Also save which brain
+    * also save model with precision en recall
+  * Create a moba model and include it
+
+* Make readme available as Jupyter notebook
+  * Include pretty graph of the conversation
+
 * Experiment with neural nets:
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
     * Check: how is it possible that with less data, scores are higher?
@@ -10,11 +20,4 @@ TODO
 
   * Look for others studies, like from the workshop Iris mentioned... do they have interesting architectures? https://sites.google.com/view/alw3/past-workshops?authuser=0
 
-* Set up framework in Python (the code works)
-  * Make it so it classifies everything there is for a user instead of just last one
-  * Make it output the whole status so you can draw a pretty graph
-  * Add training and load_pretrained parts
-  * Create a moba model and include it
-
-* Make readme available as Jupyter notebook
 * Look up: what exactly is ConvoKit?
