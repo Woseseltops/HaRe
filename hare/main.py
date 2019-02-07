@@ -48,7 +48,7 @@ class Hare():
                 new_status = {}
 
             speaker : str = utterance.speaker
-            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker)[:n] #not 100% if we get everything
+            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker)[:n+1]
 
             score: float = self.brain.classify(' LINEBREAK '.join(text_so_far))
             new_status[speaker] = score
@@ -107,7 +107,7 @@ def load_pretrained(location : str) -> Hare:
     if location[-1] != '/':
         location += '/'
 
-    if load(location+'metadata.json')['brainType'] == 'BiGru':
+    if load(open(location+'metadata.json'))['brainType'] == 'BiGru':
 
         brain: BiGruBrain = BiGruBrain()
         brain.load(location)

@@ -184,7 +184,7 @@ class BiGruBrain(AbstractBrain):
             pass
 
         #Save metadata
-        metadata : Dict[str,str] = {'brainType':'BiGru'}
+        metadata : Dict[str,str] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
@@ -195,14 +195,18 @@ class BiGruBrain(AbstractBrain):
 
     def load(self,location : str):
 
+        import json
         import pickle
         from tensorflow.keras.models import load_model
 
         if location[-1] != '/':
             location += '/'
 
+        #Load metadata
+        self._max_sequence_length = json.load(open(location+'metadata.json'))['maxSequenceLength']
+
         #Load tokenizer
-        self.tokenizer = pickle.load(open(location+'tokenizer.pickle'))
+        self.tokenizer = pickle.load(open(location+'tokenizer.pickle','rb'))
 
         #Load model
-        self.model = load_model(open(location+'model'))
+        self.model = load_model(open(location+'model','rb'))
