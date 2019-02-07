@@ -1,5 +1,5 @@
 from copy import copy
-
+from json import load
 from typing import Dict, List
 
 from hare.brain import AbstractBrain, BiGruBrain
@@ -104,12 +104,14 @@ class Hare():
 
 def load_pretrained(location : str) -> Hare:
 
-    from tensorflow.keras.models import load_model
+    if location[-1] != '/':
+        location += '/'
 
-    #Assumes it's always a BiGru model at the moment
-    brain: BiGruBrain = BiGruBrain()
-    brain.model = load_model(location)
-    brain.verbose = True
+    if load(location+'metadata.json')['brainType'] == 'BiGru':
+
+        brain: BiGruBrain = BiGruBrain()
+        brain.load(location)
+        brain.verbose = True
 
     hare : Hare = Hare()
     hare.brain = brain

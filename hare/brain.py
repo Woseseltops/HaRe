@@ -1,4 +1,5 @@
 from typing import List, Dict, Optional
+from os import mkdir
 from numpy import array # type: ignore
 from hare.embedding import load_embedding_dictionary, create_embedding_matrix_for_vocabulary
 
@@ -171,5 +172,37 @@ class BiGruBrain(AbstractBrain):
     def save(self,location : str):
 
         from tensorflow.keras.models import save_model
+        import json
+        import pickle
 
-        save_model(self.model,location)
+        if location[-1] != '/':
+            location += '/'
+
+        try:
+            mkdir(location)
+        except FileExistsError:
+            pass
+
+        #Save metadata
+        metadata : Dict[str,str] = {'brainType':'BiGru'}
+        json.dump(metadata,open(location+'metadata.json','w'))
+
+        #Save tokenizer
+        pickle.dump(self.tokenizer,open(location+'tokenizer.pickle','wb'))
+
+        #Save model
+        save_model(self.model,location+'model')
+
+    def load(self,location : str):
+
+        import pickle
+        from tensorflow.keras.models import load_model
+
+        if location[-1] != '/':
+            location += '/'
+
+        #Load tokenizer
+        self.tokenizer = pickle.load(open(location+'tokenizer.pickle'))
+
+        #Load model
+        self.model = load_model(open(location+'model'))
