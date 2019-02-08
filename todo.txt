@@ -1,12 +1,10 @@
 TODO
 ====
-* Set up framework in Python (the code works)
-  * Add training and load_pretrained parts
-    * also save model with precision en recall
-  * Create a moba model and include it
-
-* Make readme available as Jupyter notebook
-  * Include pretty graph of the conversation
+* Finished for the first update:
+  * Actually trained and working
+  * Training added to notebook
+  * Visualize monitoring
+  * Useful evaluation measure implemented
 
 * Experiment with neural nets:
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
