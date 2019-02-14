@@ -36,11 +36,13 @@ class BiGruBrain(AbstractBrain):
 
     def __init__(self) -> None:
 
+        super().__init__()
+
         self.dependencies = ['tensorflow']
         self.embedding_location : str = ''
 
         self.learning_rate : float = 1e-3
-        self.learning_epochs : int = 20
+        self.learning_epochs : int = 3
         self.learning_batch_size : int = 512
 
         self.tokenizer: Optional[text.Tokenizer] = None
@@ -198,6 +200,8 @@ class BiGruBrain(AbstractBrain):
         import json
         import pickle
         from tensorflow.keras.models import load_model
+        from warnings import filterwarnings
+        filterwarnings('ignore')
 
         if location[-1] != '/':
             location += '/'

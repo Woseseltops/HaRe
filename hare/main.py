@@ -56,6 +56,8 @@ class Hare():
 
     def visualize_history_for_conversation(self,id=0):
 
+        self.update_status_history_for_conversation(id)
+
         conversation : Conversation = self.conversations[id]
         status_history : List[Dict[str,int]] = self.status_per_conversation[id]
 
