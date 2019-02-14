@@ -127,7 +127,7 @@ DATA_FOLDER = '../datasets/LoL/'
 CLASS_NAMES = ['nontoxic','toxic']
 SAMPLES_PER_CLASS = 100000 #12500
 TRAIN_BALANCE = 0.5
-TEST_BALANCE = 0.5
+TEST_BALANCE = 0.1
 
 #Vectorization settings
 NUMBER_OF_FEATURES = 20000
