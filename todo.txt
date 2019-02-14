@@ -5,6 +5,7 @@ TODO
   * Training added to notebook
   * Visualize monitoring
   * Useful evaluation measure implemented
+  * Uitzoeken: wat zou een goed publicatie-onderwerp zijn?
 
 * Experiment with neural nets:
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557

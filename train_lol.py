@@ -1,6 +1,8 @@
-from hare import Conversation
+from hare import Hare, Conversation, BiGruBrain
 
+#Load the conversations
 CONVERSATIONS_FILE = 'datasets/LoL/conversations.txt'
+NR_OF_CONVERSATIONS = 1000
 conversations = []
 current_conversation = Conversation()
 
@@ -22,9 +24,20 @@ for line in open(CONVERSATIONS_FILE):
         if len(conversations)%100 == 0:
             print(len(conversations))
 
+        if len(conversations) == NR_OF_CONVERSATIONS:
+            break
+
         continue
 
     speaker,content = line.split('\t')
     current_conversation.add_utterance(speaker,content)
 
-print(len(conversations))
+#Add to a hare object
+moba_hare = Hare()
+for conversation in conversations:
+    moba_hare.add_conversation(conversation)
+
+moba_hare.brain = BiGruBrain()
+
+moba_hare.train()
+moba_hare.save('moba')
