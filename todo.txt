@@ -1,12 +1,22 @@
 TODO
 ====
 * Finished for the first update:
-  * Actually trained and working
-  * Visualize monitoring
+  * A really working classifier
+    * Implement: downloading pretrained models
+      * Extend config: title, mirrors, hash
+    * Retrain the simple MOBA classifier
+    * Find some working examples
   * Useful evaluation measure implemented
-  * Uitzoeken: wat zou een goed publicatie-onderwerp zijn?
-  * Download models
-  * Implement en visualiseer 'maat at'
+    * Accuracy at
+    * AUC at
+    * F-score at
+  * Visualize evaluation measures:
+    * 'score at' over time
+    * AUC
+    * precision/recall things
+  * Investigate: what would be a good publication subject?
+
+* Better errors when dependency importing
 
 * Experiment with neural nets:
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557

@@ -1,6 +1,6 @@
 from copy import copy
 from json import load
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from hare.brain import AbstractBrain, BiGruBrain
 from hare.conversation import Conversation
@@ -87,22 +87,73 @@ class Hare():
     def save(self, location : str):
         self.brain.save(location)
 
-    def calculate_retrospective_accuracy(self) -> float:
+    def get_true_and_predicted_scores_at_utterance_index(self,utterance_index : int,
+                                                         categorize_true_scores : bool = True,
+                                                         categorize_predicted_scores : bool = False) -> Tuple[List[float],List[float]]:
 
-        accurately_labeled_speakers : int = 0
-        total_speakers : int = 0
+        true_scores : List[int] = []
+        predicted_scores : List[float] = []
 
         for n, conversation in enumerate(self.conversations):
-            status : Dict[str,float] = self.get_status(n)
+
+            if n in self.conversations_excluded_from_evaluation:
+                continue
+
+            status: Dict[str, float] = self.status_per_conversation[n][utterance_index]
 
             for speaker, label in conversation.speakers_with_labels.items():
 
-                if (label > self.cut_off_value and status[speaker] > self.cut_off_value) or (label < self.cut_off_value and status[speaker] < self.cut_off_value):
-                   accurately_labeled_speakers += 1
+                if categorize_true_scores:
 
-                total_speakers += 1
+                    if label > self.cut_off_value:
+                        true_scores.append(1)
+                    else:
+                        true_scores.append(0)
+                else:
+                    true_scores.append(label)
 
-        return accurately_labeled_speakers/total_speakers
+                try:
+
+                    if categorize_predicted_scores:
+                        if status[speaker] > self.cut_off_value:
+                            predicted_scores.append(1.0)
+                        else:
+                            predicted_scores.append(0.0)
+                    else:
+                        predicted_scores.append(status[speaker])
+
+                except KeyError:
+                    predicted_scores.append(0.0)
+
+        return (true_scores,predicted_scores)
+
+    def calculate_retrospective_accuracy(self) -> float:
+        from sklearn.metrics import accuracy_score #type: ignore
+
+        true_scores : List[int]
+        predicted_scores : List[float]
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+        return accuracy_score(true_scores,predicted_scores)
+
+    def calculate_accuracy_at_utterance(self,utterance_index : int) -> float:
+        from sklearn.metrics import accuracy_score #type: ignore
+
+        true_scores : List[int]
+        predicted_scores : List[float]
+
+        true_scores,predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
+
+        return accuracy_score(true_scores,predicted_scores)
+
+    def calculate_auc_at_utterance(self,utterance_index : int) -> float:
+        from sklearn.metrics import roc_auc_score #type: ignore
+
+        true_scores : List[int]
+        predicted_scores : List[float]
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index)
+        return roc_auc_score(true_scores,predicted_scores)
 
 def load_pretrained(location : str) -> Hare:
 
