@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Set
 
 class Utterance():
 
@@ -15,6 +15,7 @@ class Conversation():
     def __init__(self) -> None:
 
         self.utterances : List[Utterance] = []
+        self.all_speakers : Set[str] = set()
         self.speakers_with_labels : Dict[str,float] = {}
 
     def add_utterance(self,speaker : str ='anonymous',content : str ='') -> None:
@@ -29,6 +30,7 @@ class Conversation():
     def add_utterance_object(self,utterance : Utterance) -> None:
 
         self.utterances.append(utterance)
+        self.all_speakers.add(utterance.speaker)
 
         if utterance.speaker not in self.speakers_with_labels.keys():
             self.speakers_with_labels[utterance.speaker] = 0

@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 from os import mkdir
 from numpy import array # type: ignore
 from hare.embedding import load_embedding_dictionary, create_embedding_matrix_for_vocabulary
@@ -20,10 +20,13 @@ class AbstractBrain():
         self.verbose : bool = False
 
     def train(self,texts : List[str],target : List[int]) -> None:
-        pass
+        raise NotImplementedError
 
     def classify(self,text : str) -> float:
         return 0
+
+    def save(self, location : str) -> None:
+        raise NotImplementedError
 
 class RandomBrain(AbstractBrain):
 
@@ -173,9 +176,9 @@ class BiGruBrain(AbstractBrain):
 
     def save(self,location : str):
 
-        from tensorflow.keras.models import save_model
         import json
         import pickle
+        from tensorflow.keras.models import save_model #type: ignore
 
         if location[-1] != '/':
             location += '/'
@@ -186,7 +189,7 @@ class BiGruBrain(AbstractBrain):
             pass
 
         #Save metadata
-        metadata : Dict[str,str] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
+        metadata : Dict[str,Any] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
@@ -199,7 +202,8 @@ class BiGruBrain(AbstractBrain):
 
         import json
         import pickle
-        from tensorflow.keras.models import load_model
+        from tensorflow.keras.models import load_model #type: ignore
+
         from warnings import filterwarnings
         filterwarnings('ignore')
 
