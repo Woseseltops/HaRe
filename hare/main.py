@@ -1,8 +1,9 @@
 from copy import copy
 from json import load
 from typing import Dict, List, Tuple
+from os.path import dirname, abspath
 
-from hare.brain import AbstractBrain, BiGruBrain
+from hare.brain import AbstractBrain
 from hare.conversation import Conversation
 
 class Hare():
@@ -54,6 +55,11 @@ class Hare():
             new_status[speaker] = score
             status_history.append(new_status)
 
+    def update_all_status_histories(self):
+
+        for i in range(len(self.conversations)):
+            self.update_status_history_for_conversation(i)
+
     def visualize_history_for_conversation(self,id=0):
 
         self.update_status_history_for_conversation(id)
@@ -99,7 +105,10 @@ class Hare():
             if n in self.conversations_excluded_from_evaluation:
                 continue
 
-            status: Dict[str, float] = self.status_per_conversation[n][utterance_index]
+            try:
+                status: Dict[str, float] = self.status_per_conversation[n][utterance_index]
+            except IndexError: #apparently there is no utterance at this index anymore
+                continue
 
             for speaker, label in conversation.speakers_with_labels.items():
 
@@ -145,6 +154,15 @@ class Hare():
         true_scores,predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
 
         return accuracy_score(true_scores,predicted_scores)
+
+    def calculate_fscore_at_utterance(self,utterance_index : int) -> float:
+        from sklearn.metrics import f1_score #type: ignore
+
+        true_scores : List[int]
+        predicted_scores : List[float]
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
+        return f1_score(true_scores,predicted_scores)
 
     def calculate_auc_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import roc_auc_score #type: ignore

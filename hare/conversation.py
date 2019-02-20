@@ -41,3 +41,6 @@ class Conversation():
     def get_all_utterances_for_speaker(self,name : str) -> List[str]:
 
         return [utterance.content for utterance in self.utterances if utterance.speaker == name]
+
+    def __len__(self) -> int:
+        return len(self.utterances)

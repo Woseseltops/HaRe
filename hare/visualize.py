@@ -1,5 +1,9 @@
 from typing import List, Tuple
 from numpy import array, arange, cumsum #type: ignore
+
+import matplotlib #type: ignore
+matplotlib.use('agg') #prevents a tKinter error
+
 from matplotlib import pyplot #type: ignore
 from matplotlib.legend import Legend, Rectangle #type: ignore
 from matplotlib.figure import Figure #type: ignore
@@ -7,7 +11,7 @@ from matplotlib.axes._subplots import Axes #type: ignore
 
 from hare.main import Hare
 
-def visualize_toxicity_over_time(hare_obj : Hare, conversation_index : int =0) -> None:
+def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index : int =0) -> None:
 
     # Make sure the hare obj is up-to-date
     hare_obj.update_status_history_for_conversation(conversation_index)
@@ -71,3 +75,33 @@ def visualize_toxicity_over_time(hare_obj : Hare, conversation_index : int =0) -
 
     pyplot.margins(y=0)
     pyplot.show(y)
+
+def get_metric_during_conversations(hare_obj : Hare,metric_name : str) -> List[float]:
+
+    hare_obj.update_all_status_histories()
+    length_of_longest_conversation : int = max(len(conversation) for conversation in hare_obj.conversations)
+    scores : List[float] = []
+
+    for utterance_index in range(length_of_longest_conversation):
+        method = getattr(hare_obj,'calculate_'+metric_name+'_at_utterance')
+        scores.append(method(utterance_index))
+
+    return scores
+
+def visualize_accuracy_during_conversations(hare_obj : Hare):
+
+    accuracies : List[float] = get_metric_during_conversations(hare_obj,'accuracy')
+    print(accuracies)
+    return
+
+def visualize_auc_during_conversations(hare_obj : Hare):
+
+    accuracies : List[float] = get_metric_during_conversations(hare_obj,'auc')
+    print(accuracies)
+    return
+
+def visualize_fscore_during_conversations(hare_obj : Hare):
+
+    accuracies : List[float] = get_metric_during_conversations(hare_obj,'fscore')
+    print(accuracies)
+    return

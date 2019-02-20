@@ -6,12 +6,8 @@ TODO
       * Extend config: title, mirrors, hash
     * Retrain the simple MOBA classifier
     * Find some working examples
-  * Useful evaluation measure implemented
-    * Accuracy at
-    * AUC at
-    * F-score at
   * Visualize evaluation measures:
-    * 'score at' over time
+    * Visualize score at over time
     * AUC
     * precision/recall things
   * Investigate: what would be a good publication subject?
