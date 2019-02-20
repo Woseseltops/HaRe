@@ -162,6 +162,8 @@ def load_pretrained(location : str) -> Hare:
 
     if load(open(location+'metadata.json'))['brainType'] == 'BiGru':
 
+        from hare.bigrubrain import BiGruBrain
+
         brain: BiGruBrain = BiGruBrain()
         brain.load(location)
         brain.verbose = True
@@ -170,3 +172,32 @@ def load_pretrained(location : str) -> Hare:
     hare.brain = brain
 
     return hare
+
+def load_example_conversations() -> List[Conversation]:
+
+    CONVERSATIONS_FILE : str = dirname(abspath(__file__))+'/example_conversations/001.txt'
+
+    conversations : List[Conversation] = []
+    current_conversation : Conversation = Conversation()
+
+    for line in open(CONVERSATIONS_FILE):
+
+        line = line.strip()
+
+        if len(line) == 0:
+            continue
+        elif line[0] == '#':
+            try:
+                current_conversation.label_speaker(line.split()[1], 1)
+            except IndexError:
+                continue
+
+            conversations.append(current_conversation)
+            current_conversation = Conversation()
+
+            continue
+
+        speaker, content = line.split('\t')
+        current_conversation.add_utterance(speaker, content)
+
+    return conversations
