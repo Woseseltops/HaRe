@@ -2,7 +2,7 @@ from typing import List, Tuple
 from numpy import array, arange, cumsum #type: ignore
 
 import matplotlib #type: ignore
-matplotlib.use('agg') #prevents a tKinter error
+#matplotlib.use('agg') #prevents a tKinter error
 
 from matplotlib import pyplot #type: ignore
 from matplotlib.legend import Legend, Rectangle #type: ignore
@@ -90,18 +90,86 @@ def get_metric_during_conversations(hare_obj : Hare,metric_name : str) -> List[f
 
 def visualize_accuracy_during_conversations(hare_obj : Hare):
 
+    from matplotlib import pyplot
+
     accuracies : List[float] = get_metric_during_conversations(hare_obj,'accuracy')
-    print(accuracies)
+
+    pyplot.plot(accuracies)
+    pyplot.ylabel('Accuracy')
+    pyplot.ylim(0,1)
+
+    pyplot.xlabel('# of turns')
+
+    pyplot.show()
+
     return
 
 def visualize_auc_during_conversations(hare_obj : Hare):
 
-    accuracies : List[float] = get_metric_during_conversations(hare_obj,'auc')
-    print(accuracies)
+    from matplotlib import pyplot
+
+    areas_under_the_curve : List[float] = get_metric_during_conversations(hare_obj,'auc')
+
+    pyplot.plot(areas_under_the_curve)
+    pyplot.ylabel('AUC')
+    pyplot.ylim(0,1)
+
+    pyplot.xlabel('# of turns')
+
+    pyplot.show()
+
     return
 
 def visualize_fscore_during_conversations(hare_obj : Hare):
 
-    accuracies : List[float] = get_metric_during_conversations(hare_obj,'fscore')
-    print(accuracies)
+    from matplotlib import pyplot
+
+    fscores : List[float] = get_metric_during_conversations(hare_obj,'fscore')
+
+    pyplot.plot(fscores)
+    pyplot.ylabel('F1-score')
+    pyplot.ylim(0,1)
+
+    pyplot.xlabel('# of turns')
+
+    pyplot.show()
+
     return
+
+def visualize_retrospective_precision_and_recall(hare_obj : Hare):
+
+    from matplotlib import pyplot
+
+    THRESHOLDS : List[float] = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
+
+    hare_obj.update_all_status_histories()
+    precisions: List[float] = hare_obj.calculate_retrospective_precision(THRESHOLDS)
+    recalls: List[float] = hare_obj.calculate_retrospective_recall(THRESHOLDS)
+
+    pyplot.plot(recalls,precisions)
+    pyplot.ylabel('Precision')
+    pyplot.ylim(0,1)
+
+    pyplot.xlabel('Recall')
+    pyplot.xlim(0,1)
+
+    pyplot.show()
+
+def visualize_retrospective_roc_curve(hare_obj : Hare):
+
+    from matplotlib import pyplot
+
+    fpr : List[float]
+    tpr : List[float]
+
+    hare_obj.update_all_status_histories()
+    fpr, tpr = hare_obj.calculate_retrospective_roc_curve()
+
+    pyplot.plot(fpr,tpr)
+    pyplot.ylabel('False positive rate')
+    pyplot.ylim(0,1)
+
+    pyplot.xlabel('True positive rate')
+    pyplot.xlim(0,1)
+
+    pyplot.show()

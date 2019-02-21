@@ -1,11 +1,15 @@
 from hare import load_pretrained, load_example_conversations
-from hare.visualize import visualize_accuracy_during_conversations, visualize_auc_during_conversations, \
-    visualize_fscore_during_conversations
+from hare.visualize import visualize_retrospective_precision_and_recall
 
-moba_hare = load_pretrained('hare/pretrained/simple')
+from hare import Hare
+from hare.brain import DictBasedBrain
+
+moba_hare = Hare()
+moba_hare.brain = DictBasedBrain()
+
 for conversation in load_example_conversations():
     moba_hare.add_conversation(conversation)
 
-visualize_accuracy_during_conversations(moba_hare)
-visualize_auc_during_conversations(moba_hare)
-visualize_fscore_during_conversations(moba_hare)
+THRESHOLDS = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+visualize_retrospective_precision_and_recall(moba_hare)

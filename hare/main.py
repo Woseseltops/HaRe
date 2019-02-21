@@ -1,6 +1,6 @@
 from copy import copy
 from json import load
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 from os.path import dirname, abspath
 
 from hare.brain import AbstractBrain
@@ -97,7 +97,7 @@ class Hare():
                                                          categorize_true_scores : bool = True,
                                                          categorize_predicted_scores : bool = False) -> Tuple[List[float],List[float]]:
 
-        true_scores : List[int] = []
+        true_scores : List[float] = []
         predicted_scores : List[float] = []
 
         for n, conversation in enumerate(self.conversations):
@@ -115,9 +115,9 @@ class Hare():
                 if categorize_true_scores:
 
                     if label > self.cut_off_value:
-                        true_scores.append(1)
+                        true_scores.append(1.0)
                     else:
-                        true_scores.append(0)
+                        true_scores.append(0.0)
                 else:
                     true_scores.append(label)
 
@@ -132,23 +132,96 @@ class Hare():
                         predicted_scores.append(status[speaker])
 
                 except KeyError:
-                    predicted_scores.append(0.0)
+                    predicted_scores.append(0)
 
         return (true_scores,predicted_scores)
 
-    def calculate_retrospective_accuracy(self) -> float:
+    def calculate_retrospective_accuracy(self,thresholds : Optional[List[float]]) -> List[float]:
         from sklearn.metrics import accuracy_score #type: ignore
 
-        true_scores : List[int]
+        if thresholds is None:
+            thresholds = [self.cut_off_value]
+        else:
+            pass
+
+        old_threshold : float = self.cut_off_value
+
+        accuracies : List[float] = []
+
+        true_scores : List[float]
         predicted_scores : List[float]
 
-        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
-        return accuracy_score(true_scores,predicted_scores)
+        for threshold in thresholds:
+            self.cut_off_value = threshold
+
+            true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+            accuracies.append(accuracy_score(true_scores, predicted_scores))
+
+        self.cut_off_value = old_threshold
+
+        return accuracies
+
+    def calculate_retrospective_precision(self,thresholds : Optional[List[float]]) -> List[float]:
+        from sklearn.metrics import precision_score #type: ignore
+
+        if thresholds is None:
+            thresholds = [self.cut_off_value]
+
+        old_threshold : float = self.cut_off_value
+
+        precisions : List[float] = []
+
+        true_scores : List[float]
+        predicted_scores : List[float]
+
+        for threshold in thresholds:
+            self.cut_off_value = threshold
+
+            true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+            precisions.append(precision_score(true_scores, predicted_scores))
+
+        self.cut_off_value = old_threshold
+
+        return precisions
+
+    def calculate_retrospective_recall(self,thresholds : Optional[List[float]] = None) -> List[float]:
+        from sklearn.metrics import recall_score #type: ignore
+
+        if thresholds is None:
+            thresholds = [self.cut_off_value]
+
+        old_threshold : float = self.cut_off_value
+
+        recalls : List[float] = []
+
+        true_scores : List[float]
+        predicted_scores : List[float]
+
+        for threshold in thresholds:
+            self.cut_off_value = threshold
+
+            true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+            recalls.append(recall_score(true_scores, predicted_scores))
+
+        self.cut_off_value = old_threshold
+
+        return recalls
+
+    def calculate_retrospective_roc_curve(self) -> Tuple[List[float],List[float]]:
+        from sklearn.metrics import roc_curve #type: ignore
+
+        true_scores : List[float]
+        predicted_scores : List[float]
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1)
+
+        fpr, tpr, thresholds = roc_curve(true_scores,predicted_scores)
+
+        return list(fpr), list(tpr)
 
     def calculate_accuracy_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import accuracy_score #type: ignore
 
-        true_scores : List[int]
+        true_scores : List[float]
         predicted_scores : List[float]
 
         true_scores,predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
@@ -158,7 +231,7 @@ class Hare():
     def calculate_fscore_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import f1_score #type: ignore
 
-        true_scores : List[int]
+        true_scores : List[float]
         predicted_scores : List[float]
 
         true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
@@ -167,7 +240,7 @@ class Hare():
     def calculate_auc_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import roc_auc_score #type: ignore
 
-        true_scores : List[int]
+        true_scores : List[float]
         predicted_scores : List[float]
 
         true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index)

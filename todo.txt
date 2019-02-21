@@ -1,16 +1,14 @@
 TODO
 ====
 * Finished for the first update:
+  * Precision recall curve: find good thresholds
   * A really working classifier
     * Implement: downloading pretrained models
       * Extend config: title, mirrors, hash
     * Retrain the simple MOBA classifier
     * Find some working examples
-  * Visualize evaluation measures:
-    * Visualize score at over time
-    * AUC
-    * precision/recall things
-  * Investigate: what would be a good publication subject?
+    * Compare with DictBased
+  * Investigate: what would be a good publication subject
 
 * Better errors when dependency importing
 
