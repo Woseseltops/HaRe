@@ -117,7 +117,6 @@ B	u mad bro
 B	bet u cant lift lmao
 E	i can
 E	i lift
-E	on summoners rift
 E	duh
 G	DON'T CARE
 E	good
@@ -130,7 +129,7 @@ D	y do ppl try in this game mode this is game mode to have fu
 D	fun*
 E	cause is just to have fun lol
 G	I'm sorry people have fun in ways that are different than yours
-H	YA IT IS YOU FAT UDYR FAG ASS NIGGER
+H	YA IT IS YOU FAT FAG ASS NIGGER
 F	report
 F	hahahaha
 E	xD
@@ -184,8 +183,6 @@ A	u think i can 1v1 fight her?
 B	why pick a champ that cant kill anyone
 C	mia
 F	ty
-H	push mid
-A	with her ganker
 B	outplayed hardcore
 G	not really youve had him camp this whole game
 H	you have the best wave clear in the game
@@ -194,7 +191,6 @@ E	thanks for the help
 E	report
 D	ahah
 E	abusive langauage all game
-G	smite
 D	cd
 E	noob
 G	you used it on a minion i bet
