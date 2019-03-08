@@ -30,12 +30,7 @@ class RandomBrain(AbstractBrain):
 
 class DictBasedBrain(AbstractBrain):
 
-    bad_words : List[str] = ['fuck','fck','fuk',
-                             'noob','newb','n00b',
-                             'gay', 'fag',
-                             'shit','stfu',
-                             'suck','loser']
-
+    bad_words : List[str] = []
     maximum_nr_of_bad_words_needed : int = 4
 
     def classify(self,text : str) -> float:

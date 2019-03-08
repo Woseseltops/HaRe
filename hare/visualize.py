@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Any
 from numpy import array, arange, cumsum #type: ignore
 
 import matplotlib #type: ignore
@@ -88,88 +88,115 @@ def get_metric_during_conversations(hare_obj : Hare,metric_name : str) -> List[f
 
     return scores
 
-def visualize_accuracy_during_conversations(hare_obj : Hare):
+def visualize_accuracy_during_conversations(hares : List[Hare]):
 
     from matplotlib import pyplot
 
-    accuracies : List[float] = get_metric_during_conversations(hare_obj,'accuracy')
+    accuracies : List[float]
+    lines : List[Any] = []
 
-    pyplot.plot(accuracies)
+    for hare_obj in hares:
+        accuracies = get_metric_during_conversations(hare_obj,'accuracy')
+        line = pyplot.plot(accuracies)
+        lines.append(line[0])
+
     pyplot.ylabel('Accuracy')
     pyplot.ylim(0,1)
-
     pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()
 
     return
 
-def visualize_auc_during_conversations(hare_obj : Hare):
+def visualize_auc_during_conversations(hares : List[Hare]):
 
     from matplotlib import pyplot
 
-    areas_under_the_curve : List[float] = get_metric_during_conversations(hare_obj,'auc')
+    areas_under_the_curve : List[float]
+    lines : List[Any] = []
 
-    pyplot.plot(areas_under_the_curve)
+    for hare_obj in hares:
+        areas_under_the_curve = get_metric_during_conversations(hare_obj,'auc')
+        line = pyplot.plot(areas_under_the_curve)
+        lines.append(line[0])
+
     pyplot.ylabel('AUC')
     pyplot.ylim(0,1)
-
     pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()
 
     return
 
-def visualize_fscore_during_conversations(hare_obj : Hare):
+def visualize_fscore_during_conversations(hares : List[Hare]):
 
     from matplotlib import pyplot
 
-    fscores : List[float] = get_metric_during_conversations(hare_obj,'fscore')
+    fscores : List[float]
+    lines : List[Any] = []
 
-    pyplot.plot(fscores)
+    for hare_obj in hares:
+        fscores = get_metric_during_conversations(hare_obj, 'fscore')
+        line = pyplot.plot(fscores)
+        lines.append(line[0])
+
     pyplot.ylabel('F1-score')
     pyplot.ylim(0,1)
-
     pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()
 
     return
 
-def visualize_retrospective_precision_and_recall(hare_obj : Hare):
+def visualize_retrospective_precision_and_recall(hares : List[Hare]):
 
     from matplotlib import pyplot
 
     THRESHOLDS : List[float] = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
 
-    hare_obj.update_all_status_histories()
-    precisions: List[float] = hare_obj.calculate_retrospective_precision(THRESHOLDS)
-    recalls: List[float] = hare_obj.calculate_retrospective_recall(THRESHOLDS)
+    lines : List[Any] = []
 
-    pyplot.plot(recalls,precisions)
+    for hare_obj in hares:
+
+        hare_obj.update_all_status_histories()
+        precisions: List[float] = hare_obj.calculate_retrospective_precision(THRESHOLDS)
+        recalls: List[float] = hare_obj.calculate_retrospective_recall(THRESHOLDS)
+
+        line = pyplot.plot(recalls,precisions)
+        lines.append(line[0])
+
     pyplot.ylabel('Precision')
     pyplot.ylim(0,1)
-
     pyplot.xlabel('Recall')
     pyplot.xlim(0,1)
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()
 
-def visualize_retrospective_roc_curve(hare_obj : Hare):
+def visualize_retrospective_roc_curve(hares : List[Hare]):
 
     from matplotlib import pyplot
 
     fpr : List[float]
     tpr : List[float]
 
-    hare_obj.update_all_status_histories()
-    fpr, tpr = hare_obj.calculate_retrospective_roc_curve()
+    lines : List[Any] = []
 
-    pyplot.plot(fpr,tpr)
+    for hare_obj in hares:
+
+        hare_obj.update_all_status_histories()
+        fpr, tpr = hare_obj.calculate_retrospective_roc_curve()
+
+        line = pyplot.plot(fpr,tpr)
+        lines.append(line[0])
+
     pyplot.ylabel('False positive rate')
     pyplot.ylim(0,1)
-
     pyplot.xlabel('True positive rate')
     pyplot.xlim(0,1)
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()

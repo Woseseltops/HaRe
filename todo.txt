@@ -1,13 +1,13 @@
 TODO
 ====
 * Finished for the first update:
-  * Precision recall curve: find good thresholds
+  * Multiple hare objects in visualization functions
+    * Precision/recall add: everything yes no
   * A really working classifier
     * Implement: downloading pretrained models
       * Extend config: title, mirrors, hash
     * Retrain the simple MOBA classifier
     * Find some working examples
-    * Compare with DictBased
   * Investigate: what would be a good publication subject
 
 * Better errors when dependency importing

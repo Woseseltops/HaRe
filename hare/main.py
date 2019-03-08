@@ -8,7 +8,10 @@ from hare.conversation import Conversation
 
 class Hare():
 
-    def __init__(self) -> None:
+    def __init__(self, name : str = 'unnamed') -> None:
+
+        self.name : str = name
+
         self.brain : AbstractBrain = AbstractBrain()
 
         self.conversations : List[Conversation] = []
@@ -180,6 +183,9 @@ class Hare():
             true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
             precisions.append(precision_score(true_scores, predicted_scores))
 
+        #Add the situation of always saying yes to everything
+        precisions = [precision_score(true_scores, [1]*len(true_scores))] + precisions
+
         self.cut_off_value = old_threshold
 
         return precisions
@@ -202,6 +208,9 @@ class Hare():
 
             true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
             recalls.append(recall_score(true_scores, predicted_scores))
+
+        #Add the situation of always saying yes to everything
+        recalls = [recall_score(true_scores, [1]*len(true_scores))] + recalls
 
         self.cut_off_value = old_threshold
 
