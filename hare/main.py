@@ -257,6 +257,15 @@ class Hare():
 
 def load_pretrained(location : str) -> Hare:
 
+    #If this dir not exists, assume it's a file
+    if not isdir(location):
+        zipfile_location = location+'.zip'
+        print('Model not found, downloading...')
+        urlretrieve(open(location+'_url').read().strip(),zipfile_location)
+        mkdir(location)
+        ZipFile(location+'.zip','r').extractall(location)
+        print('Downloading model successful')
+
     if location[-1] != '/':
         location += '/'
 

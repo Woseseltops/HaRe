@@ -1,7 +1,7 @@
 from hare import load_pretrained, Conversation
-from hare.brain import BiGruBrain
+from hare.bigrubrain import BiGruBrain
 
-simple_hare = load_pretrained('hare/pretrained/simple')
+simple_hare = load_pretrained('hare/pretrained/testhare')
 
 convo = Conversation()
 convo.add_utterance(speaker='a',content='hate you')
