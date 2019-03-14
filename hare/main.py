@@ -1,7 +1,10 @@
 from copy import copy
 from json import load
 from typing import Dict, List, Tuple, Optional
-from os.path import dirname, abspath
+from os import mkdir
+from os.path import dirname, abspath, isdir
+from urllib.request import urlretrieve
+from zipfile import ZipFile
 
 from hare.brain import AbstractBrain
 from hare.conversation import Conversation
@@ -52,7 +55,7 @@ class Hare():
                 new_status = {}
 
             speaker : str = utterance.speaker
-            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker)[:n+1]
+            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker)[:n]
 
             score: float = self.brain.classify(' LINEBREAK '.join(text_so_far))
             new_status[speaker] = score
@@ -239,6 +242,9 @@ class Hare():
 
     def calculate_fscore_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import f1_score #type: ignore
+        from warnings import filterwarnings
+
+        filterwarnings('ignore')
 
         true_scores : List[float]
         predicted_scores : List[float]
