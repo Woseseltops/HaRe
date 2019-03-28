@@ -46,8 +46,9 @@ class Hare():
         status_history : List[Dict[str,float]] = self.status_per_conversation[id]
 
         new_status: Dict[str, float]
+        start_utterance_index : int = len(status_history)
 
-        for n, utterance in enumerate(conversation.utterances[len(status_history):]):
+        for n, utterance in enumerate(conversation.utterances[start_utterance_index:]):
 
             try:
                 new_status = copy(status_history[-1])
@@ -55,9 +56,10 @@ class Hare():
                 new_status = {}
 
             speaker : str = utterance.speaker
-            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker)[:n]
+            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker,n+start_utterance_index+1)
 
             score: float = self.brain.classify(' LINEBREAK '.join(text_so_far))
+
             new_status[speaker] = score
             status_history.append(new_status)
 

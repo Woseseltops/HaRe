@@ -38,9 +38,19 @@ class Conversation():
     def label_speaker(self,speaker : str,label : float) -> None:
         self.speakers_with_labels[speaker] = label
 
-    def get_all_utterances_for_speaker(self,name : str) -> List[str]:
+    def get_all_utterances_for_speaker(self,name : str, until_utterance_index : int = None) -> List[str]:
 
-        return [utterance.content for utterance in self.utterances if utterance.speaker == name]
+        result : List[str] = []
+
+        for n,utterance in enumerate(self.utterances):
+
+            if until_utterance_index != None and n == until_utterance_index:
+                break
+
+            if utterance.speaker == name:
+                result.append(utterance.content)
+
+        return result
 
     def __len__(self) -> int:
         return len(self.utterances)
