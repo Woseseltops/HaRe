@@ -11,6 +11,7 @@ class AbstractBrain():
     def __init__(self) -> None:
         self.dependencies : List[str] = []
         self.verbose : bool = False
+        self.downsampling : bool = False
 
     def train(self,texts : List[str],target : List[int]) -> None:
         raise NotImplementedError

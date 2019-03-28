@@ -3,6 +3,7 @@ from os import mkdir
 from numpy import array # type: ignore
 from hare.brain import AbstractBrain, UntrainedBrainError
 from hare.embedding import load_embedding_dictionary, create_embedding_matrix_for_vocabulary
+from hare.downsample import downsample
 
 try:
     from tensorflow.python.framework.ops import Tensor  # type: ignore
@@ -80,6 +81,8 @@ class BiGruBrain(AbstractBrain):
         from tensorflow.keras.optimizers import Adam #type: ignore
         from tensorflow.keras.callbacks import History #type: ignore
 
+        if self.downsampling:
+            texts, target = downsample(texts,target,0.5)
         if self.verbose:
             print('1. Vectorizing texts')
 
