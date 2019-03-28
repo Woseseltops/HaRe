@@ -83,6 +83,7 @@ class BiGruBrain(AbstractBrain):
 
         if self.downsampling:
             texts, target = downsample(texts,target,0.5)
+
         if self.verbose:
             print('1. Vectorizing texts')
 
@@ -91,8 +92,15 @@ class BiGruBrain(AbstractBrain):
         self.tokenizer.fit_on_texts(texts)
         vocabulary : Dict[str,int] = self.tokenizer.word_index
 
-        self._max_sequence_length = len(max(texts, key=len))
+        if self._max_sequence_length == 0:
+            self._max_sequence_length = len(max(texts, key=len))
+
         vectorized_texts : array = self.vectorize_texts(texts)
+
+        #========== temp =============
+        #for n, (t,vector) in enumerate(zip(texts,vectorized_texts)):
+        #    open('/vol/tensusers2/wstoop/HaRe/tmp/' + str(n) + '_' + str(target[n]), 'w').write(t+'\n\n'+str(vector))
+        #=============================
 
         if self.embedding_location == '':
             if self.verbose:
