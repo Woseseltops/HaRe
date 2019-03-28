@@ -122,7 +122,7 @@ def visualize_auc_during_conversations(hares : List[Hare]):
         lines.append(line[0])
 
     pyplot.ylabel('AUC')
-    pyplot.ylim(0,1)
+    pyplot.ylim(0.5,1)
     pyplot.xlabel('# of turns')
     pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 

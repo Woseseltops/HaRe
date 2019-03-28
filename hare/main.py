@@ -184,6 +184,11 @@ class Hare():
             self.cut_off_value = threshold
 
             true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+
+            #We're not interested if you never fire
+            if sum(predicted_scores) == 0:
+                continue
+
             precisions.append(precision_score(true_scores, predicted_scores))
 
         #Add the situation of always saying yes to everything
@@ -210,6 +215,11 @@ class Hare():
             self.cut_off_value = threshold
 
             true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(-1,categorize_predicted_scores=True)
+
+            #We're not interested if you never fire
+            if sum(predicted_scores) == 0:
+                continue
+
             recalls.append(recall_score(true_scores, predicted_scores))
 
         #Add the situation of always saying yes to everything

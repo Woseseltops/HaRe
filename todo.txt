@@ -1,10 +1,11 @@
 TODO
 ====
 * Finished for the first update:
-  * A really working classifier
-    * Retrain the simple MOBA classifier
-      * Train with whole conversation, not just one
-    * Find some working examples
+  * Working classifier: also with unseen material?
+  * Finish first notebook
+  * Figure out why classifier is not working
+    * Try with word embeddings
+    * Try with feature for capitals
   * Investigate: what would be a good publication subject
 
 * Experiment with neural nets:
