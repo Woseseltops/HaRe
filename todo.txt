@@ -1,13 +1,22 @@
 TODO
 ====
-* Finished for the first update:
-  * Working classifier: also with unseen material?
-  * Finish first notebook
-  * Figure out why classifier is not working
-    * Try with word embeddings
-    * Try with feature for capitals
-  * Investigate: what would be a good publication subject
+* Write paper
+  * Will scores look more attractive if I force that only 1 can be toxic?
+  * Process on ponies: get ponies to process for all distributions
+    * CL: 125
+    * SL: 250
+    * R : 500
+    * FS: 1000
+    * FP: 2000
+    * PS: 4000
 
+  * Read: Zhang 2018
+
+* Fix type hinting
+* Add save option for all visualization functions
+
+Backlog
+=======
 * Experiment with neural nets:
   * Study best model in Kaggle... what is different from this experiment? https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
     * Check: how is it possible that with less data, scores are higher?
