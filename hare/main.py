@@ -1,6 +1,7 @@
 from copy import copy
-from json import load
+from json import load,dump
 from typing import Dict, List, Tuple, Optional
+from typing.io import TextIO
 from os import mkdir
 from os.path import dirname, abspath, isdir
 from urllib.request import urlretrieve
@@ -48,19 +49,30 @@ class Hare():
         new_status: Dict[str, float]
         start_utterance_index : int = len(status_history)
 
+        #First collect all utterances
+        utterances : List[str] = []
+
         for n, utterance in enumerate(conversation.utterances[start_utterance_index:]):
+
+            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(utterance.speaker,n+start_utterance_index+1)
+            utterances.append(' LINEBREAK '.join(text_so_far))
+
+        #Stop if there's nothing to do
+        if len(utterances) == 0:
+            return
+
+        #Classify everything
+        scores : List[float] = self.brain.classify_multiple(utterances)
+
+        #Save the results
+        for utterance,score in zip(conversation.utterances[start_utterance_index:],scores):
 
             try:
                 new_status = copy(status_history[-1])
             except IndexError:
                 new_status = {}
 
-            speaker : str = utterance.speaker
-            text_so_far : List[str] = conversation.get_all_utterances_for_speaker(speaker,n+start_utterance_index+1)
-
-            score: float = self.brain.classify(' LINEBREAK '.join(text_so_far))
-
-            new_status[speaker] = score
+            new_status[utterance.speaker] = score
             status_history.append(new_status)
 
     def update_all_status_histories(self):
@@ -68,7 +80,7 @@ class Hare():
         for i in range(len(self.conversations)):
             self.update_status_history_for_conversation(i)
 
-    def visualize_history_for_conversation(self,id=0):
+    def visualize_history_for_conversation(self,id : int =0):
 
         self.update_status_history_for_conversation(id)
 
@@ -81,6 +93,12 @@ class Hare():
             print(status)
             print('---')
             print()
+
+    def save_history_for_conversation(self,f : TextIO,id : int = 0):
+
+        self.update_status_history_for_conversation(id)
+        dump(self.status_per_conversation[id],f)
+        f.write('\n')
 
     def train(self):
 

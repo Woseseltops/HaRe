@@ -12,12 +12,17 @@ class AbstractBrain():
         self.dependencies : List[str] = []
         self.verbose : bool = False
         self.downsampling : bool = False
+        self.downsampling_ratio : float = 0.5
 
     def train(self,texts : List[str],target : List[int]) -> None:
         raise NotImplementedError
 
     def classify(self,text : str) -> float:
         return 0
+
+    #The default is to just run self.classify multiple times, but you can decide to optimize things here
+    def classify_multiple(self,texts : List[str]) -> List[float]:
+        return [self.classify(text) for text in texts]
 
     def save(self, location : str) -> None:
         raise NotImplementedError

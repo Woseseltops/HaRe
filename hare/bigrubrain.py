@@ -50,6 +50,15 @@ class BiGruBrain(AbstractBrain):
         else:
             raise UntrainedBrainError
 
+    def classify_multiple(self,texts : List[str]) -> List[float]:
+
+        vectorized_texts : str = self.vectorize_texts(texts)
+
+        if self.model is not None:
+            return [float(i[0]) for i in self.model.predict_proba(vectorized_texts)]
+        else:
+            raise UntrainedBrainError
+
     def precision(self, y_true, y_pred) -> Tensor:
         '''Calculates the precision, a metric for multi-label classification of
         how many selected items are relevant.
@@ -82,7 +91,7 @@ class BiGruBrain(AbstractBrain):
         from tensorflow.keras.callbacks import History #type: ignore
 
         if self.downsampling:
-            texts, target = downsample(texts,target,0.5)
+            texts, target = downsample(texts,target,self.downsampling_ratio)
 
         if self.verbose:
             print('1. Vectorizing texts')
