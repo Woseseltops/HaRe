@@ -252,6 +252,30 @@ class Hare():
 
         return accuracy_score(true_scores,predicted_scores)
 
+    def calculate_precision_at_utterance(self,utterance_index : int) -> float:
+        from sklearn.metrics import precision_score #type: ignore
+        from warnings import filterwarnings
+
+        filterwarnings('ignore')
+
+        true_scores : List[float]
+        predicted_scores : List[float]
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
+        return precision_score(true_scores,predicted_scores)
+
+    def calculate_recall_at_utterance(self,utterance_index : int) -> float:
+        from sklearn.metrics import recall_score #type: ignore
+        from warnings import filterwarnings
+
+        filterwarnings('ignore')
+
+        true_scores : List[float]
+        predicted_scores : List[float]
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
+        return recall_score(true_scores,predicted_scores)
+
     def calculate_fscore_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import f1_score #type: ignore
         from warnings import filterwarnings

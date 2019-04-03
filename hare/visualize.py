@@ -1,4 +1,4 @@
-from typing import List, Tuple, Any
+from typing import List, Tuple, Any, Optional
 from numpy import array, arange, cumsum #type: ignore
 
 import matplotlib #type: ignore
@@ -92,6 +92,8 @@ def visualize_accuracy_during_conversations(hares : List[Hare]):
 
     from matplotlib import pyplot
 
+    pyplot.clf()
+
     accuracies : List[float]
     lines : List[Any] = []
 
@@ -109,9 +111,11 @@ def visualize_accuracy_during_conversations(hares : List[Hare]):
 
     return
 
-def visualize_auc_during_conversations(hares : List[Hare]):
+def visualize_auc_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
 
     from matplotlib import pyplot
+
+    pyplot.clf()
 
     areas_under_the_curve : List[float]
     lines : List[Any] = []
@@ -126,13 +130,71 @@ def visualize_auc_during_conversations(hares : List[Hare]):
     pyplot.xlabel('# of turns')
     pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
-    pyplot.show()
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
 
     return
 
-def visualize_fscore_during_conversations(hares : List[Hare]):
+def visualize_precision_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
 
     from matplotlib import pyplot
+
+    pyplot.clf()
+
+    precisions : List[float]
+    lines : List[Any] = []
+
+    for hare_obj in hares:
+        precisions = get_metric_during_conversations(hare_obj, 'precision')
+        line = pyplot.plot(precisions)
+        lines.append(line[0])
+
+    pyplot.ylabel('Precision')
+    pyplot.ylim(0,1)
+    pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
+
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
+
+    return
+
+
+def visualize_recall_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
+
+    from matplotlib import pyplot
+
+    pyplot.clf()
+
+    recalls : List[float]
+    lines : List[Any] = []
+
+    for hare_obj in hares:
+        recalls = get_metric_during_conversations(hare_obj, 'recall')
+        line = pyplot.plot(recalls)
+        lines.append(line[0])
+
+    pyplot.ylabel('Recall')
+    pyplot.ylim(0,1)
+    pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
+
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
+
+    return
+
+def visualize_fscore_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
+
+    from matplotlib import pyplot
+
+    pyplot.clf()
 
     fscores : List[float]
     lines : List[Any] = []
@@ -147,7 +209,10 @@ def visualize_fscore_during_conversations(hares : List[Hare]):
     pyplot.xlabel('# of turns')
     pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
-    pyplot.show()
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
 
     return
 
