@@ -54,3 +54,14 @@ class Conversation():
 
     def __len__(self) -> int:
         return len(self.utterances)
+
+    def __str__(self) -> str:
+
+        s : str = ''
+
+        for utterance in self.utterances:
+            s += utterance.speaker + '\t' + utterance.content + '\n'
+
+        s += '#toxic ' + ' '.join([speaker for speaker,label in self.speakers_with_labels.items() if label == 1])
+
+        return s + '\n'
