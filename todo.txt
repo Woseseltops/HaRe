@@ -1,15 +1,8 @@
 TODO
 ====
 * Write paper
+  * Plot optimal threshold over time
   * Will scores look more attractive if I force that only 1 can be toxic?
-  * Process on ponies: get ponies to process for all distributions
-    * CL: 125
-    * SL: 250
-    * R : 500
-    * FS: 1000
-    * FP: 2000
-    * PS: 4000
-
   * Read: Zhang 2018
 
 * Fix type hinting
