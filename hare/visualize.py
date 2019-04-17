@@ -11,6 +11,8 @@ from matplotlib.axes._subplots import Axes #type: ignore
 
 from hare.main import Hare
 
+line_spacing = [(1,1),(1,5),(5,1),(5,5),(10,1),(10,5)]
+
 def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index : int =0) -> None:
 
     # Make sure the hare obj is up-to-date
@@ -44,16 +46,15 @@ def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index 
     ax1.set_ylabel('Toxicity')
 
     # Figure out the horizontal ticks (and font for vertical)
-    TICK_FREQUENCY : int = 1
-    x_ticks : List[int] = []
-    x_tick_labels : List[int] = []
-
-    for i in x:
-        x_ticks.append(int(i))
-        x_tick_labels.append(int(i + 1))
-
-    ax1.set_xticks(x_ticks)
-    ax1.set_xticklabels(x_tick_labels)
+    # x_ticks : List[int] = []
+    # x_tick_labels : List[int] = []
+    #
+    # for i in x:
+    #     x_ticks.append(int(i))
+    #     x_tick_labels.append(int(i + 1))
+    #
+    # ax1.set_xticks(x_ticks)
+    # ax1.set_xticklabels(x_tick_labels)
 
     # Draw the figure
     colors : List[Tuple[float, float, float]] = [(248 / 255, 118 / 255, 109 / 255), (205 / 255, 150 / 255, 0 / 255), (124 / 255, 174 / 255, 1 / 255),
@@ -66,11 +67,14 @@ def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index 
         else:
             starting_point = y_stack[i - 1, :]
 
-        ax1.fill_between(x, starting_point, y_stack[i, :], color=colors[i], facecolor=colors[i])
+        try:
+            ax1.fill_between(x, starting_point, y_stack[i, :], color=colors[i], facecolor=colors[i])
+        except IndexError:
+            pass
 
     # Legend
     legend_color_items : List[Rectangle] = [Rectangle((0, 0), 1, 1, fc=color, edgecolor="white") for color in colors]
-    legend : Legend = ax1.legend(legend_color_items, speakers, loc='upper left', prop={'size': 10})
+    legend : Legend = ax1.legend(legend_color_items, ['player a','player b','player c','player d','player e','player f'], loc='upper left', prop={'size': 10})
     legend.get_frame().set_linewidth(0.5)
 
     pyplot.margins(y=0)
@@ -146,9 +150,9 @@ def visualize_precision_during_conversations(hares : List[Hare], save_with_filen
     precisions : List[float]
     lines : List[Any] = []
 
-    for hare_obj in hares:
+    for n,hare_obj in enumerate(hares):
         precisions = get_metric_during_conversations(hare_obj, 'precision')
-        line = pyplot.plot(precisions)
+        line = pyplot.plot(precisions,dashes=line_spacing[n])
         lines.append(line[0])
 
     pyplot.ylabel('Precision')
@@ -173,9 +177,9 @@ def visualize_recall_during_conversations(hares : List[Hare], save_with_filename
     recalls : List[float]
     lines : List[Any] = []
 
-    for hare_obj in hares:
+    for n,hare_obj in enumerate(hares):
         recalls = get_metric_during_conversations(hare_obj, 'recall')
-        line = pyplot.plot(recalls)
+        line = pyplot.plot(recalls,dashes=line_spacing[n])
         lines.append(line[0])
 
     pyplot.ylabel('Recall')
@@ -199,9 +203,9 @@ def visualize_fscore_during_conversations(hares : List[Hare], save_with_filename
     fscores : List[float]
     lines : List[Any] = []
 
-    for hare_obj in hares:
+    for n,hare_obj in enumerate(hares):
         fscores = get_metric_during_conversations(hare_obj, 'fscore')
-        line = pyplot.plot(fscores)
+        line = pyplot.plot(fscores,dashes=line_spacing[n])
         lines.append(line[0])
 
     pyplot.ylabel('F1-score')
