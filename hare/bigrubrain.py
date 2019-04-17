@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Tuple, Optional, Any
 from os import mkdir
 from numpy import array # type: ignore
 from hare.brain import AbstractBrain, UntrainedBrainError
@@ -58,6 +58,20 @@ class BiGruBrain(AbstractBrain):
             return [float(i[0]) for i in self.model.predict_proba(vectorized_texts)]
         else:
             raise UntrainedBrainError
+
+    def determine_impact_of_words(self,text : str) -> List[Tuple[str,float]]:
+
+        words : List[str] = text.split()
+        all_text_to_classify : List[str] = [text]
+
+        for i in range(len(words)):
+            words_for_this_iteration : List[str] = words[:i]+['[UNK]']+words[i+1:]
+            all_text_to_classify.append(' '.join(words_for_this_iteration))
+
+        scores : List[float] = self.classify_multiple(all_text_to_classify)
+        impacts : List[Tuple[str,float]] = [(word,scores[0]-score) for word,score in zip(words,scores[1:])]
+
+        return impacts
 
     def precision(self, y_true, y_pred) -> Tensor:
         '''Calculates the precision, a metric for multi-label classification of
