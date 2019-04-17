@@ -65,3 +65,32 @@ class Conversation():
         s += '#toxic ' + ' '.join([speaker for speaker,label in self.speakers_with_labels.items() if label == 1])
 
         return s + '\n'
+
+def import_conversations(filename : str) -> List[Conversation]:
+
+    conversations : List[Conversation] = []
+    current_conversation : Conversation = Conversation()
+
+    for line in open(filename):
+
+        line : str = line.strip()
+
+        if len(line) == 0:
+            continue
+        elif line[0] == '#':
+            try:
+                current_conversation.label_speaker(line.split()[1], 1)
+            except IndexError:
+                continue
+
+            conversations.append(current_conversation)
+            current_conversation = Conversation()
+            continue
+
+        speaker : str
+        content : str
+
+        speaker, content = line.split('\t')
+        current_conversation.add_utterance(speaker, content)
+
+    return conversations
