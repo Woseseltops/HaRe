@@ -1,5 +1,6 @@
 from os import listdir
 from enum import Enum
+from statistics import mean,stdev
 
 RAW_DATA_FOLDER = '/vol/bigdata2/datasets2/LoL/ExtractedData/'
 OUTPUT_DATA_FOLDER = '/vol/tensusers2/wstoop/HaRe/datasets/LoL/'
@@ -11,6 +12,8 @@ ANONYMOUS_NAMES = 'abcdefghijklmnopqrstuvwxyz'
 number_of_players_processed = 0
 nr_of_lines_in_this_convo = 0
 nr_of_lines_per_convo = []
+nr_of_words_per_utterance = []
+nr_of_players_per_convo = []
 
 for file in listdir(RAW_DATA_FOLDER):
 
@@ -47,13 +50,21 @@ for file in listdir(RAW_DATA_FOLDER):
 
                 pseudonym = pseudonyms_for_this_game[name]
 
+            nr_of_words_per_utterance.append(len(text.split()))
             nr_of_lines_in_this_convo += 1
 
         elif 'Game ' in line and not 'Game type' in line:
+            nr_of_players_per_convo.append(len(pseudonyms_for_this_game))
             pseudonyms_for_this_game = {}
 
             nr_of_lines_per_convo.append(nr_of_lines_in_this_convo)
-            print(number_of_players_processed,nr_of_lines_in_this_convo,sum(nr_of_lines_per_convo)/len(nr_of_lines_per_convo))
             nr_of_lines_in_this_convo = 0
 
     number_of_players_processed += 1
+
+    if number_of_players_processed == 5000:
+        print(len(nr_of_lines_per_convo))
+        print(mean(nr_of_words_per_utterance), stdev(nr_of_words_per_utterance))
+        print(mean(nr_of_lines_per_convo), stdev(nr_of_lines_per_convo))
+        print(mean(nr_of_players_per_convo), stdev(nr_of_players_per_convo))
+        print()

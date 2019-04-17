@@ -23,7 +23,7 @@ Method
 
 Results
 * You need different thresholds at different points in the conversation, a 'sliding threshold'.
-* You can select the optimal threshold per turn and plot this. It shows you need to increase the threshold over time
+* You can select the optimathreshold per turn and plot this. It shows you need to increase the threshold over time
 * How fast to increase the threshold during a conversation is not a given: it interacts with training size. The larger the training material, to slower you can turn up the threshold.
 * Also with distribution ratio?
 

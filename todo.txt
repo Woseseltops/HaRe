@@ -6,6 +6,7 @@ TODO
   * Read: Zhang 2018
 
 * Fix type hinting
+* Visualize module: too much duplicate code
 * Add save option for all visualization functions
 
 Backlog

@@ -1,17 +1,11 @@
 from hare import Hare, Conversation
-from hare.visualize import visualize_precision_during_conversations, visualize_recall_during_conversations, visualize_auc_during_conversations, visualize_fscore_during_conversations
+from hare.visualize import visualize_toxicity_for_one_conversation
 
 from json import loads
 
-#General settings
-#CONVERSATION_HISTORY_FILES = ['moba_0.5_125','moba_0.5_250','moba_0.5_500','moba_0.5_1000','moba_0.5_2000','moba_0.5_4000']
-CONVERSATION_HISTORY_FILES = ['moba_0.5_4000']#,'moba_0.4_4000','moba_0.3_4000','moba_0.2_4000','moba_0.1_4000']
+CONVERSATION_HISTORY_FILES = ['moba_0.5_4000']
 
 CONVERSATIONS_FILE = '../datasets/LoL/heldout_conversations_anon.txt'
-
-#THRESHOLDS = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
-#THRESHOLDS = [0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1]
-THRESHOLDS = [0.01,0.025,0.05,0.075,0.1,0.25]
 
 CONVERSATION_LENGTH = 200
 
@@ -28,12 +22,10 @@ for conv_hist_file in CONVERSATION_HISTORY_FILES:
         if n%100 == 0:
             print(conv_hist_file,n)
 
-    for threshold in THRESHOLDS:
-        h = Hare(name=threshold)
-        h.status_per_conversation = status_per_conversation
-        h.cut_off_value = threshold
+    h = Hare(name=conv_hist_file)
+    h.status_per_conversation = status_per_conversation
 
-        hares.append(h)
+    hares.append(h)
 
 #Load the conversations
 conversations = []
@@ -69,15 +61,4 @@ for conversation in conversations:
     for h in hares:
         h.add_conversation(conversation)
 
-#Visualize the result
-print('Making precision visualization')
-visualize_precision_during_conversations(hares,save_with_filename='precision.png')
-
-print('Making recall visualization')
-visualize_recall_during_conversations(hares,save_with_filename='recall.png')
-
-print('Making fscore visualization')
-visualize_fscore_during_conversations(hares,save_with_filename='fscore.png')
-
-print('Making AUC visualization')
-visualize_auc_during_conversations(hares,save_with_filename='auc.png')
+visualize_toxicity_for_one_conversation(hares[0])
