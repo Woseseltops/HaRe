@@ -331,7 +331,7 @@ def load_pretrained(location : str) -> Hare:
 
     if load(open(location+'metadata.json'))['brainType'] == 'BiGru':
 
-        from hare.bigrubrain import BiGruBrain
+        from hare.tensorflowbrain import BiGruBrain
 
         brain: BiGruBrain = BiGruBrain()
         brain.load(location)
