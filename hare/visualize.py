@@ -13,7 +13,7 @@ from hare.main import Hare
 
 line_spacing = [(1,1),(1,5),(5,1),(5,5),(10,1),(10,5)]
 
-def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index : int =0) -> None:
+def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index : int =0, save_with_filename : Optional[str] = None) -> None:
 
     # Make sure the hare obj is up-to-date
     hare_obj.update_status_history_for_conversation(conversation_index)
@@ -57,8 +57,8 @@ def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index 
     # ax1.set_xticklabels(x_tick_labels)
 
     # Draw the figure
-    colors : List[Tuple[float, float, float]] = [(248 / 255, 118 / 255, 109 / 255), (205 / 255, 150 / 255, 0 / 255), (124 / 255, 174 / 255, 1 / 255),
-              (0 / 255, 190 / 255, 103 / 255), (0 / 255, 191 / 255, 196 / 255), (0 / 255, 169 / 255, 1.0)]
+    colors : List[Tuple[float, float, float]] = [(238,73,96),(255,208,96),(22,199,144),(51,138,159),(131,95,127),(237,132,19)]
+    colors = [(r/255,g/255,b/255) for r,g,b in colors]
 
     for i in range(len(y)):
 
@@ -78,7 +78,11 @@ def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index 
     legend.get_frame().set_linewidth(0.5)
 
     pyplot.margins(y=0)
-    pyplot.show(y)
+
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show(y)
 
 def get_metric_during_conversations(hare_obj : Hare,metric_name : str) -> List[float]:
 

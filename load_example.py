@@ -1,7 +1,9 @@
 from hare import load_pretrained, Conversation, load_example_conversations
-from hare.bigrubrain import BiGruBrain
+from hare.tensorflowbrain import BiGruBrain
 
-simple_hare = load_pretrained('hare/pretrained/moba7')
+simple_hare = load_pretrained('hare/pretrained/moba')
+
+print(simple_hare.brain.determine_impact_of_words('well played noob'))
 
 convo = Conversation()
 convo.add_utterance(speaker='a',content='i am nice')

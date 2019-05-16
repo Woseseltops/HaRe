@@ -1,5 +1,5 @@
 from hare import Hare, Conversation
-from hare.bigrubrain import BiGruBrain
+from hare.tensorflowbrain import BiGruBrain
 
 mockhare = Hare()
 mockhare.brain = BiGruBrain()

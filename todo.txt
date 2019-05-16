@@ -1,13 +1,19 @@
 TODO
 ====
-* Write paper
-  * Plot optimal threshold over time
-  * Will scores look more attractive if I force that only 1 can be toxic?
-  * Read: Zhang 2018
+Interactive article:
+* Train with 3x single direction LSTM, without capitalization, and check that
+  * Using self trained word embeddings?
 
+Code
 * Fix type hinting
 * Visualize module: too much duplicate code
 * Add save option for all visualization functions
+
+Ideas to make the model better
+==============================
+Use toxic embeddings (make sure to not mix up train and test data!)
+Separate casing
+Do sequences really need to have a fixed length?
 
 Backlog
 =======
@@ -18,7 +24,5 @@ Backlog
 
   * See if this best result can be improved by using Ulmfit http://nlp.fast.ai/ or Bert https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
     * https://www.analyticsvidhya.com/blog/2018/11/tutorial-text-classification-ulmfit-fastai-library/
-
-  * Look for others studies, like from the workshop Iris mentioned... do they have interesting architectures? https://sites.google.com/view/alw3/past-workshops?authuser=0
 
 * Look up: what exactly is ConvoKit?
