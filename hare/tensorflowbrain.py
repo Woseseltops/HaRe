@@ -12,7 +12,7 @@ try:
 except ImportError:
     pass
 
-class BiGruBrain(AbstractBrain):
+class TensorFlowBrain(AbstractBrain):
 
     def __init__(self) -> None:
 
@@ -97,6 +97,63 @@ class BiGruBrain(AbstractBrain):
         recall : Tensor = true_positives / (possible_positives + backend.epsilon())
         return recall
 
+
+    def save(self,location : str):
+
+        import json
+        import pickle
+        from tensorflow.keras.models import save_model #type: ignore
+
+        if location[-1] != '/':
+            location += '/'
+
+        try:
+            mkdir(location)
+        except FileExistsError:
+            pass
+
+        #Save metadata
+        metadata : Dict[str,Any] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
+        json.dump(metadata,open(location+'metadata.json','w'))
+
+        #Save tokenizer
+        pickle.dump(self.tokenizer,open(location+'tokenizer.pickle','wb'))
+
+        #Save model
+        save_model(self.model,location+'model')
+
+    def load(self,location : str):
+
+        import json
+        import pickle
+        from tensorflow.keras.models import load_model #type: ignore
+
+        from warnings import filterwarnings
+        filterwarnings('ignore')
+
+        if location[-1] != '/':
+            location += '/'
+
+        #Load metadata
+        self._max_sequence_length = json.load(open(location+'metadata.json'))['maxSequenceLength']
+
+        #Load tokenizer
+        self.tokenizer = pickle.load(open(location+'tokenizer.pickle','rb'))
+
+        #Load model
+        self.model = load_model(open(location+'model','rb'))
+
+    def get_embeddings(self,limit : int = 1000) -> Tuple[List[str],List[List[float]]]:
+
+        if self.model != None:
+            return list(self.tokenizer.word_index.keys())[:limit], self.model.layers[0].get_weights()[0][:limit]
+
+class BiGruBrain(TensorFlowBrain):
+
+    def __init__(self) -> None:
+
+        super().__init__()
+
     def train(self, texts : List[str],target : List[int]) -> None:
 
         from tensorflow.python.keras.models import Sequential #type: ignore
@@ -119,11 +176,6 @@ class BiGruBrain(AbstractBrain):
             self._max_sequence_length = len(max(texts, key=len))
 
         vectorized_texts : array = self.vectorize_texts(texts)
-
-        #========== temp =============
-        #for n, (t,vector) in enumerate(zip(texts,vectorized_texts)):
-        #    open('/vol/tensusers2/wstoop/HaRe/tmp/' + str(n) + '_' + str(target[n]), 'w').write(t+'\n\n'+str(vector))
-        #=============================
 
         if self.embedding_location == '':
             if self.verbose:
@@ -184,47 +236,86 @@ class BiGruBrain(AbstractBrain):
 
         self.model = model
 
-    def save(self,location : str):
+class LSTMBrain(TensorFlowBrain):
 
-        import json
-        import pickle
-        from tensorflow.keras.models import save_model #type: ignore
+    def train(self, texts : List[str],target : List[int]) -> None:
 
-        if location[-1] != '/':
-            location += '/'
+        from tensorflow.python.keras.models import Sequential #type: ignore
+        from tensorflow.python.keras.layers import Embedding, Dense, LSTM #type: ignore
+        from tensorflow.keras.optimizers import Adam #type: ignore
+        from tensorflow.keras.callbacks import History #type: ignore
 
-        try:
-            mkdir(location)
-        except FileExistsError:
-            pass
+        if self.downsampling:
+            texts, target = downsample(texts,target,self.downsampling_ratio)
 
-        #Save metadata
-        metadata : Dict[str,Any] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
-        json.dump(metadata,open(location+'metadata.json','w'))
+        if self.verbose:
+            print('1. Vectorizing texts')
 
-        #Save tokenizer
-        pickle.dump(self.tokenizer,open(location+'tokenizer.pickle','wb'))
+        NUMBER_OF_FEATURES : int = 20000
+        self.tokenizer = text.Tokenizer(num_words=NUMBER_OF_FEATURES)
+        self.tokenizer.fit_on_texts(texts)
+        vocabulary : Dict[str,int] = self.tokenizer.word_index
 
-        #Save model
-        save_model(self.model,location+'model')
+        if self._max_sequence_length == 0:
+            self._max_sequence_length = len(max(texts, key=len))
 
-    def load(self,location : str):
+        vectorized_texts : array = self.vectorize_texts(texts)
 
-        import json
-        import pickle
-        from tensorflow.keras.models import load_model #type: ignore
+        if self.embedding_location == '':
+            if self.verbose:
+                print('2. Skip (no embeddings)')
+                print('3. Skip (no embeddings)')
+        else:
+            if self.verbose:
+                print('2. Loading word embeddings')
 
-        from warnings import filterwarnings
-        filterwarnings('ignore')
+            embedding_dictionary : Dict[str,List[float]] = load_embedding_dictionary(self.embedding_location)
+            nr_of_embedding_features: int = len(list(embedding_dictionary.values())[0])  # Check how many values we have for the first word
 
-        if location[-1] != '/':
-            location += '/'
+            if self.verbose:
+                print('3. Creating embedding matrix')
 
-        #Load metadata
-        self._max_sequence_length = json.load(open(location+'metadata.json'))['maxSequenceLength']
+            embedding_matrix : array = create_embedding_matrix_for_vocabulary(embedding_dictionary,vocabulary)
 
-        #Load tokenizer
-        self.tokenizer = pickle.load(open(location+'tokenizer.pickle','rb'))
+        if self.verbose:
+            print('4. Building up model')
 
-        #Load model
-        self.model = load_model(open(location+'model','rb'))
+        #Define a simple LSTM model with a pretrained embedding layer
+        model : Sequential = Sequential()
+
+        if self.embedding_location == '':
+            #Add an empty embedding layer if we have no pretrained embeddings
+            EMPTY_EMBEDDING_LAYER_SIZE : int = 300
+            model.add(Embedding(len(vocabulary)+1,EMPTY_EMBEDDING_LAYER_SIZE))
+
+        else:
+            model.add(Embedding(input_dim=len(vocabulary)+1,
+                               output_dim=nr_of_embedding_features,
+                               input_length=vectorized_texts.shape[1],
+                               weights=[embedding_matrix],
+                               trainable=False))
+
+        model.add(LSTM(16, return_sequences=True))
+        model.add(LSTM(16, return_sequences=True))
+        model.add(LSTM(16))
+
+        model.add(Dense(256))
+        model.add(Dense(256))
+
+        model.add(Dense(1, activation='sigmoid'))
+
+        #Compile the model
+        optimizer : Adam = Adam(lr=self.learning_rate)
+        model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['acc'])
+
+        if self.verbose:
+            print('5. training the model')
+
+        history : History = model.fit(vectorized_texts,
+            target,
+            epochs=self.learning_epochs,
+            #validation_data=(test_vectors, test_target),
+            verbose=1,  # Logs once per epoch.
+            batch_size=self.learning_batch_size)
+
+        self.model = model
