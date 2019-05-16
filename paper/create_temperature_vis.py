@@ -61,4 +61,5 @@ for conversation in conversations:
     for h in hares:
         h.add_conversation(conversation)
 
-visualize_toxicity_for_one_conversation(hares[0])
+for i in range(0,20):
+    visualize_toxicity_for_one_conversation(hares[0],i,'temperature_'+str(i)+'.png')

@@ -1,5 +1,5 @@
 from hare import Hare, Conversation
-from hare.bigrubrain import BiGruBrain
+from hare.tensorflowbrain import BiGruBrain
 
 #Load the conversations
 CONVERSATIONS_FILE = '../datasets/LoL/conversations_anon.txt'
