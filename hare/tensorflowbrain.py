@@ -1,5 +1,6 @@
 from typing import List, Dict, Tuple, Optional, Any
 from os import mkdir
+from collections import Counter
 from numpy import array # type: ignore
 from hare.brain import AbstractBrain, UntrainedBrainError
 from hare.embedding import load_embedding_dictionary, create_embedding_matrix_for_vocabulary
@@ -19,6 +20,8 @@ class TensorFlowBrain(AbstractBrain):
         super().__init__()
 
         self.dependencies = ['tensorflow']
+        self.brain_type : str = 'TensorFlow'
+
         self.embedding_location : str = ''
 
         self.learning_rate : float = 1e-3
@@ -113,7 +116,7 @@ class TensorFlowBrain(AbstractBrain):
             pass
 
         #Save metadata
-        metadata : Dict[str,Any] = {'brainType':'BiGru','maxSequenceLength':self._max_sequence_length}
+        metadata : Dict[str,Any] = {'brainType':self.brain_type,'maxSequenceLength':self._max_sequence_length}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
@@ -148,11 +151,67 @@ class TensorFlowBrain(AbstractBrain):
         if self.model != None:
             return list(self.tokenizer.word_index.keys())[:limit], self.model.layers[0].get_weights()[0][:limit]
 
+    def visualize_neuron_specializations(self,layer_index : int, texts : List[str], list_length : int = 5):
+
+        from tensorflow.keras.models import Model
+
+        intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
+
+        word_scores_per_neuron : List[List[Tuple[str,float]]] = []
+
+        #For now only processes the first text
+        for text in self.vectorize_texts(texts):
+
+            for word_index, activations in zip(text, intermediate_output_model.predict(text)):
+
+                try:
+                    current_word : str = self.tokenizer.index_word[word_index]
+                except KeyError:
+                    continue
+
+                for neuron_index, neuron_activation in enumerate(activations[0]):
+
+                    if len(word_scores_per_neuron) <= neuron_index:
+                        word_scores_per_neuron.append([])
+
+                    word_scores_per_neuron[neuron_index].append((current_word,neuron_activation))
+
+        for neuron_scores in word_scores_per_neuron:
+
+            sorted_words : List[Tuple[str,float]] = sorted(neuron_scores,key=lambda x:x[1])
+
+            lowest_words : List[str] = []
+            highest_words: List[str] = []
+
+            for word,activation in sorted_words:
+                lowest_words.append(word)
+
+                if len(set(lowest_words)) > list_length:
+                    break
+
+            for word, activation in reversed(sorted_words):
+                highest_words.append(word)
+
+                if len(set(highest_words)) > list_length:
+                    break
+
+            low_word_str = ''
+            high_word_str = ''
+
+            for word in set(lowest_words):
+                low_word_str += word + ' (' + str(lowest_words.count(word)) + ')\t'
+
+            for word in set(highest_words):
+                high_word_str += word + ' (' + str(highest_words.count(word)) + ')\t'
+
+            print(low_word_str+'\t-\t'+high_word_str)
+
 class BiGruBrain(TensorFlowBrain):
 
     def __init__(self) -> None:
 
         super().__init__()
+        self.brain_type = 'BiGru'
 
     def train(self, texts : List[str],target : List[int]) -> None:
 
@@ -186,7 +245,7 @@ class BiGruBrain(TensorFlowBrain):
                 print('2. Loading word embeddings')
 
             embedding_dictionary : Dict[str,List[float]] = load_embedding_dictionary(self.embedding_location)
-            nr_of_embedding_features: int = len(list(embedding_dictionary.values())[0])  # Check how many values we have for the first word
+            nr_of_embedding_features: int = len(list(embedding_dictionary.values())[1])  # Check how many values we have for the first word
 
             if self.verbose:
                 print('3. Creating embedding matrix')
@@ -238,10 +297,15 @@ class BiGruBrain(TensorFlowBrain):
 
 class LSTMBrain(TensorFlowBrain):
 
+    def __init__(self) -> None:
+
+        super().__init__()
+        self.brain_type = 'LSTM'
+
     def train(self, texts : List[str],target : List[int]) -> None:
 
         from tensorflow.python.keras.models import Sequential #type: ignore
-        from tensorflow.python.keras.layers import Embedding, Dense, LSTM #type: ignore
+        from tensorflow.python.keras.layers import Embedding, Dense, LSTM, GlobalMaxPool1D #type: ignore
         from tensorflow.keras.optimizers import Adam #type: ignore
         from tensorflow.keras.callbacks import History #type: ignore
 
@@ -270,7 +334,7 @@ class LSTMBrain(TensorFlowBrain):
                 print('2. Loading word embeddings')
 
             embedding_dictionary : Dict[str,List[float]] = load_embedding_dictionary(self.embedding_location)
-            nr_of_embedding_features: int = len(list(embedding_dictionary.values())[0])  # Check how many values we have for the first word
+            nr_of_embedding_features: int = len(list(embedding_dictionary.values())[1])  # Check how many values we have for the first word
 
             if self.verbose:
                 print('3. Creating embedding matrix')
@@ -297,7 +361,8 @@ class LSTMBrain(TensorFlowBrain):
 
         model.add(LSTM(16, return_sequences=True))
         model.add(LSTM(16, return_sequences=True))
-        model.add(LSTM(16))
+        model.add(LSTM(16, return_sequences=True))
+        model.add(GlobalMaxPool1D())
 
         model.add(Dense(256))
         model.add(Dense(256))

@@ -5,17 +5,23 @@ def load_embedding_dictionary(location : str) -> Dict[str,List[float]]:
 
     embedding_dictionary : Dict[str,List[float]] = {}
 
-    for line in open(location):
+    for n,line in enumerate(open(location,encoding='ISO-8859-1')):
+
         values : List[str] = line.split()
         word : str = values[0]
-        coefs : array = asarray(values[1:], dtype='float32')
-        embedding_dictionary[word] = coefs
+
+        try:
+            coefs : array = asarray(values[1:], dtype='float32')
+            embedding_dictionary[word] = coefs
+
+        except ValueError:
+            print('Embedding file syntax error at line',n)
 
     return embedding_dictionary
 
 def create_embedding_matrix_for_vocabulary(embedding_dictionary : Dict[str,List[float]], vocabulary : Dict[str,int]) -> array:
 
-    nr_of_embedding_features : int = len(list(embedding_dictionary.values())[0]) #Check how many values we have for the first word
+    nr_of_embedding_features : int = len(list(embedding_dictionary.values())[1]) #Check how many values we have for the first word
 
     embedding_matrix : array = zeros((len(vocabulary) + 1, nr_of_embedding_features))
 

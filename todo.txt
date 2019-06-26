@@ -1,8 +1,14 @@
 TODO
 ====
 Interactive article:
-* Train with 3x single direction LSTM, without capitalization, and check that
-  * Using self trained word embeddings?
+1. Interactive visualization to evaluate classifiers during conversations: TP, FP, F-score
+  * Design
+  * Implement
+2. Show the difference between dict and BiGru
+3. Use this visualization to figure out
+   * If we can do without Bi
+   * If we can get a comparable score WITH word embeddings
+     * If the neuron visualizations for word embeddings are more organized
 
 Code
 * Fix type hinting

@@ -37,7 +37,6 @@ class RandomBrain(AbstractBrain):
 class DictBasedBrain(AbstractBrain):
 
     bad_words : List[str] = []
-    maximum_nr_of_bad_words_needed : int = 4
 
     def classify(self,text : str) -> float:
 
@@ -46,9 +45,4 @@ class DictBasedBrain(AbstractBrain):
         for bad_word in self.bad_words:
             nr_of_bad_words += text.lower().count(bad_word)
 
-        score : float = nr_of_bad_words/self.maximum_nr_of_bad_words_needed
-
-        if score > 1:
-            return 1.0
-        else:
-            return score
+        return nr_of_bad_words

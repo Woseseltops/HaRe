@@ -1,0 +1,55 @@
+STRUCTURE
+=========
+
+Text:
+* Online harassment is a big problem.
+* Gaming is good because we have good training data. In this article we will use game chats from the popular online video game League of Legends.
+* This is an example conversation.
+* Let's see how many we can filter out based on a simple word list
+
+Interactive #1:
+* Set word list classifier with various thresholds
+* Test during the conversation: grey happy/angry faces light up
+* A graph where you can see a metric (accuracy?) for each test you do, plus a clear button
+
+Text:
+* Machine learning might be better
+* The latest state of the art are recurrent neural networks, because they are good at
+* What's cool about neural networks is that the neurons take up various functions
+
+Interactive #2:
+* A number of example texts (toxic vs nice?) you can go through word by word
+* A number of example neurons and how hard they activate at various points
+
+Text:
+* You see that at the lowest level the neurons activate on individual words
+* The higher levels track the temperature at a higher level
+* Important: nobody told the network to do this, it just figured out that this was a good strategy to catch toxic players
+
+Interactive #3:
+* Same as interactive #1, but adds second classifier option with threshold
+
+* It might be hard to grasp which is better by just looking at raw numbers, so we added a button so you can see the F-score instead
+* You can play with the beta value of the F-score
+
+-- Possible --
+
+Interactive #4:
+* 3D visualization T-SNE toxic word embeddings
+
+Text:
+* Word embeddings are also cool
+
+Interactive #5:
+* Same as interactive #3, but adds word embedding based classifier
+
+QUESTIONS
+=========
+* Why is BiGRU so much better than LSTM? Because of the Bi or the GRU?
+  * Compare moba_bigru to moba_gru, moba_bilstm, moba_bigru_3layer
+* Is the difference between the neurons wide enough to be visible, or do they actually all specialize in everything?
+
+EXTRA IDEAS
+===========
+* If I build my own embedding layer, and add an extra dimension that identifies the percentage of the word that is capitalized, are there any neurons that specialize in capitalization?
+* Visualize what area from the embedding space a neuron specializes in

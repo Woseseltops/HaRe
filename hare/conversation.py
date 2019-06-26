@@ -1,4 +1,4 @@
-from typing import List, Dict, Set
+from typing import List, Dict, Set, Optional
 
 class Utterance():
 
@@ -66,7 +66,7 @@ class Conversation():
 
         return s + '\n'
 
-def import_conversations(filename : str) -> List[Conversation]:
+def import_conversations(filename : str, cutoff_point : Optional[int] = None) -> List[Conversation]:
 
     conversations : List[Conversation] = []
     current_conversation : Conversation = Conversation()
@@ -91,6 +91,8 @@ def import_conversations(filename : str) -> List[Conversation]:
         content : str
 
         speaker, content = line.split('\t')
-        current_conversation.add_utterance(speaker, content)
+
+        if cutoff_point == None or len(current_conversation.utterances) < cutoff_point:
+            current_conversation.add_utterance(speaker, content)
 
     return conversations

@@ -140,7 +140,7 @@ class Hare():
 
                 if categorize_true_scores:
 
-                    if label > self.cut_off_value:
+                    if label > 0.5:
                         true_scores.append(1.0)
                     else:
                         true_scores.append(0.0)
@@ -294,8 +294,8 @@ class Hare():
         true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
         return recall_score(true_scores,predicted_scores)
 
-    def calculate_fscore_at_utterance(self,utterance_index : int) -> float:
-        from sklearn.metrics import f1_score #type: ignore
+    def calculate_fscore_at_utterance(self,utterance_index : int, beta : float = 1) -> float:
+        from sklearn.metrics import fbeta_score #type: ignore
         from warnings import filterwarnings
 
         filterwarnings('ignore')
@@ -304,7 +304,7 @@ class Hare():
         predicted_scores : List[float]
 
         true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
-        return f1_score(true_scores,predicted_scores)
+        return fbeta_score(true_scores,predicted_scores,beta)
 
     def calculate_auc_at_utterance(self,utterance_index : int) -> float:
         from sklearn.metrics import roc_auc_score #type: ignore
@@ -314,6 +314,30 @@ class Hare():
 
         true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index)
         return roc_auc_score(true_scores,predicted_scores)
+
+    def calculate_true_positives_at_utterance(self,utterance_index : int) -> float:
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index, categorize_true_scores=False, categorize_predicted_scores=True)
+
+        true_positives = 0
+
+        for true, prediction in zip(true_scores, predicted_scores):
+            if prediction and true:
+                true_positives += 1
+
+        return true_positives
+
+    def calculate_false_positives_at_utterance(self,utterance_index : int) -> float:
+
+        true_scores, predicted_scores = self.get_true_and_predicted_scores_at_utterance_index(utterance_index, categorize_true_scores=False, categorize_predicted_scores=True)
+
+        false_positives = 0
+
+        for true,prediction in zip(true_scores,predicted_scores):
+            if prediction and not true:
+                false_positives += 1
+
+        return false_positives
 
 def load_pretrained(location : str) -> Hare:
 
@@ -334,6 +358,12 @@ def load_pretrained(location : str) -> Hare:
         from hare.tensorflowbrain import BiGruBrain
 
         brain: BiGruBrain = BiGruBrain()
+        brain.load(location)
+        brain.verbose = True
+    elif load(open(location + 'metadata.json'))['brainType'] == 'LSTM':
+        from hare.tensorflowbrain import LSTMBrain
+
+        brain: BiGruBrain = LSTMBrain()
         brain.load(location)
         brain.verbose = True
 

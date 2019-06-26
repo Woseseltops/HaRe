@@ -109,3 +109,4 @@ hare_env/*
 hare_env_python36/*
 experiments/error_analysis/*
 paper/moba*
+hare/pretrained/*

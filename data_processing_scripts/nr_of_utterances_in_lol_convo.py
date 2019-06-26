@@ -57,14 +57,33 @@ for file in listdir(RAW_DATA_FOLDER):
             nr_of_players_per_convo.append(len(pseudonyms_for_this_game))
             pseudonyms_for_this_game = {}
 
-            nr_of_lines_per_convo.append(nr_of_lines_in_this_convo)
+            if nr_of_lines_in_this_convo > 0:
+                nr_of_lines_per_convo.append(nr_of_lines_in_this_convo)
+
             nr_of_lines_in_this_convo = 0
 
     number_of_players_processed += 1
 
+    if number_of_players_processed%100 == 0:
+        print(number_of_players_processed)
+
     if number_of_players_processed == 5000:
-        print(len(nr_of_lines_per_convo))
-        print(mean(nr_of_words_per_utterance), stdev(nr_of_words_per_utterance))
-        print(mean(nr_of_lines_per_convo), stdev(nr_of_lines_per_convo))
-        print(mean(nr_of_players_per_convo), stdev(nr_of_players_per_convo))
-        print()
+
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        def bins(xmin, xmax, binwidth, padding):
+            # Returns an array of integers which can be used to represent bins
+            return np.arange(
+                xmin - (xmin % binwidth) - padding,
+                xmax + binwidth + padding,
+                binwidth)
+
+        plt.hist(nr_of_lines_per_convo, bins=bins(min(nr_of_lines_per_convo), max(nr_of_lines_per_convo), 5, 5))
+        plt.xlim(0,800)
+        plt.xlabel('Conversation length')
+        plt.ylabel('Frequency')
+        plt.savefig('convo_length')
+
+        print(mean(nr_of_lines_per_convo),stdev(nr_of_lines_per_convo))
+        break

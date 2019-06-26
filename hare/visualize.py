@@ -84,19 +84,23 @@ def visualize_toxicity_for_one_conversation(hare_obj : Hare, conversation_index 
     else:
         pyplot.show(y)
 
-def get_metric_during_conversations(hare_obj : Hare,metric_name : str) -> List[float]:
+def get_metric_during_conversations(hare_obj : Hare,metric_name : str,beta : float = 1) -> List[float]:
 
     hare_obj.update_all_status_histories()
     length_of_longest_conversation : int = max(len(conversation) for conversation in hare_obj.conversations)
     scores : List[float] = []
 
     for utterance_index in range(length_of_longest_conversation):
-        method = getattr(hare_obj,'calculate_'+metric_name+'_at_utterance')
-        scores.append(method(utterance_index))
+
+        if metric_name == 'fscore':
+            scores.append(hare_obj.calculate_fscore_at_utterance(utterance_index,beta))
+        else:
+            method = getattr(hare_obj,'calculate_'+metric_name+'_at_utterance')
+            scores.append(method(utterance_index))
 
     return scores
 
-def visualize_accuracy_during_conversations(hares : List[Hare]):
+def visualize_accuracy_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
 
     from matplotlib import pyplot
 
@@ -115,7 +119,10 @@ def visualize_accuracy_during_conversations(hares : List[Hare]):
     pyplot.xlabel('# of turns')
     pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
-    pyplot.show()
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
 
     return
 
@@ -156,7 +163,12 @@ def visualize_precision_during_conversations(hares : List[Hare], save_with_filen
 
     for n,hare_obj in enumerate(hares):
         precisions = get_metric_during_conversations(hare_obj, 'precision')
-        line = pyplot.plot(precisions,dashes=line_spacing[n])
+
+        if n < len(line_spacing):
+            line = pyplot.plot(precisions,dashes=line_spacing[n])
+        else:
+            line = pyplot.plot(precisions)
+
         lines.append(line[0])
 
     pyplot.ylabel('Precision')
@@ -183,7 +195,12 @@ def visualize_recall_during_conversations(hares : List[Hare], save_with_filename
 
     for n,hare_obj in enumerate(hares):
         recalls = get_metric_during_conversations(hare_obj, 'recall')
-        line = pyplot.plot(recalls,dashes=line_spacing[n])
+
+        if n < len(line_spacing):
+            line = pyplot.plot(recalls,dashes=line_spacing[n])
+        else:
+            line = pyplot.plot(recalls)
+
         lines.append(line[0])
 
     pyplot.ylabel('Recall')
@@ -198,7 +215,7 @@ def visualize_recall_during_conversations(hares : List[Hare], save_with_filename
 
     return
 
-def visualize_fscore_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
+def visualize_fscore_during_conversations(hares : List[Hare], beta: float = 1,save_with_filename : Optional[str] = None):
 
     from matplotlib import pyplot
 
@@ -208,8 +225,13 @@ def visualize_fscore_during_conversations(hares : List[Hare], save_with_filename
     lines : List[Any] = []
 
     for n,hare_obj in enumerate(hares):
-        fscores = get_metric_during_conversations(hare_obj, 'fscore')
-        line = pyplot.plot(fscores,dashes=line_spacing[n])
+        fscores = get_metric_during_conversations(hare_obj, 'fscore', beta=beta)
+
+        if n < len(line_spacing):
+            line = pyplot.plot(fscores,dashes=line_spacing[n])
+        else:
+            line = pyplot.plot(fscores)
+
         lines.append(line[0])
 
     pyplot.ylabel('F1-score')
@@ -273,3 +295,63 @@ def visualize_retrospective_roc_curve(hares : List[Hare]):
     pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
 
     pyplot.show()
+
+def visualize_true_positives_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
+
+    from matplotlib import pyplot
+
+    pyplot.clf()
+
+    true_positives : List[float]
+    lines : List[Any] = []
+
+    for n,hare_obj in enumerate(hares):
+        true_positives = get_metric_during_conversations(hare_obj, 'true_positives')
+
+        if n < len(line_spacing):
+            line = pyplot.plot(true_positives,dashes=line_spacing[n])
+        else:
+            line = pyplot.plot(true_positives)
+
+        lines.append(line[0])
+
+    pyplot.ylabel('True positives')
+    pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
+
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
+
+    return
+
+def visualize_false_positives_during_conversations(hares : List[Hare], save_with_filename : Optional[str] = None):
+
+    from matplotlib import pyplot
+
+    pyplot.clf()
+
+    false_positives : List[float]
+    lines : List[Any] = []
+
+    for n,hare_obj in enumerate(hares):
+        false_positives = get_metric_during_conversations(hare_obj, 'false_positives')
+
+        if n < len(line_spacing):
+            line = pyplot.plot(false_positives,dashes=line_spacing[n])
+        else:
+            line = pyplot.plot(false_positives)
+
+        lines.append(line[0])
+
+    pyplot.ylabel('False positives')
+    pyplot.xlabel('# of turns')
+    pyplot.legend(lines, [hare_obj.name for hare_obj in hares])
+
+    if save_with_filename is not None:
+        pyplot.savefig(save_with_filename)
+    else:
+        pyplot.show()
+
+    return
