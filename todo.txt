@@ -1,9 +1,12 @@
 TODO
 ====
 Interactive article:
-1. Interactive visualization to evaluate classifiers during conversations: TP, FP, F-score
-  * Design
-  * Implement
+1. Implement interactive visualization to evaluate classifiers during conversations
+   * Start with the graphs, hardcoding the source files
+     * Create data json files for dict and bigru, all settings
+       * Remove later players
+     * Code to create graph on canvas, using javascript array is input data
+     * Fill graphs by hardcoding source files
 2. Show the difference between dict and BiGru
 3. Use this visualization to figure out
    * If we can do without Bi

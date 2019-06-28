@@ -52,6 +52,11 @@ class Conversation():
 
         return result
 
+    def remove_speaker(self,speaker_to_remove : str):
+
+        clean_utterances : List[Utterance] = [utterance for utterance in self.utterances if utterance.speaker != speaker_to_remove]
+        self.utterances = clean_utterances
+
     def __len__(self) -> int:
         return len(self.utterances)
 
