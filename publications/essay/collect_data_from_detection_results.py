@@ -114,9 +114,9 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
             for b in BETA_VALUES:
                 beta[b].append(fbeta_score(true,predicted,b))
 
-        open(folder_name+'per_player.js','w').write(dumps(per_player))
-        open(folder_name+'tp.js','w').write(dumps(tp))
-        open(folder_name+'fp.js','w').write(dumps(fp))
+        open(folder_name+'per_player.js','w').write(conv_hist_file+'_per_player['+str(threshold)+'] = '+dumps(per_player))
+        open(folder_name+'tp.js','w').write(conv_hist_file+'_tp['+str(threshold)+'] = '+dumps(tp))
+        open(folder_name+'fp.js','w').write(conv_hist_file+'_fp['+str(threshold)+'] = '+dumps(fp))
 
         for b in BETA_VALUES:
-            open(folder_name+'f@'+str(b)+'.js','w').write(dumps(beta[b]))
+            open(folder_name+'f@'+str(b)+'.js','w').write(conv_hist_file+'_f_'+str(b)+'['+str(threshold)+'] = '+dumps(beta[b]))

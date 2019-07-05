@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="3587.1994"
-     inkscape:cy="-698.63129"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="1965.9034"
+     inkscape:cy="-879.1219"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,15 +59,22 @@
        id="rect4752-2"
        width="1661.6838"
        height="1155.7258"
-       x="3094.6108"
-       y="1490.3733" />
+       x="3054.2048"
+       y="1005.5001" />
     <rect
        style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:3.54330707;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4752"
        width="1661.6838"
        height="2627.1868"
-       x="1105.2836"
-       y="-391.74088" />
+       x="1082.4264"
+       y="-397.45517" />
+    <rect
+       style="fill:#a44731;fill-opacity:0.06962025;stroke:#a44731;stroke-width:5.17092037;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-6-8-0"
+       width="393.29968"
+       height="123.62919"
+       x="1369.0867"
+       y="-195.37148" />
     <circle
        style="fill:#adadad;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="path3336"
@@ -8477,7 +8484,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">match 10</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="1175.771"
        y="-280.4213"
        id="text9756-2-5-9"
@@ -8486,7 +8493,7 @@
          id="tspan9758-8-8-5"
          x="1175.771"
          y="-280.4213"
-         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#000000;fill-opacity:0.58860761">1. Add a detector</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#a44731;fill-opacity:1;">1. Add one or more detectors</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -8498,17 +8505,22 @@
          id="tspan9758-8-8-5-0"
          x="1176.0787"
          y="208.05258"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">to see the status at various points during the conversations</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">to see the status of the selected detector at various points </tspan><tspan
+         sodipodi:role="line"
+         x="1176.0787"
+         y="258.05258"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761"
+         id="tspan11540">during the conversations</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#646464;stroke-width:6.34002447;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.22784813"
-       d="m 1363.1132,314.50579 945.4648,0"
+       d="m 1363.1132,354.50579 945.4648,0"
        id="path10136"
        inkscape:connector-curvature="0" />
     <circle
-       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#444444;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path10138"
        cx="1460.9731"
-       cy="314.36218"
+       cy="354.36218"
        r="21.428572" />
     <circle
        style="fill:#ffb950;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:1.74344254;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -8710,29 +8722,29 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="1188.0718"
-       y="320.79202"
+       y="360.79202"
        id="text9756-2-5-9-15"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9"
          x="1188.0718"
-         y="320.79202"
+         y="360.79202"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">first message</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="2350.5422"
-       y="320.99402"
+       y="360.99402"
        id="text9756-2-5-9-15-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9-0"
          x="2350.5422"
-         y="320.99402"
+         y="360.99402"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">last message</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="1174.6771"
        y="134.18507"
        id="text9756-2-5-9-2"
@@ -8741,10 +8753,10 @@
          id="tspan9758-8-8-5-8"
          x="1174.6771"
          y="134.18507"
-         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#000000;fill-opacity:0.58860761">2. Slide</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#a44731;fill-opacity:1;">2. Slide</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="1187.4019"
        y="1588.4365"
        id="text9756-2-5-9-2-1"
@@ -8753,30 +8765,30 @@
          id="tspan9758-8-8-5-8-7"
          x="1187.4019"
          y="1588.4365"
-         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#000000;fill-opacity:0.58860761">3. Compare</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#a44731;fill-opacity:1;">3. Compare</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1256.2151"
-       y="1679.2546"
+       x="1284.7865"
+       y="1680.6832"
        id="text9756-2-0-9-3-2-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9"
-         x="1256.2151"
-         y="1679.2546"
+         x="1284.7865"
+         y="1680.6832"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">toxic players correctly detected</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="2240.8831"
-       y="1683.4757"
+       x="2198.4565"
+       y="1669.3336"
        id="text9756-2-0-9-3-2-7-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9-9"
-         x="2240.8831"
-         y="1683.4757"
+         x="2198.4565"
+         y="1669.3336"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">false alarms</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:6.80000019;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -8894,12 +8906,12 @@
        id="path10539"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#c4b1d8;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:48, 6;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:#a44731;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:48, 6;stroke-dashoffset:0;stroke-opacity:1"
        d="m 2038.9506,2142.7481 210.1118,-127.2792 153.5432,12.1218 90.9137,-98.995 109.0965,-14.1421 84.8528,-159.6041"
        id="path10539-0"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#cfcfcf;stroke-width:7.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:#d273e7;fill-rule:evenodd;stroke:#444444;stroke-width:7.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.36708862;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1"
        d="m 1329.3607,1735.2253 0,436.3859"
        id="path10556"
        inkscape:connector-curvature="0" />
@@ -8938,90 +8950,90 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3143.5674"
-       y="1578.4941"
+       x="3103.1614"
+       y="1093.621"
        id="text9756-2-5-9-2-1-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-8-7-4"
-         x="3143.5674"
-         y="1578.4941"
+         x="3103.1614"
+         y="1093.621"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';fill:#000000;fill-opacity:0.58860761">3. Compare</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3864.8552"
-       y="2095.1631"
+       x="3824.4492"
+       y="1610.2899"
        id="text9756-2-0-9-3-2-7-75"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9-3"
-         x="3864.8552"
-         y="2095.1631"
+         x="3824.4492"
+         y="1610.2899"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">F-score</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:6.80000019;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect10426-20"
        width="699.67798"
        height="440"
-       x="3612.926"
-       y="2141.1277" />
+       x="3572.52"
+       y="1656.2545" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3890.0742"
-       y="2614.9998"
+       x="3849.6682"
+       y="2130.1265"
        id="text9756-2-5-9-15-8-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9-8-30"
-         x="3890.0742"
-         y="2614.9998"
+         x="3849.6682"
+         y="2130.1265"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">time</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3586.5625"
-       y="2159.9199"
+       x="3546.1565"
+       y="1675.0468"
        id="text9756-2-5-9-15-8-9-04"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9-8-8-8"
-         x="3586.5625"
-         y="2159.9199"
+         x="3546.1565"
+         y="1675.0468"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3572.2295"
-       y="2581.3545"
+       x="3531.8235"
+       y="2096.4812"
        id="text9756-2-5-9-15-8-9-0-22"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9-8-8-5-02"
-         x="3572.2295"
-         y="2581.3545"
+         x="3531.8235"
+         y="2096.4812"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">0.1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3572.4119"
-       y="2361.1411"
+       x="3532.0059"
+       y="1876.2679"
        id="text9756-2-5-9-15-8-9-0-2-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-9-8-8-5-0-5"
-         x="3572.4119"
-         y="2361.1411"
+         x="3532.0059"
+         y="1876.2679"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.58860761">0.5</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#3178a4;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:48, 6;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 3637.6192,2557.3166 210.1118,-127.2792 153.5432,12.1218 90.9137,-98.995 109.0965,-14.1421 84.8528,-159.6041"
+       d="m 3597.2131,2072.4434 210.1118,-127.2792 153.5432,12.1218 90.9137,-98.995 109.0965,-14.1421 84.8528,-159.6041"
        id="path10539-7"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#cfcfcf;stroke-width:7.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 3760.8578,2141.1337 0,436.3859"
+       d="m 3720.4517,1656.2605 0,436.3859"
        id="path10556-7"
        inkscape:connector-curvature="0" />
     <rect
@@ -9029,49 +9041,49 @@
        id="rect10706"
        width="86.514191"
        height="51.51778"
-       x="3877.5442"
-       y="1656.4333"
+       x="3837.1382"
+       y="1171.5602"
        ry="25.75889" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3690.8894"
-       y="1690.475"
+       x="3650.4834"
+       y="1205.6018"
        id="text9756-2-0-9-3-2-7-75-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9-3-8"
-         x="3690.8894"
-         y="1690.475"
+         x="3650.4834"
+         y="1205.6018"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">raw numbers</tspan></text>
     <circle
-       style="fill:#646464;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#a44731;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path10138-6"
-       cx="3938.7615"
-       cy="1683.0703"
+       cx="3898.3555"
+       cy="1198.1971"
        r="15" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="3992.8472"
-       y="1692.3253"
+       style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3952.4412"
+       y="1207.4521"
        id="text9756-2-0-9-3-2-7-75-2-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9-3-8-0"
-         x="3992.8472"
-         y="1692.3253"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761;font-size:25px;">F-score</tspan></text>
+         x="3952.4412"
+         y="1207.4521"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">F-score</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#646464;stroke-width:5.51226282;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.22784813"
-       d="m 3569.3411,1963.079 714.6992,0"
+       d="m 3528.935,1478.2058 714.6992,0"
        id="path10136-0"
        inkscape:connector-curvature="0" />
     <circle
-       style="fill:#646464;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#a44731;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path10138-9"
-       cx="3667.9856"
-       cy="1962.9352"
+       cx="3627.5796"
+       cy="1478.062"
        r="21.428572" />
     <text
        xml:space="preserve"
@@ -9087,18 +9099,18 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3347.0322"
-       y="1948.1025"
+       x="3306.6262"
+       y="1463.2294"
        id="text9756-2-0-9-3-2-7-75-2-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="3347.0322"
-         y="1948.1025"
+         x="3306.6262"
+         y="1463.2294"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761"
          id="tspan10825">not missing </tspan><tspan
          sodipodi:role="line"
-         x="3347.0322"
-         y="1979.3525"
+         x="3306.6262"
+         y="1494.4794"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761"
          id="tspan10829">toxic players</tspan></text>
     <text
@@ -9116,98 +9128,564 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="3698.511"
-       y="1840.899"
+       x="3658.105"
+       y="1356.0259"
        id="text9756-2-0-9-3-2-7-75-2-1-8"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-86-3-7-0-9-3-8-2-2"
-         x="3698.511"
-         y="1840.899"
+         x="3658.105"
+         y="1356.0259"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761">What is more important?</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="4378.2598"
-       y="1959.2614"
+       style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="4337.8535"
+       y="1474.3882"
        id="text9756-2-0-9-3-2-7-75-2-1-82"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="4378.2598"
-         y="1959.2614"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761;font-size:25px;"
+         x="4337.8535"
+         y="1474.3882"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#000000;fill-opacity:0.58860761"
          id="tspan10829-8">no false alarms</tspan></text>
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-2-5-7-8-9-9"
+       cx="1206.3099"
+       cy="1675.2412"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-1-8-6-3-7-19"
+       cx="1236.2108"
+       cy="1675.677"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1210.1542,1683.5484 21.592,0"
+       id="path4155-7-2-2-6-9-5-4-7-6-8-5-3-8"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-2-5-8-3-0-7"
+       cx="1206.8903"
+       cy="1675.1686"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-1-8-5-7-3-6"
+       cx="1236.7914"
+       cy="1675.6044"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1210.7348,1683.4758 21.592,0"
+       id="path4155-7-2-2-6-9-5-4-7-6-84-9-7-5"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-2-6-8-7-6-1"
+       cx="1206.255"
+       cy="1674.9557"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-1-1-5-0-8-1"
+       cx="1236.1561"
+       cy="1675.3915"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1210.0995,1683.2629 21.592,0"
+       id="path4155-7-2-2-6-9-5-4-7-0-3-5-5-4"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#e77373;fill-opacity:1;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-6-7-3-8-9-8"
+       cx="1220.975"
+       cy="1663.7908"
+       r="30.714285" />
+    <circle
+       style="fill:#ad1e1e;fill-opacity:1;stroke:none"
+       id="path4138-7-0-7-9-95-5"
+       cx="1205.7333"
+       cy="1673.2333"
+       r="3.4743993" />
+    <circle
+       style="fill:#ad1e1e;fill-opacity:1;stroke:none"
+       id="path4138-3-5-9-5-7-2-7"
+       cx="1235.6342"
+       cy="1673.6691"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1202.2251,1664.1479 11.25,4.2857"
+       id="path4181-6-2-6-08-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1241.6001,1663.6122 -11.25,4.2857"
+       id="path4181-5-0-2-1-35-6"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ad1e1e;fill-opacity:1;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1212.7608,1678.4336 16.7857,0 c 0,0 -0.7143,11.25 -9.1071,10.7143 -7.1429,0.1786 -7.6786,-10.7143 -7.6786,-10.7143 z"
+       id="path4348-96-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="fill:#ffb950;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:1.74344254;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-0-8-1"
+       cx="1243.8322"
+       cy="1682.3622"
+       r="12.749665" />
+    <circle
+       style="fill:#2f2f2f;fill-opacity:1;stroke:none"
+       id="path4138-1-3-1-4"
+       cx="1243.475"
+       cy="1682.1465"
+       r="2.3332965" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1239.6628,1682.5002 c 0.1111,1.5937 1.9272,3.1133 1.9272,3.1133 l -2.9279,5.8559 c 0,0 -5.4112,-2.8909 -5.263,-8.9692 z"
+       id="path4509-64-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1247.5947,1682.4198 c -0.1112,1.5937 -1.9273,3.1133 -1.9273,3.1133 l 2.928,5.8559 c 0,0 5.4112,-2.8909 5.2629,-8.9692 z"
+       id="path4509-6-8-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1241.3391,1678.7822 c 1.3594,-0.8392 3.653,-0.2503 3.653,-0.2503 l 3.049,-5.7939 c 0,0 -5.5043,-2.7093 -10.3552,0.9562 z"
+       id="path4509-6-1-5-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <circle
+       style="fill:#4eb44b;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:4.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-9-7-7-5-7-0-0-3-3-6"
+       cx="2110.9756"
+       cy="1653.6573"
+       r="30.714285" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-6-3-4-9"
+       cx="2095.7336"
+       cy="1663.0999"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-4-8-1-7"
+       cx="2125.6348"
+       cy="1663.5356"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 2099.5781,1671.4072 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-6-0-5-6"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#4eb44b;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:4.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-9-7-7-5-7-0-67-0"
+       cx="2111.6135"
+       cy="1653.4537"
+       r="30.714285" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-0-9"
+       cx="2096.3716"
+       cy="1662.8962"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-48-0"
+       cx="2126.2725"
+       cy="1663.332"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 2100.2158,1671.2036 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-48-7"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#ffb950;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:1.74344254;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-0-09-6"
+       cx="2138.7361"
+       cy="1674.5653"
+       r="12.749665" />
+    <circle
+       style="fill:#2f2f2f;fill-opacity:1;stroke:none"
+       id="path4138-1-3-30-6"
+       cx="2138.3789"
+       cy="1674.3496"
+       r="2.3332965" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2134.5667,1674.7034 c 0.1112,1.5937 1.9272,3.1133 1.9272,3.1133 l -2.9279,5.856 c 0,0 -5.4112,-2.8909 -5.263,-8.9693 z"
+       id="path4509-2-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2142.4986,1674.623 c -0.1112,1.5938 -1.9273,3.1133 -1.9273,3.1133 l 2.928,5.856 c 0,0 5.4112,-2.8909 5.2629,-8.9693 z"
+       id="path4509-6-6-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2136.243,1670.9854 c 1.3594,-0.8392 3.653,-0.2503 3.653,-0.2503 l 3.049,-5.7938 c 0,0 -5.5043,-2.7094 -10.3552,0.9562 z"
+       id="path4509-6-1-4-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-2-8-8-7-9-6"
+       cx="3370.5085"
+       cy="1561.0325"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-1-5-4-1-9-4"
+       cx="3400.4094"
+       cy="1561.4684"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3374.3524,1569.3397 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-7-9-7-3-1-9"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-2-8-2-4-7-5"
+       cx="3369.873"
+       cy="1560.8196"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-1-5-2-1-9-3"
+       cx="3399.7742"
+       cy="1561.2552"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3373.7171,1569.1269 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-7-9-2-5-1-5"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#e77373;fill-opacity:1;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-6-7-3-8-8-1"
+       cx="3384.0112"
+       cy="1551.3777"
+       r="30.714285" />
+    <circle
+       style="fill:#ad1e1e;fill-opacity:1;stroke:none"
+       id="path4138-7-0-7-9-90-1"
+       cx="3368.7693"
+       cy="1560.8203"
+       r="3.4743993" />
+    <circle
+       style="fill:#ad1e1e;fill-opacity:1;stroke:none"
+       id="path4138-3-5-9-5-7-78-0"
+       cx="3398.6702"
+       cy="1561.256"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 3365.261,1551.7349 11.25,4.2857"
+       id="path4181-6-2-6-03-0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 3404.636,1551.1992 -11.25,4.2857"
+       id="path4181-5-0-2-1-10-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ad1e1e;fill-opacity:1;fill-rule:evenodd;stroke:#ad1e1e;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 3375.7967,1566.0206 16.7857,0 c 0,0 -0.7143,11.25 -9.1071,10.7143 -7.1429,0.1785 -7.6786,-10.7143 -7.6786,-10.7143 z"
+       id="path4348-3-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="fill:#4eb44b;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:4.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-9-7-7-5-7-0-0-3-3-6-2"
+       cx="4430.2856"
+       cy="1536.4797"
+       r="30.714285" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-6-3-4-9-7"
+       cx="4415.0435"
+       cy="1545.9224"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-4-8-1-7-3"
+       cx="4444.9448"
+       cy="1546.3582"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 4418.8884,1554.2296 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-6-0-5-6-9"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#4eb44b;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:4.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-9-7-7-5-7-0-67-0-0"
+       cx="4430.9233"
+       cy="1536.2761"
+       r="30.714285" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-1-2-1-2-9-3-4-0-9-1"
+       cx="4415.6816"
+       cy="1545.7188"
+       r="3.4743993" />
+    <circle
+       style="fill:#146d35;fill-opacity:1;stroke:none"
+       id="path4138-3-8-0-7-2-4-6-4-48-0-5"
+       cx="4445.5825"
+       cy="1546.1545"
+       r="3.4743993" />
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:2.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 4419.5261,1554.026 21.5921,0"
+       id="path4155-7-2-2-6-9-5-4-48-7-0"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#ffb950;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:1.74344254;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3336-626-0-09-6-6"
+       cx="4458.0459"
+       cy="1557.3877"
+       r="12.749665" />
+    <circle
+       style="fill:#2f2f2f;fill-opacity:1;stroke:none"
+       id="path4138-1-3-30-6-9"
+       cx="4457.689"
+       cy="1557.1721"
+       r="2.3332965" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4453.877,1557.5258 c 0.1112,1.5937 1.9272,3.1133 1.9272,3.1133 l -2.9279,5.856 c 0,0 -5.4112,-2.8909 -5.263,-8.9693 z"
+       id="path4509-2-8-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4461.8089,1557.4454 c -0.1112,1.5938 -1.9273,3.1133 -1.9273,3.1133 l 2.928,5.856 c 0,0 5.4112,-2.8909 5.2629,-8.9693 z"
+       id="path4509-6-6-7-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#2f2f2f;fill-opacity:1;fill-rule:evenodd;stroke:#2f2f2f;stroke-width:0.4151054px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4455.5533,1553.8078 c 1.3594,-0.8392 3.653,-0.2503 3.653,-0.2503 l 3.049,-5.7938 c 0,0 -5.5043,-2.7094 -10.3552,0.9562 z"
+       id="path4509-6-1-4-7-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:3.54330707;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4752-3"
+       width="1661.6838"
+       height="449.29788"
+       x="3076.4282"
+       y="-378.40894" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3146.9155"
+       y="-267.08932"
+       id="text9756-2-5-9-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-7"
+         x="3146.9155"
+         y="-267.08932"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#000000;fill-opacity:0.58860761">1. Add one or more detectors</tspan></text>
+    <circle
+       style="fill:#000000;fill-opacity:0.15189873;stroke:none;stroke-width:7.0999999;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.22784813"
+       id="path10251-5"
+       cx="3221.415"
+       cy="-122.24702"
+       r="56.42857" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#f2f2f2;stroke-width:6.80000019;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3220.1116,-148.79447 0,56.063397"
+       id="path10253-3"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#f2f2f2;stroke-width:6.80000019;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3248.7323,-120.99707 -56.0634,0"
+       id="path10253-0-5"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-6"
+       width="400.66159"
+       height="129.66103"
+       x="3373.1914"
+       y="-185.50797"
+       ry="18.571428" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.52531648;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="3401.8279"
+       y="-140.90988"
+       id="text9756-2-5-9-7-2-7-4-3-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9"
+         x="3401.8279"
+         y="-140.90988"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:0.52531648;">Word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.4050633;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="3402.8027"
+       y="-106.74655"
+       id="text9756-2-5-9-7-2-7-4-4-6-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-2"
+         x="3402.8027"
+         y="-106.74655"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:0.4050633;">a player is toxic if s/he use more </tspan><tspan
+         sodipodi:role="line"
+         x="3402.8027"
+         y="-84.871552"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:0.4050633;"
+         id="tspan10933-7-7">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.53797466;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="3716.321"
+       y="-98.274628"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="3716.321"
+         y="-98.274628"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#ffffff;fill-opacity:0.53797466;"
+         id="tspan10933-6-4-9">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 3715.5544,-148.00719 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 3715.7993,-86.243543 30.8521,0 -15.4086,8.696055 z"
+       id="path10975-5-7-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:3.54330707;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4752-3-3"
+       width="1661.6838"
+       height="632.15497"
+       x="4917.7295"
+       y="-383.7153" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="4988.2168"
+       y="-272.39572"
+       id="text9756-2-5-9-6-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-7-9"
+         x="4988.2168"
+         y="-272.39572"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#000000;fill-opacity:0.58860761">1. Add one or more detectors</tspan></text>
+    <circle
+       style="fill:#000000;fill-opacity:0.15189873;stroke:none;stroke-width:7.0999999;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.22784813"
+       id="path10251-5-2"
+       cx="5062.7163"
+       cy="-127.55339"
+       r="56.42857" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#f2f2f2;stroke-width:6.80000019;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 5061.4129,-154.10084 0,56.063391"
+       id="path10253-3-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#f2f2f2;stroke-width:6.80000019;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 5090.0336,-126.30344 -56.0634,0"
+       id="path10253-0-5-4"
+       inkscape:connector-curvature="0" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#3178a4;stroke-width:1.92860949;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-0"
        width="378.444"
        height="123.11"
-       x="1403.9612"
-       y="-191.08798" />
+       x="5200.5718"
+       y="-179.52997" />
     <rect
        style="fill:#f7f7f7;fill-opacity:1;stroke:#cfcfcf;stroke-width:0.72510016;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-0-2"
        width="83.611961"
        height="78.765114"
-       x="1698.1759"
-       y="-147.6517" />
+       x="5494.7866"
+       y="-136.09369" />
     <rect
        style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-6-9"
        width="379.23303"
        height="57.43512"
-       x="1403.6621"
-       y="-204.1407" />
+       x="5200.2725"
+       y="-192.58269" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1428.8501"
-       y="-165.32927"
+       x="5225.4604"
+       y="-153.77126"
        id="text9756-2-5-9-7-2-7-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-4-8-7-5"
-         x="1428.8501"
-         y="-165.32927"
+         x="5225.4604"
+         y="-153.77126"
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">WORD LIST DETECTOR</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#252525;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="1422.2128"
-       y="-115.90601"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#252525;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5218.8232"
+       y="-104.34799"
        id="text9756-2-5-9-7-2-7-4-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-4-8-7-5-2"
-         x="1422.2128"
-         y="-115.90601"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1;">a player is toxic if he use more </tspan><tspan
+         x="5218.8232"
+         y="-104.34799"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1">a player is toxic if he use more </tspan><tspan
          sodipodi:role="line"
-         x="1422.2128"
-         y="-94.031013"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1;"
+         x="5218.8232"
+         y="-82.472992"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1"
          id="tspan10933">than this nr of bad words</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="1727.3448"
-       y="-93.511368"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5523.9556"
+       y="-81.953339"
        id="text9756-2-5-9-7-2-7-4-4-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="1727.3448"
-         y="-93.511368"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1;"
+         x="5523.9556"
+         y="-81.953339"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1"
          id="tspan10933-6">3</tspan></text>
     <path
        style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 1726.7857,-129.78066 22.5,0 -11.2373,-6.34191 z"
+       d="m 5523.3964,-118.22264 22.5,0 -11.2373,-6.34191 z"
        id="path10975"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
-       style="fill:#000000;fill-opacity:0.3607595;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 1726.9643,-84.737324 22.5,0 -11.2373,6.34191 z"
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5523.575,-73.179306 22.5,0 -11.2373,6.34191 z"
        id="path10975-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -9216,72 +9694,72 @@
        id="rect10856-0-7"
        width="376.66278"
        height="123.11451"
-       x="1828.9872"
-       y="-191.12868" />
+       x="5625.5977"
+       y="-179.57066" />
     <rect
        style="fill:#f2f2f2;fill-opacity:1;stroke:#cfcfcf;stroke-width:0.72510016;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-0-2-4"
        width="83.611961"
        height="78.765114"
-       x="2121.4185"
-       y="-147.69014" />
+       x="5918.0288"
+       y="-136.13213" />
     <rect
        style="fill:#6831a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-6-9-3"
        width="379.23303"
        height="57.43512"
-       x="1826.9047"
-       y="-204.17914" />
+       x="5623.5151"
+       y="-192.62112" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1852.0927"
-       y="-165.36771"
+       x="5648.7031"
+       y="-153.80969"
        id="text9756-2-5-9-7-2-7-4-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-4-8-7-5-4"
-         x="1852.0927"
-         y="-165.36771"
+         x="5648.7031"
+         y="-153.80969"
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">WORD LIST DETECTOR</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="1845.4553"
-       y="-115.94446"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5642.0659"
+       y="-104.38644"
        id="text9756-2-5-9-7-2-7-4-4-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-4-8-7-5-2-0"
-         x="1845.4553"
-         y="-115.94446"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1;">a player is toxic if he use more </tspan><tspan
+         x="5642.0659"
+         y="-104.38644"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1">a player is toxic if he use more </tspan><tspan
          sodipodi:role="line"
-         x="1845.4553"
-         y="-94.069458"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1;"
+         x="5642.0659"
+         y="-82.511444"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1"
          id="tspan10933-60">than this nr of bad words</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#6831a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="2150.5874"
-       y="-93.549805"
+       x="5947.1978"
+       y="-81.991783"
        id="text9756-2-5-9-7-2-7-4-4-3-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="2150.5874"
-         y="-93.549805"
+         x="5947.1978"
+         y="-81.991783"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#6831a4;fill-opacity:1"
          id="tspan10933-6-2">2</tspan></text>
     <path
        style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2150.0282,-129.8191 22.5,0 -11.2373,-6.34191 z"
+       d="m 5946.6389,-118.26108 22.5,0 -11.2373,-6.34191 z"
        id="path10975-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2150.2068,-84.775769 22.5,0 -11.2373,6.34191 z"
+       d="m 5946.8175,-73.217746 22.5,0 -11.2373,6.34191 z"
        id="path10975-5-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -9290,73 +9768,601 @@
        id="rect10856-0-7-3"
        width="376.66278"
        height="123.11451"
-       x="2262.2461"
-       y="-190.02933" />
+       x="6058.8564"
+       y="-178.47131" />
     <rect
        style="fill:#f2f2f2;fill-opacity:1;stroke:#e2e2e2;stroke-width:0.72510016;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-0-2-4-1"
        width="83.611961"
        height="78.765114"
-       x="2554.6775"
-       y="-146.59079" />
+       x="6351.2881"
+       y="-135.03278" />
     <rect
        style="fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect10856-6-9-3-1"
        width="379.23303"
        height="57.43512"
-       x="2260.1636"
-       y="-203.07979" />
+       x="6056.7739"
+       y="-191.52177" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="2277.3516"
-       y="-164.26836"
+       x="6073.9619"
+       y="-152.71034"
        id="text9756-2-5-9-7-2-7-4-9-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9758-8-8-5-4-8-7-5-4-9"
-         x="2277.3516"
-         y="-164.26836"
+         x="6073.9619"
+         y="-152.71034"
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">NEURAL NET DETECTOR</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="2278.7144"
-       y="-114.8451"
+       x="6075.3247"
+       y="-103.28708"
        id="text9756-2-5-9-7-2-7-4-4-4-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="2278.7144"
-         y="-114.8451"
+         x="6075.3247"
+         y="-103.28708"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1"
          id="tspan10933-60-0">a player is toxic if the network </tspan><tspan
          sodipodi:role="line"
-         x="2278.7144"
-         y="-92.9701"
+         x="6075.3247"
+         y="-81.412079"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#a6a6a6;fill-opacity:1"
          id="tspan11092">is this confident</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="2573.8464"
-       y="-92.450447"
+       x="6370.457"
+       y="-80.892418"
        id="text9756-2-5-9-7-2-7-4-4-3-2-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="2573.8464"
-         y="-92.450447"
+         x="6370.457"
+         y="-80.892418"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#a44731;fill-opacity:1"
          id="tspan10933-6-2-5">50</tspan></text>
     <path
        style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2583.2872,-128.71974 22.5,0 -11.2373,-6.34191 z"
+       d="m 6379.8979,-117.16172 22.5,0 -11.2373,-6.34191 z"
        id="path10975-8-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2583.4658,-83.676413 22.5,0 -11.2373,6.34191 z"
+       d="m 6380.0765,-72.118386 22.5,0 -11.2373,6.34191 z"
        id="path10975-5-4-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#3178a4;stroke-width:5.52899981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-0-6"
+       width="378.444"
+       height="123.11"
+       x="5213.7808"
+       y="11.565208"
+       ry="11.111678" />
+    <path
+       style="fill:#000000;fill-opacity:0.0443038;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5517.175,56.541804 71.2157,0.25254 0.7576,66.670076 c 2.1733,8.11101 -9.2699,8.45105 -9.2699,8.45105 l -62.956,0.0766 z"
+       id="path11276"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-5"
+       width="384.25842"
+       height="57.43512"
+       x="5210.9561"
+       y="-1.4875257"
+       ry="15.830693" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5238.6694"
+       y="37.323936"
+       id="text9756-2-5-9-7-2-7-4-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7"
+         x="5238.6694"
+         y="37.323936"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#252525;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5232.0322"
+       y="86.747231"
+       id="text9756-2-5-9-7-2-7-4-4-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9"
+         x="5232.0322"
+         y="86.747231"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1">a player is toxic if he use more </tspan><tspan
+         sodipodi:role="line"
+         x="5232.0322"
+         y="108.62223"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1"
+         id="tspan10933-7">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5541.4502"
+       y="107.71317"
+       id="text9756-2-5-9-7-2-7-4-4-3-26"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="5541.4502"
+         y="107.71317"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1"
+         id="tspan10933-6-4">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5540.8911,71.443924 22.5,0 -11.2373,-6.34191 z"
+       id="path10975-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5541.0697,116.48727 22.5,0 -11.2373,6.34191 z"
+       id="path10975-5-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:5.52899981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect11265"
+       width="376.78693"
+       height="12.121838"
+       x="5216.4873"
+       y="44.242714"
+       ry="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#3178a4;stroke-width:5.52899981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-0-6-5"
+       width="378.444"
+       height="123.11"
+       x="5633.6719"
+       y="11.49894"
+       ry="0" />
+    <path
+       style="fill:#000000;fill-opacity:0.0443038;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5937.0661,56.475524 71.2157,0.25254 0.7576,66.670076 c 2.1733,8.11101 -9.2699,8.45105 -9.2699,8.45105 l -62.956,0.0766 z"
+       id="path11276-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-5-0"
+       width="384.25842"
+       height="57.43512"
+       x="5630.8472"
+       y="-1.5537946"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5658.5605"
+       y="37.257668"
+       id="text9756-2-5-9-7-2-7-4-3-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-2"
+         x="5658.5605"
+         y="37.257668"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">WORD LIST DETECTOR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#252525;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5651.9233"
+       y="86.680946"
+       id="text9756-2-5-9-7-2-7-4-4-6-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-0"
+         x="5651.9233"
+         y="86.680946"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1">a player is toxic if he use more </tspan><tspan
+         sodipodi:role="line"
+         x="5651.9233"
+         y="108.55595"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1"
+         id="tspan10933-7-1">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="5961.3413"
+       y="107.64689"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="5961.3413"
+         y="107.64689"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1"
+         id="tspan10933-6-4-2">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5960.7822,71.377644 22.5,0 -11.2373,-6.34191 z"
+       id="path10975-0-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5960.9608,116.42099 22.5,0 -11.2373,6.34191 z"
+       id="path10975-5-7-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5.52899981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-0-6-5-8"
+       width="378.444"
+       height="123.11"
+       x="6059.9561"
+       y="16.54969"
+       ry="0" />
+    <path
+       style="fill:#000000;fill-opacity:0.10759493;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 6363.7162,60.812004 73.6714,0.25852 0.7837,68.247976 c 2.2483,8.30297 -9.5895,8.65106 -9.5895,8.65106 l -65.1269,0.0784 z"
+       id="path11276-4-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       style="fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-5-0-9"
+       width="384.25842"
+       height="57.43512"
+       x="6057.1318"
+       y="3.4969561"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="6084.8452"
+       y="42.308418"
+       id="text9756-2-5-9-7-2-7-4-3-1-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-2-9"
+         x="6084.8452"
+         y="42.308418"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">WORD LIST DETECTOR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#252525;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="6078.208"
+       y="91.731697"
+       id="text9756-2-5-9-7-2-7-4-4-6-8-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-0-6"
+         x="6078.208"
+         y="91.731697"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1">a player is toxic if he use more </tspan><tspan
+         sodipodi:role="line"
+         x="6078.208"
+         y="113.6067"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#252525;fill-opacity:1"
+         id="tspan10933-7-1-3">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="6387.6255"
+       y="112.69767"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-5-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="6387.6255"
+         y="112.69767"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1"
+         id="tspan10933-6-4-2-0">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 6387.0665,76.428404 22.5,0 -11.2373,-6.34191 z"
+       id="path10975-0-0-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 6387.2451,121.47175 22.5,0 -11.2373,6.34191 z"
+       id="path10975-5-7-7-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1389.0991"
+       y="-153.78931"
+       id="text9756-2-5-9-7-2-7-4-3-2-8-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9-8-9"
+         x="1389.0991"
+         y="-153.78931"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#a44731;fill-opacity:1">Word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.80379748;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="1390.074"
+       y="-119.62598"
+       id="text9756-2-5-9-7-2-7-4-4-6-1-9-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-2-7-6"
+         x="1390.074"
+         y="-119.62598"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.80379748;">a player is toxic if s/he use more </tspan><tspan
+         sodipodi:role="line"
+         x="1390.074"
+         y="-97.750984"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.80379748;"
+         id="tspan10933-7-7-7-9">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a44731;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1700.7646"
+       y="-113.17436"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0-6-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="1700.7646"
+         y="-113.17436"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#a44731;fill-opacity:1"
+         id="tspan10933-6-4-9-4-2">7</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1699.9983,-162.90694 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3-3-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1700.2432,-101.14328 30.8521,0 -15.4086,8.696053 z"
+       id="path10975-5-7-6-0-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#3178a4;fill-opacity:0;stroke:#3178a4;stroke-width:5.171;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.1392405"
+       id="rect10856-6-9-6-8-0-7"
+       width="393.29968"
+       height="123.62919"
+       x="1805.4725"
+       y="-195.12637" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1825.485"
+       y="-153.5442"
+       id="text9756-2-5-9-7-2-7-4-3-2-8-5-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9-8-9-4"
+         x="1825.485"
+         y="-153.5442"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#3178a4;fill-opacity:1">Word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.26582283;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1826.4598"
+       y="-119.38089"
+       id="text9756-2-5-9-7-2-7-4-4-6-1-9-4-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-2-7-6-1"
+         x="1826.4598"
+         y="-119.38089"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.26582283">a player is toxic if s/he use more </tspan><tspan
+         sodipodi:role="line"
+         x="1826.4598"
+         y="-97.50589"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.26582283"
+         id="tspan10933-7-7-7-9-2">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3178a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="2137.1504"
+       y="-112.92926"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0-6-2-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="2137.1504"
+         y="-112.92926"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#3178a4;fill-opacity:1"
+         id="tspan10933-6-4-9-4-2-9">2</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2136.3841,-162.66185 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3-3-4-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2136.629,-100.89819 30.8521,0 -15.4086,8.696067 z"
+       id="path10975-5-7-6-0-7-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#9431a4;fill-opacity:0;stroke:#9431a4;stroke-width:5.171;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.1392405"
+       id="rect10856-6-9-6-8-0-7-8"
+       width="393.29968"
+       height="123.62919"
+       x="2237.8176"
+       y="-193.10606" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#7e31a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="2257.8301"
+       y="-151.5239"
+       id="text9756-2-5-9-7-2-7-4-3-2-8-5-5-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9-8-9-4-2"
+         x="2257.8301"
+         y="-151.5239"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#7e31a4;fill-opacity:1">Neural net detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.29113925;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="2258.8049"
+       y="-117.36058"
+       id="text9756-2-5-9-7-2-7-4-4-6-1-9-4-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="2258.8049"
+         y="-117.36058"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.29113925"
+         id="tspan10933-7-7-7-9-2-5">a player is toxic if s/he if the</tspan><tspan
+         sodipodi:role="line"
+         x="2258.8049"
+         y="-95.48558"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#000000;fill-opacity:0.29113925"
+         id="tspan6365">neural net is this confident</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#9431a4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="2553.4956"
+       y="-110.90894"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0-6-2-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="2553.4956"
+         y="-110.90894"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#9431a4;fill-opacity:1"
+         id="tspan10933-6-4-9-4-2-9-1">20</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2568.7293,-160.64153 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3-3-4-3-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.20886075;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2568.9742,-98.877866 30.8521,0 -15.4086,8.696056 z"
+       id="path10975-5-7-6-0-7-6-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#a46e31;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-6-5"
+       width="400.66159"
+       height="129.66103"
+       x="3821.0979"
+       y="-183.89688"
+       ry="24.285715" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3849.7344"
+       y="-139.2988"
+       id="text9756-2-5-9-7-2-7-4-3-2-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9-6"
+         x="3849.7344"
+         y="-139.2988"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:1">Word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3850.7092"
+       y="-105.13546"
+       id="text9756-2-5-9-7-2-7-4-4-6-1-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-2-6"
+         x="3850.7092"
+         y="-105.13546"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:1">a player is toxic if s/he use more </tspan><tspan
+         sodipodi:role="line"
+         x="3850.7092"
+         y="-83.26046"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:1"
+         id="tspan10933-7-7-2">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="4164.2275"
+       y="-96.663536"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="4164.2275"
+         y="-96.663536"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#ffffff;fill-opacity:1"
+         id="tspan10933-6-4-9-8">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4163.4608,-146.3961 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4163.7057,-84.632458 30.8521,0 -15.4086,8.696058 z"
+       id="path10975-5-7-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#a4316a;fill-opacity:1;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10856-6-9-6-5-0"
+       width="400.66159"
+       height="129.66103"
+       x="4264.5435"
+       y="-186.26556"
+       ry="31.428572" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.57594937;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="4293.1802"
+       y="-141.66748"
+       id="text9756-2-5-9-7-2-7-4-3-2-0-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-7-9-6-1"
+         x="4293.1802"
+         y="-141.66748"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:27.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Semi-Bold';fill:#ffffff;fill-opacity:0.57594937;">Word list detector</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.56329113;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="4294.1548"
+       y="-107.50414"
+       id="text9756-2-5-9-7-2-7-4-4-6-1-4-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9758-8-8-5-4-8-7-5-2-9-2-6-1"
+         x="4294.1548"
+         y="-107.50414"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:0.56329113;">a player is toxic if s/he use more </tspan><tspan
+         sodipodi:role="line"
+         x="4294.1548"
+         y="-85.629143"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:17.5px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Light';fill:#ffffff;fill-opacity:0.56329113;"
+         id="tspan10933-7-7-2-1">than this nr of bad words</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.84817123px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.47468355;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="4607.6733"
+       y="-99.032219"
+       id="text9756-2-5-9-7-2-7-4-4-3-26-0-5-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="4607.6733"
+         y="-99.032219"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:54.84817123px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#ffffff;fill-opacity:0.47468355;"
+         id="tspan10933-6-4-9-8-3">3</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4606.9063,-148.76478 30.8521,0 -15.4086,-8.69604 z"
+       id="path10975-0-3-6-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:0.36075954;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 4607.1512,-87.001143 30.8521,0 -15.4086,8.69606 z"
+       id="path10975-5-7-6-2-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
   </g>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="addDetector('dic')">Add</button>
+<div id="detectorArea"></div>
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+
+<script>
+    var moba_dic_100_tp = [];
+</script>
+<script src="precalculated_data/moba_dic_100@1/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@2/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@3/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@4/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@5/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@6/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@7/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@8/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@9/tp.js"></script>
+<script src="precalculated_data/moba_dic_100@10/tp.js"></script>
+
+<script>
+var allDetectors = []
+
+function addDetector(detectorType)
+{
+    allDetectors.push([detectorType,1]);
+    updateDetectorArea();
+    updateGraphs();
+}
+
+function changeDetectorThreshold(detectorIndex,delta)
+{
+    allDetectors[detectorIndex][1] += delta;
+    updateDetectorArea();
+    updateGraphs();
+}
+
+function updateDetectorArea()
+{
+    var detectorTemplates = {'dic':'<div class="detector"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'};
+
+    var detectorAreaHTML = '';
+
+    for (detectorIndex in allDetectors)
+    {
+        var detectorType = allDetectors[detectorIndex][0];
+        var threshold = allDetectors[detectorIndex][1];
+        detectorAreaHTML += detectorTemplates[detectorType].replace(/{{ threshold }}/g,threshold).replace(/{{ index }}/g,detectorIndex);
+    }
+
+    document.getElementById('detectorArea').innerHTML = detectorAreaHTML;
+}
+
+function updateGraphs()
+{
+    var threshold = allDetectors[0][1];
+    drawGraph(document.getElementById('myCanvas'),moba_dic_100_tp[threshold],3);
+}
+
+function drawGraph(canvas,data,timeIndicatorPosition)
+{
+    //Preparations
+    var ctx = canvas.getContext("2d");
+    var horizontalTickSize = canvas.width / (data.length-1);
+
+    //The graph
+    ctx.beginPath();
+    ctx.setLineDash([5, 3]);
+    ctx.strokeStyle = "#FF0000";
+    ctx.moveTo(0, canvas.height - (data[0]*canvas.height));
+
+    for (index in data)
+    {
+        ctx.lineTo(index*horizontalTickSize, canvas.height-(data[index]*canvas.height));
+        ctx.stroke();
+    }
+
+    //The time indicator
+    ctx.beginPath();
+    ctx.setLineDash([1,0]);
+    ctx.strokeStyle = "#000000";
+    ctx.moveTo(timeIndicatorPosition*horizontalTickSize, 0);
+    ctx.lineTo(timeIndicatorPosition*horizontalTickSize, canvas.height);
+    ctx.stroke();
+
+}
+</script>
+</body>
+</html>
