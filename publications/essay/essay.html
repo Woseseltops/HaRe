@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
 <body>
 
-<button onclick="addDetector('dic')">Add</button>
-<div id="detectorArea"></div>
-<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+<div class="interactive_panel">
+    <h2>1. Add one or more detectors</h2>
+    <button onclick="addDetector('dic')">Add word list based detector</button>
+    <button onclick="addDetector('bigru')">Add neural net detector</button>
+    <button onclick="addDetector('bigru_embeddings')">Add embeddings detector</button>
+    <div id="detectorArea"></div>
+
+
+    <h2>2. Slide</h2>
+
+    <h2>3. Compare</h2>
+
+    <canvas id="true_positives" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="false_positives" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+
+    <input name="fbeta_slider" type="range" min="0" max="6" value="3" oninput="moveFbetaSlider(this.value)">
+    <canvas id="fbeta" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+
+</div>
 
 <script>
     var moba_dic_100_tp = [];
+    var moba_dic_100_fp = [];
+    var moba_dic_100_fbeta = {};
+
+    var moba_bigru_100_tp = [];
+    var moba_bigru_100_fp = [];
+    var moba_bigru_100_fbeta = {};
+
+    var moba_bigru_embeddings_100_tp = [];
+    var moba_bigru_embeddings_100_fp = [];
+    var moba_bigru_embeddings_100_fbeta = {};
 </script>
+
 <script src="precalculated_data/moba_dic_100@1/tp.js"></script>
 <script src="precalculated_data/moba_dic_100@2/tp.js"></script>
 <script src="precalculated_data/moba_dic_100@3/tp.js"></script>
@@ -20,8 +51,119 @@
 <script src="precalculated_data/moba_dic_100@9/tp.js"></script>
 <script src="precalculated_data/moba_dic_100@10/tp.js"></script>
 
+<script src="precalculated_data/moba_dic_100@1/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@2/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@3/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@4/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@5/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@6/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@7/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@8/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@9/fp.js"></script>
+<script src="precalculated_data/moba_dic_100@10/fp.js"></script>
+
+<script src="precalculated_data/moba_dic_100@1/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@2/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@3/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@4/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@5/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@6/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@7/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@8/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@9/fbeta.js"></script>
+<script src="precalculated_data/moba_dic_100@10/fbeta.js"></script>
+
+<script src="precalculated_data/moba_bigru_100@0.001/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0025/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.005/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0075/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.01/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.025/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.05/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.075/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.1/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.25/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.5/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.75/tp.js"></script>
+<script src="precalculated_data/moba_bigru_100@1/tp.js"></script>
+
+<script src="precalculated_data/moba_bigru_100@0.001/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0025/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.005/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0075/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.01/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.025/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.05/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.075/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.1/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.25/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.5/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.75/fp.js"></script>
+<script src="precalculated_data/moba_bigru_100@1/fp.js"></script>
+
+<script src="precalculated_data/moba_bigru_100@0.001/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0025/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.005/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0075/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.01/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.025/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.05/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.075/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.1/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.25/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.5/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.75/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_100@1/fbeta.js"></script>
+
+<script src="precalculated_data/moba_bigru_embeddings_100@0.001/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.005/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.01/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.025/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.05/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.075/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.1/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.25/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.5/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.75/tp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@1/tp.js"></script>
+
+<script src="precalculated_data/moba_bigru_embeddings_100@0.001/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.005/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.01/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.025/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.05/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.075/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.1/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.25/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.5/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.75/fp.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@1/fp.js"></script>
+
+<script src="precalculated_data/moba_bigru_embeddings_100@0.001/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.005/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.01/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.025/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.05/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.075/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.1/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.25/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.5/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.75/fbeta.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@1/fbeta.js"></script>
+
 <script>
 var allDetectors = []
+var beta = 1;
+var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
+var thresholdsPerDetectorType = {'dic':[1,2,3,4,5,6,7,8,9,10],
+                                    'bigru':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                    'bigru_embeddings':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
 
 function addDetector(detectorType)
 {
@@ -37,16 +179,26 @@ function changeDetectorThreshold(detectorIndex,delta)
     updateGraphs();
 }
 
+function moveFbetaSlider(beta_index)
+{
+    beta = allBetaValues[beta_index];
+    updateGraphs();
+}
+
 function updateDetectorArea()
 {
-    var detectorTemplates = {'dic':'<div class="detector"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'};
+    var detectorTemplates = {'dic':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
+                              'bigru':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
+                            'bigru_embeddings':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
+                              };
 
     var detectorAreaHTML = '';
 
     for (detectorIndex in allDetectors)
     {
-        var detectorType = allDetectors[detectorIndex][0];
-        var threshold = allDetectors[detectorIndex][1];
+        var detector = allDetectors[detectorIndex];
+        var detectorType = detector[0];
+        var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
         detectorAreaHTML += detectorTemplates[detectorType].replace(/{{ threshold }}/g,threshold).replace(/{{ index }}/g,detectorIndex);
     }
 
@@ -55,26 +207,65 @@ function updateDetectorArea()
 
 function updateGraphs()
 {
-    var threshold = allDetectors[0][1];
-    drawGraph(document.getElementById('myCanvas'),moba_dic_100_tp[threshold],3);
+    var truePositiveData = [];
+    var falsePositiveData = [];
+    var fbetaData = [];
+
+    for (var detector_index in allDetectors)
+    {
+        var detector = allDetectors[detector_index];
+
+        var detectorType = detector[0];
+        var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
+
+        if (detectorType == 'dic')
+        {
+            truePositiveData.push(moba_dic_100_tp[threshold]);
+            falsePositiveData.push(moba_dic_100_fp[threshold]);
+            fbetaData.push(moba_dic_100_fbeta[threshold][beta]);
+        }
+        else if (detectorType == 'bigru')
+        {
+            truePositiveData.push(moba_bigru_100_tp[threshold]);
+            falsePositiveData.push(moba_bigru_100_fp[threshold]);
+            fbetaData.push(moba_bigru_100_fbeta[threshold][beta]);
+        }
+        else if (detectorType == 'bigru_embeddings')
+        {
+            truePositiveData.push(moba_bigru_embeddings_100_tp[threshold]);
+            falsePositiveData.push(moba_bigru_embeddings_100_fp[threshold]);
+            fbetaData.push(moba_bigru_embeddings_100_fbeta[threshold][beta]);
+        }
+    }
+
+   drawGraph(document.getElementById('true_positives'),truePositiveData,10,3);
+   drawGraph(document.getElementById('false_positives'),falsePositiveData,100,3);
+   drawGraph(document.getElementById('fbeta'),fbetaData,1,3);
 }
 
-function drawGraph(canvas,data,timeIndicatorPosition)
+function drawGraph(canvas,data,maxY,timeIndicatorPosition)
 {
     //Preparations
     var ctx = canvas.getContext("2d");
-    var horizontalTickSize = canvas.width / (data.length-1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var horizontalTickSize = canvas.width / (data[0].length-1);
+
+    var colors = ["31a5a5","a34734","59a334","a335a4"];
 
     //The graph
-    ctx.beginPath();
     ctx.setLineDash([5, 3]);
-    ctx.strokeStyle = "#FF0000";
-    ctx.moveTo(0, canvas.height - (data[0]*canvas.height));
 
-    for (index in data)
+    for (var series_index in data)
     {
-        ctx.lineTo(index*horizontalTickSize, canvas.height-(data[index]*canvas.height));
-        ctx.stroke();
+       ctx.beginPath();
+        ctx.strokeStyle = "#"+colors[series_index];
+        ctx.moveTo(0, canvas.height - (data[series_index]/maxY*canvas.height));
+
+        for (var datapoint_index in data[series_index])
+        {
+            ctx.lineTo(datapoint_index*horizontalTickSize, canvas.height-(data[series_index][datapoint_index]/maxY*canvas.height));
+            ctx.stroke();
+        }
     }
 
     //The time indicator

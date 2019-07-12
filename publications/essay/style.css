@@ -1,0 +1,80 @@
+body
+{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.interactive_panel
+{
+    width: 600px;
+    height: 1000px;
+    background-color: hsl(0, 0%, 90%);
+    padding: 65px;
+}
+
+.detector
+{
+    width: 250px;
+    border-width: 3px;
+    border-style: solid;
+    padding: 10px;
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+}
+
+.detector_0
+{
+    border-color: hsla(180, 54%, 42%, 0.25);
+}
+
+.detector_0 .detectorTitle, .detector_0 .detectorThreshold
+{
+    color: hsl(180, 54%, 42%);
+}
+
+.detector_1
+{
+    border-color: hsla(10, 54%, 42%, 0.25);
+}
+
+.detector_1 .detectorTitle, .detector_1 .detectorThreshold
+{
+    color: hsl(10, 54%, 42%);
+}
+
+.detector_2
+{
+    border-color: hsla(100, 54%, 42%, 0.25);
+}
+
+.detector_2 .detectorTitle, .detector_2 .detectorThreshold
+{
+    color: hsl(100, 54%, 42%);
+}
+
+.detector_3
+{
+    border-color: hsla(300, 54%, 42%, 0.25);
+}
+
+.detector_3 .detectorTitle, .detector_3 .detectorThreshold
+{
+    color: hsl(300, 54%, 42%);
+}
+
+.detectorTitle
+{
+    font-weight: 1000;
+}
+
+.detectorDescription
+{
+    font-size: 13px;
+    color: hsla(0, 0%, 0%, 0.55);
+}
+
+.detectorThreshold
+{
+    font-size: 45px;
+    font-weight: 1000;
+}

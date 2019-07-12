@@ -32,7 +32,9 @@ HARE_ROOT = '/vol/tensusers2/wstoop/HaRe/'
 ESSAY_ROOT = HARE_ROOT+'publications/essay/'
 
 CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
-CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'moba_dic_100':[1,2,3,4,5,6,7,8,9,10]}
+CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'moba_dic_100':[1,2,3,4,5,6,7,8,9,10],
+                                              'moba_bigru_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'moba_bigru_embeddings_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
@@ -92,7 +94,7 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
         per_player = []
         tp = []
         fp = []
-        beta = {b:[] for b in BETA_VALUES}
+        fbeta = {b:[] for b in BETA_VALUES}
 
         #Calculate metrics for this detector/threshold combi
         for utterance_index in range(CONVERSATION_LENGTH):
@@ -112,11 +114,9 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
             fp.append(false_positives(true,predicted))
 
             for b in BETA_VALUES:
-                beta[b].append(fbeta_score(true,predicted,b))
+                fbeta[b].append(fbeta_score(true,predicted,b))
 
         open(folder_name+'per_player.js','w').write(conv_hist_file+'_per_player['+str(threshold)+'] = '+dumps(per_player))
         open(folder_name+'tp.js','w').write(conv_hist_file+'_tp['+str(threshold)+'] = '+dumps(tp))
         open(folder_name+'fp.js','w').write(conv_hist_file+'_fp['+str(threshold)+'] = '+dumps(fp))
-
-        for b in BETA_VALUES:
-            open(folder_name+'f@'+str(b)+'.js','w').write(conv_hist_file+'_f_'+str(b)+'['+str(threshold)+'] = '+dumps(beta[b]))
+        open(folder_name+'fbeta.js','w').write(conv_hist_file+'_fbeta['+str(threshold)+'] = '+dumps(fbeta))
