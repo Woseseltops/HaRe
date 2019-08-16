@@ -6,6 +6,7 @@ from sklearn.metrics import fbeta_score
 from os import mkdir
 from shutil import rmtree
 from json import loads, dumps
+from random import shuffle
 
 def true_positives(true, predicted):
 
@@ -49,8 +50,18 @@ conversations = import_conversations(CONVERSATIONS_FILE, cutoff_point=CONVERSATI
 
 #Cut away utterances by some speakers
 
+# Come up with speakers aliases (artistic effect to have toxic players at random positions)
+aliases_per_conversation = []
+
+for conversation in conversations:
+    speakers = list(conversation.all_speakers)
+    shuffle(speakers)
+
+    aliases_per_conversation.append({speaker:speaker_index for speaker_index, speaker in enumerate(speakers)})
+
 #Save the true target data
-open(OUTPUT_FOLDER+'target.js','w').write(dumps([conversation.speakers_with_labels for conversation in conversations]))
+print(aliases_per_conversation)
+open(OUTPUT_FOLDER+'target.js','w').write('var target = '+dumps([aliases['TOXIC'] for aliases in aliases_per_conversation]))
 
 #Go through all detectors, with all thresholds
 hares = []
@@ -99,6 +110,8 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
         #Calculate metrics for this detector/threshold combi
         for utterance_index in range(CONVERSATION_LENGTH):
 
+            state_per_player = {}
+
             for conversation_index in range(NR_OF_CONVERSATIONS):
 
                 try:
@@ -107,7 +120,12 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
                     continue
 
                 speakers = h.conversations[conversation_index].all_speakers
-                per_player.append({speaker:current_status[speaker] >= threshold if speaker in current_status.keys() else False for speaker in speakers})
+
+                for speaker in speakers:
+                    speaker_id = 'conv' + str(conversation_index) + '.' + str(aliases_per_conversation[conversation_index][speaker])
+                    state_per_player[speaker_id] = current_status[speaker] >= threshold if speaker in current_status.keys() else False
+
+            per_player.append(state_per_player)
 
             true, predicted = h.get_true_and_predicted_scores_at_utterance_index(utterance_index,categorize_predicted_scores=True)
             tp.append(true_positives(true,predicted))

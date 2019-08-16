@@ -1,17 +1,21 @@
 TODO
 ====
-Interactive article:
-1. Implement interactive visualization to evaluate classifiers during conversations
-   * Start with the graphs, hardcoding the source files
-     * Have the data from the source files shown in the graphs as you click through the settings
-       * Set a max y in the graph code
-     * Create data json files for dict and bigru, all settings
-       * Remove later players
-2. Show the difference between dict and BiGru
-3. Use this visualization to figure out
-   * If we can do without Bi
-   * If we can get a comparable score WITH word embeddings
-     * If the neuron visualizations for word embeddings are more organized
+Interactive article now:
+* Develop: Showing individual players
+  * Visualization: I feel like it's not showing the correct players as toxic
+  * At data generation:
+    * rename players, create separate file with info on who is toxic
+    * solve the problem with too many players
+
+* Experiment: can we remove the Bi of BiGru?
+* Experiment: can we get better results with casing?
+* Think/design: can we make the 'add detectors' part more guided/static?
+  * Perhaps make it free in the final visualization
+
+After the experimental part is clear:
+* Think/design: visualize neurons
+  * I'm hoping for a casing detector
+  * I'm hoping for similar words in one detector if I can use the detector
 
 Code
 * Fix type hinting

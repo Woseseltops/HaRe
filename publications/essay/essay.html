@@ -16,6 +16,32 @@
 
     <h2>2. Slide</h2>
 
+    <input name="time_slider" type="range" min="0" max="200" value="0" oninput="moveTimeSlider(this.value)">
+
+    <table id="individual_player_visualizations">
+        <tr><td>Game 1</td><td><img src="svg/fn.svg"></td><td><img src="svg/fp.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 2</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 3</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 4</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 5</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+
+        <tr><td>Game 6</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+         <tr><td>Game 7</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 8</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 9</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+        <tr><td>Game 10</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+
+    </table>
+
     <h2>3. Compare</h2>
 
     <canvas id="true_positives" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
@@ -30,15 +56,19 @@
     var moba_dic_100_tp = [];
     var moba_dic_100_fp = [];
     var moba_dic_100_fbeta = {};
+    var moba_dic_100_per_player = {};
 
     var moba_bigru_100_tp = [];
     var moba_bigru_100_fp = [];
     var moba_bigru_100_fbeta = {};
+    var moba_bigru_100_per_player = {};
 
     var moba_bigru_embeddings_100_tp = [];
     var moba_bigru_embeddings_100_fp = [];
     var moba_bigru_embeddings_100_fbeta = {};
+    var moba_bigru_embeddings_100_per_player = {};
 </script>
+<script src="precalculated_data/target.js"></script>
 
 <script src="precalculated_data/moba_dic_100@1/tp.js"></script>
 <script src="precalculated_data/moba_dic_100@2/tp.js"></script>
@@ -72,6 +102,17 @@
 <script src="precalculated_data/moba_dic_100@8/fbeta.js"></script>
 <script src="precalculated_data/moba_dic_100@9/fbeta.js"></script>
 <script src="precalculated_data/moba_dic_100@10/fbeta.js"></script>
+
+<script src="precalculated_data/moba_dic_100@1/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@2/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@3/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@4/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@5/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@6/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@7/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@8/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@9/per_player.js"></script>
+<script src="precalculated_data/moba_dic_100@10/per_player.js"></script>
 
 <script src="precalculated_data/moba_bigru_100@0.001/tp.js"></script>
 <script src="precalculated_data/moba_bigru_100@0.0025/tp.js"></script>
@@ -170,6 +211,7 @@ function addDetector(detectorType)
     allDetectors.push([detectorType,1]);
     updateDetectorArea();
     updateGraphs();
+    updatePlayerVisualizations(0,0);
 }
 
 function changeDetectorThreshold(detectorIndex,delta)
@@ -203,6 +245,77 @@ function updateDetectorArea()
     }
 
     document.getElementById('detectorArea').innerHTML = detectorAreaHTML;
+}
+
+function updatePlayerVisualizations(detectorIndex,time)
+{
+    var detector = allDetectors[detectorIndex];
+    var detectorType = detector[0];
+    var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
+
+    var data_for_this_time = moba_dic_100_per_player[threshold][time];
+    var player_names = Object.keys(data_for_this_time);
+    player_names.sort();
+
+    var player_index_within_conversation = -1;
+    var previous_conversation_index = 0;
+
+    for (var player_index in player_names)
+    {
+        var player_name_parts = player_names[player_index].split('.');
+        var conversation_index = parseInt(player_name_parts[0][4]);
+        var player_name = player_name_parts[1];
+
+        if (conversation_index == previous_conversation_index)
+        {
+            player_index_within_conversation++;
+        }
+        else
+        {
+            player_index_within_conversation = 0;
+            previous_conversation_index = conversation_index;
+        }
+
+        if (player_index_within_conversation > 9)
+        {
+            continue;
+        }
+
+        var img_elem = document.getElementById('individual_player_visualizations').rows[conversation_index].cells[player_index_within_conversation].children[0];
+
+        if (!img_elem)
+        {
+            continue;
+        }
+
+        if (target[conversation_index] == player_index_within_conversation)
+        {
+            if (moba_dic_100_per_player[threshold][time][player_names[player_index]])
+            {
+                img_elem.src = 'svg/tp.svg';
+            }
+            else
+            {
+                img_elem.src = 'svg/fn.svg';
+            }
+        }
+        else
+        {
+            if (moba_dic_100_per_player[threshold][time][player_names[player_index]])
+            {
+                img_elem.src = 'svg/fp.svg';
+            }
+            else
+            {
+                img_elem.src = 'svg/tn.svg';
+            }
+        }
+    }
+}
+
+function moveTimeSlider(time)
+{
+    updatePlayerVisualizations(0,time);
 }
 
 function updateGraphs()
