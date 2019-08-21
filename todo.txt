@@ -2,11 +2,12 @@ TODO
 ====
 Interactive article now:
 * Develop: Showing individual players
-  * Visualization: I feel like it's not showing the correct players as toxic
+  * Select detector: it works, but generates errors every now and then
   * At data generation:
-    * rename players, create separate file with info on who is toxic
     * solve the problem with too many players
+  * More dynamic way to import all this data
 
+* Develop: sliding threshold option for detectors
 * Experiment: can we remove the Bi of BiGru?
 * Experiment: can we get better results with casing?
 * Think/design: can we make the 'add detectors' part more guided/static?

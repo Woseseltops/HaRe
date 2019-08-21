@@ -16,7 +16,7 @@
 
     <h2>2. Slide</h2>
 
-    <input name="time_slider" type="range" min="0" max="200" value="0" oninput="moveTimeSlider(this.value)">
+    <input name="time_slider" type="range" min="0" max="199" value="0" oninput="moveTimeSlider(this.value)">
 
     <table id="individual_player_visualizations">
         <tr><td>Game 1</td><td><img src="svg/fn.svg"></td><td><img src="svg/fp.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
@@ -156,6 +156,20 @@
 <script src="precalculated_data/moba_bigru_100@0.75/fbeta.js"></script>
 <script src="precalculated_data/moba_bigru_100@1/fbeta.js"></script>
 
+<script src="precalculated_data/moba_bigru_100@0.001/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0025/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.005/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.0075/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.01/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.025/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.05/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.075/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.1/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.25/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.5/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@0.75/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_100@1/per_player.js"></script>
+
 <script src="precalculated_data/moba_bigru_embeddings_100@0.001/tp.js"></script>
 <script src="precalculated_data/moba_bigru_embeddings_100@0.0025/tp.js"></script>
 <script src="precalculated_data/moba_bigru_embeddings_100@0.005/tp.js"></script>
@@ -198,6 +212,20 @@
 <script src="precalculated_data/moba_bigru_embeddings_100@0.75/fbeta.js"></script>
 <script src="precalculated_data/moba_bigru_embeddings_100@1/fbeta.js"></script>
 
+<script src="precalculated_data/moba_bigru_embeddings_100@0.001/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.005/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.01/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.025/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.05/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.075/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.1/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.25/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.5/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@0.75/per_player.js"></script>
+<script src="precalculated_data/moba_bigru_embeddings_100@1/per_player.js"></script>
+
 <script>
 var allDetectors = []
 var beta = 1;
@@ -205,19 +233,29 @@ var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
 var thresholdsPerDetectorType = {'dic':[1,2,3,4,5,6,7,8,9,10],
                                     'bigru':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
                                     'bigru_embeddings':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+var currentTime = 0;
+var currentlySelectedDetectorIndex = 0;
 
 function addDetector(detectorType)
 {
     allDetectors.push([detectorType,1]);
     updateDetectorArea();
     updateGraphs();
-    updatePlayerVisualizations(0,0);
+    updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
 }
 
 function changeDetectorThreshold(detectorIndex,delta)
 {
     allDetectors[detectorIndex][1] += delta;
     updateDetectorArea();
+    updateGraphs();
+    updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
+}
+
+function moveTimeSlider(time)
+{
+    currentTime = time;
+    updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
     updateGraphs();
 }
 
@@ -229,9 +267,9 @@ function moveFbetaSlider(beta_index)
 
 function updateDetectorArea()
 {
-    var detectorTemplates = {'dic':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                              'bigru':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                            'bigru_embeddings':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
+    var detectorTemplates = {'dic':'<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
+                              'bigru':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
+                            'bigru_embeddings':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
                               };
 
     var detectorAreaHTML = '';
@@ -245,52 +283,68 @@ function updateDetectorArea()
     }
 
     document.getElementById('detectorArea').innerHTML = detectorAreaHTML;
+
+    var allDetectorElements = document.getElementsByClassName('detector');
+    for (elem of allDetectorElements)
+    {
+        elem.onclick = function()
+        {
+            for (d of document.getElementsByClassName('detector'))
+            {
+                d.classList.remove('selected');
+            }
+
+            this.classList.add('selected')
+
+            currentlySelectedDetectorIndex = this.getAttribute('detectorIndex');
+            updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
+        };
+    }
 }
 
-function updatePlayerVisualizations(detectorIndex,time)
+function updatePlayerVisualizations(time,detectorIndex)
 {
     var detector = allDetectors[detectorIndex];
     var detectorType = detector[0];
     var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
 
-    var data_for_this_time = moba_dic_100_per_player[threshold][time];
+    if (detectorType == 'dic')
+    {
+        var data_for_this_time = moba_dic_100_per_player[threshold][time];
+    }
+    else if (detectorType == 'bigru')
+    {
+        var data_for_this_time = moba_bigru_100_per_player[threshold][time];
+    }
+    else if (detectorType == 'bigru_embeddings')
+    {
+        var data_for_this_time = moba_bigru_embeddings_100_per_player[threshold][time];
+    }
+
     var player_names = Object.keys(data_for_this_time);
     player_names.sort();
-
-    var player_index_within_conversation = -1;
-    var previous_conversation_index = 0;
 
     for (var player_index in player_names)
     {
         var player_name_parts = player_names[player_index].split('.');
         var conversation_index = parseInt(player_name_parts[0][4]);
-        var player_name = player_name_parts[1];
+        var player_name = parseInt(player_name_parts[1]);
 
-        if (conversation_index == previous_conversation_index)
-        {
-            player_index_within_conversation++;
-        }
-        else
-        {
-            player_index_within_conversation = 0;
-            previous_conversation_index = conversation_index;
-        }
-
-        if (player_index_within_conversation > 9)
+        if (player_name > 9)
         {
             continue;
         }
 
-        var img_elem = document.getElementById('individual_player_visualizations').rows[conversation_index].cells[player_index_within_conversation].children[0];
+        var img_elem = document.getElementById('individual_player_visualizations').rows[conversation_index].cells[player_name].children[0];
 
         if (!img_elem)
         {
             continue;
         }
 
-        if (target[conversation_index] == player_index_within_conversation)
+        if (target[conversation_index] == player_name)
         {
-            if (moba_dic_100_per_player[threshold][time][player_names[player_index]])
+            if (data_for_this_time[player_names[player_index]])
             {
                 img_elem.src = 'svg/tp.svg';
             }
@@ -301,7 +355,7 @@ function updatePlayerVisualizations(detectorIndex,time)
         }
         else
         {
-            if (moba_dic_100_per_player[threshold][time][player_names[player_index]])
+            if (data_for_this_time[player_names[player_index]])
             {
                 img_elem.src = 'svg/fp.svg';
             }
@@ -311,11 +365,6 @@ function updatePlayerVisualizations(detectorIndex,time)
             }
         }
     }
-}
-
-function moveTimeSlider(time)
-{
-    updatePlayerVisualizations(0,time);
 }
 
 function updateGraphs()
@@ -351,9 +400,9 @@ function updateGraphs()
         }
     }
 
-   drawGraph(document.getElementById('true_positives'),truePositiveData,10,3);
-   drawGraph(document.getElementById('false_positives'),falsePositiveData,100,3);
-   drawGraph(document.getElementById('fbeta'),fbetaData,1,3);
+   drawGraph(document.getElementById('true_positives'),truePositiveData,10,currentTime);
+   drawGraph(document.getElementById('false_positives'),falsePositiveData,100,currentTime);
+   drawGraph(document.getElementById('fbeta'),fbetaData,1,currentTime);
 }
 
 function drawGraph(canvas,data,maxY,timeIndicatorPosition)
