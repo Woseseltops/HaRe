@@ -227,6 +227,69 @@
 <script src="precalculated_data/moba_bigru_embeddings_100@1/per_player.js"></script>
 
 <script>
+class Detector
+{
+    constructor(detectorType,useSlidingThreshold,staticThresholds)
+    {
+        this.detectorType = detectorType;
+        this.useSlidingThreshold = useSlidingThreshold;
+
+        this.staticThresholds = staticThresholds;
+
+        //If using the sliding threshold
+        this.fscores = [];
+
+        //If not using the sliding threshold
+        this.staticThresholdIndex = 0;
+    };
+
+    previousThreshold()
+    {
+        this.staticThresholdIndex--;
+
+        if (this.staticThresholdIndex < 0)
+        {
+            this.staticThresholdIndex = 0;
+        }
+    }
+
+    nextThreshold()
+    {
+        this.staticThresholdIndex++;
+
+        if (this.staticThresholdIndex == this.staticThresholds.length)
+        {
+            this.staticThresholdIndex--;
+        }
+    }
+
+    getThreshold(time)
+    {
+        if (!this.useSlidingThreshold)
+        {
+            return this.staticThresholds[this.staticThresholdIndex];
+        }
+
+        var best_threshold = this.staticThresholds[0];
+        var highest_fscore = 0;
+
+        for (var threshold of this.staticThresholds)
+        {
+            var fscore = this.fscores[threshold][1][time];
+
+            if (fscore > highest_fscore)
+            {
+                highest_fscore = fscore;
+                best_threshold = threshold;
+            }
+        }
+
+        console.log(best_threshold);
+        return best_threshold;
+    }
+
+}
+
 var allDetectors = []
 var beta = 1;
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
@@ -238,7 +301,24 @@ var currentlySelectedDetectorIndex = 0;
 
 function addDetector(detectorType)
 {
-    allDetectors.push([detectorType,1]);
+    //var detector = new Detector(detectorType,false,thresholdsPerDetectorType[detectorType]);
+    var detector = new Detector(detectorType,true,thresholdsPerDetectorType[detectorType]);
+
+    if (detectorType == 'dic')
+    {
+        detector.fscores = moba_dic_100_fbeta;
+    }
+    else if (detectorType == 'bigru')
+    {
+        detector.fscores = moba_bigru_100_fbeta;
+    }
+    else if (detectorType == 'bigru_embeddings')
+    {
+        detector.fscores = moba_bigru_embeddings_100_fbeta;
+    }
+
+    allDetectors.push(detector);
+
     updateDetectorArea();
     updateGraphs();
     updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
@@ -246,7 +326,15 @@ function addDetector(detectorType)
 
 function changeDetectorThreshold(detectorIndex,delta)
 {
-    allDetectors[detectorIndex][1] += delta;
+    if (delta == 1)
+    {
+        allDetectors[detectorIndex].nextThreshold();
+    }
+    else
+    {
+        allDetectors[detectorIndex].previousThreshold();
+    }
+
     updateDetectorArea();
     updateGraphs();
     updatePlayerVisualizations(currentTime,currentlySelectedDetectorIndex);
@@ -269,7 +357,7 @@ function updateDetectorArea()
 {
     var detectorTemplates = {'dic':'<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
                               'bigru':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                            'bigru_embeddings':'<div class="detector detector_{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
+                            'bigru_embeddings':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
                               };
 
     var detectorAreaHTML = '';
@@ -277,9 +365,7 @@ function updateDetectorArea()
     for (detectorIndex in allDetectors)
     {
         var detector = allDetectors[detectorIndex];
-        var detectorType = detector[0];
-        var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
-        detectorAreaHTML += detectorTemplates[detectorType].replace(/{{ threshold }}/g,threshold).replace(/{{ index }}/g,detectorIndex);
+        detectorAreaHTML += detectorTemplates[detector.detectorType].replace(/{{ threshold }}/g,detector.getThreshold(currentTime)).replace(/{{ index }}/g,detectorIndex);
     }
 
     document.getElementById('detectorArea').innerHTML = detectorAreaHTML;
@@ -305,20 +391,18 @@ function updateDetectorArea()
 function updatePlayerVisualizations(time,detectorIndex)
 {
     var detector = allDetectors[detectorIndex];
-    var detectorType = detector[0];
-    var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
 
-    if (detectorType == 'dic')
+    if (detector.detectorType == 'dic')
     {
-        var data_for_this_time = moba_dic_100_per_player[threshold][time];
+        var data_for_this_time = moba_dic_100_per_player[detector.getThreshold(time)][time];
     }
-    else if (detectorType == 'bigru')
+    else if (detector.detectorType == 'bigru')
     {
-        var data_for_this_time = moba_bigru_100_per_player[threshold][time];
+        var data_for_this_time = moba_bigru_100_per_player[detector.getThreshold(time)][time];
     }
-    else if (detectorType == 'bigru_embeddings')
+    else if (detector.detectorType == 'bigru_embeddings')
     {
-        var data_for_this_time = moba_bigru_embeddings_100_per_player[threshold][time];
+        var data_for_this_time = moba_bigru_embeddings_100_per_player[detector.getThreshold(time)][time];
     }
 
     var player_names = Object.keys(data_for_this_time);
@@ -377,26 +461,23 @@ function updateGraphs()
     {
         var detector = allDetectors[detector_index];
 
-        var detectorType = detector[0];
-        var threshold = thresholdsPerDetectorType[detectorType][detector[1]];
-
-        if (detectorType == 'dic')
+        if (detector.detectorType == 'dic')
         {
-            truePositiveData.push(moba_dic_100_tp[threshold]);
-            falsePositiveData.push(moba_dic_100_fp[threshold]);
-            fbetaData.push(moba_dic_100_fbeta[threshold][beta]);
+            truePositiveData.push(moba_dic_100_tp[detector.getThreshold(currentTime)]);
+            falsePositiveData.push(moba_dic_100_fp[detector.getThreshold(currentTime)]);
+            fbetaData.push(moba_dic_100_fbeta[detector.getThreshold(currentTime)][beta]);
         }
-        else if (detectorType == 'bigru')
+        else if (detector.detectorType == 'bigru')
         {
-            truePositiveData.push(moba_bigru_100_tp[threshold]);
-            falsePositiveData.push(moba_bigru_100_fp[threshold]);
-            fbetaData.push(moba_bigru_100_fbeta[threshold][beta]);
+            truePositiveData.push(moba_bigru_100_tp[detector.getThreshold(currentTime)]);
+            falsePositiveData.push(moba_bigru_100_fp[detector.getThreshold(currentTime)]);
+            fbetaData.push(moba_bigru_100_fbeta[detector.getThreshold(currentTime)][beta]);
         }
-        else if (detectorType == 'bigru_embeddings')
+        else if (detector.detectorType == 'bigru_embeddings')
         {
-            truePositiveData.push(moba_bigru_embeddings_100_tp[threshold]);
-            falsePositiveData.push(moba_bigru_embeddings_100_fp[threshold]);
-            fbetaData.push(moba_bigru_embeddings_100_fbeta[threshold][beta]);
+            truePositiveData.push(moba_bigru_embeddings_100_tp[detector.getThreshold(currentTime)]);
+            falsePositiveData.push(moba_bigru_embeddings_100_fp[detector.getThreshold(currentTime)]);
+            fbetaData.push(moba_bigru_embeddings_100_fbeta[detector.getThreshold(currentTime)][beta]);
         }
     }
 

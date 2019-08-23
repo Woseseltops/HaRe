@@ -8,6 +8,8 @@ Interactive article now:
   * More dynamic way to import all this data
 
 * Develop: sliding threshold option for detectors
+  * Better indicate by hand, threshold doesn't go straight up
+
 * Experiment: can we remove the Bi of BiGru?
 * Experiment: can we get better results with casing?
 * Think/design: can we make the 'add detectors' part more guided/static?
