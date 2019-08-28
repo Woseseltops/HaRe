@@ -29,7 +29,7 @@ def false_positives(true, predicted):
     return result
 
 #General settings
-HARE_ROOT = '/vol/tensusers2/wstoop/HaRe/'
+HARE_ROOT = '/home/wessel/hare/'
 ESSAY_ROOT = HARE_ROOT+'publications/essay/'
 
 CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
@@ -39,7 +39,7 @@ CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'moba_dic_100':[1,2,3,4,5,6,7,8,9,
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
-CONVERSATIONS_FILE = HARE_ROOT+'/datasets/LoL/heldout_conversations_anon.txt'
+CONVERSATIONS_FILE = HARE_ROOT+'datasets/LoL/heldout_conversations_anon.txt'
 CONVERSATION_LENGTH = 200
 NR_OF_CONVERSATIONS = 10
 
@@ -54,18 +54,17 @@ conversations = import_conversations(CONVERSATIONS_FILE, cutoff_point=CONVERSATI
 aliases_per_conversation = []
 
 for conversation in conversations:
-    speakers = list(conversation.all_speakers)
-    shuffle(speakers)
 
+    speakers = list(conversation.all_speakers)
+    activity_per_speaker = conversation.calculate_activity_per_speaker()
+    speakers.sort(key=lambda x: activity_per_speaker[x],reverse=True)
     aliases_per_conversation.append({speaker:speaker_index for speaker_index, speaker in enumerate(speakers)})
+    temp = 0
 
 #Save the true target data
-print(aliases_per_conversation)
 open(OUTPUT_FOLDER+'target.js','w').write('var target = '+dumps([aliases['TOXIC'] for aliases in aliases_per_conversation]))
 
 #Go through all detectors, with all thresholds
-hares = []
-
 for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.items():
 
     #For each conversation, read the status at every point during the conversation
@@ -100,7 +99,6 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
 
         for conversation in conversations:
             h.add_conversation(conversation)
-            hares.append(h)
 
         per_player = []
         tp = []
@@ -122,7 +120,12 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
                 speakers = h.conversations[conversation_index].all_speakers
 
                 for speaker in speakers:
-                    speaker_id = 'conv' + str(conversation_index) + '.' + str(aliases_per_conversation[conversation_index][speaker])
+                    speaker_alias = str(aliases_per_conversation[conversation_index][speaker])
+
+                    if len(speaker_alias) < 2:
+                        speaker_alias = '0' + speaker_alias
+
+                    speaker_id = 'conv' + str(conversation_index) + '.' + speaker_alias
                     state_per_player[speaker_id] = current_status[speaker] >= threshold if speaker in current_status.keys() else False
 
             per_player.append(state_per_player)

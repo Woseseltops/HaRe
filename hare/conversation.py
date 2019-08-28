@@ -1,4 +1,5 @@
 from typing import List, Dict, Set, Optional
+from collections import Counter
 
 class Utterance():
 
@@ -56,6 +57,11 @@ class Conversation():
 
         clean_utterances : List[Utterance] = [utterance for utterance in self.utterances if utterance.speaker != speaker_to_remove]
         self.utterances = clean_utterances
+
+    def calculate_activity_per_speaker(self):
+
+        nr_of_utterances : int = len(self.utterances)
+        return {speaker: freq/nr_of_utterances for speaker,freq in Counter([utterance.speaker for utterance in self.utterances]).most_common()}
 
     def __len__(self) -> int:
         return len(self.utterances)
