@@ -53,180 +53,13 @@
 </div>
 
 <script>
-    var moba_dic_100_tp = [];
-    var moba_dic_100_fp = [];
-    var moba_dic_100_fbeta = {};
-    var moba_dic_100_per_player = {};
+var loadJS = function(url, location)
+{
+    var scriptTag = document.createElement('script');
+    scriptTag.src = url;
+    location.appendChild(scriptTag);
+};
 
-    var moba_bigru_100_tp = [];
-    var moba_bigru_100_fp = [];
-    var moba_bigru_100_fbeta = {};
-    var moba_bigru_100_per_player = {};
-
-    var moba_bigru_embeddings_100_tp = [];
-    var moba_bigru_embeddings_100_fp = [];
-    var moba_bigru_embeddings_100_fbeta = {};
-    var moba_bigru_embeddings_100_per_player = {};
-</script>
-<script src="precalculated_data/target.js"></script>
-
-<script src="precalculated_data/moba_dic_100@1/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@2/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@3/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@4/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@5/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@6/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@7/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@8/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@9/tp.js"></script>
-<script src="precalculated_data/moba_dic_100@10/tp.js"></script>
-
-<script src="precalculated_data/moba_dic_100@1/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@2/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@3/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@4/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@5/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@6/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@7/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@8/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@9/fp.js"></script>
-<script src="precalculated_data/moba_dic_100@10/fp.js"></script>
-
-<script src="precalculated_data/moba_dic_100@1/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@2/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@3/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@4/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@5/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@6/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@7/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@8/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@9/fbeta.js"></script>
-<script src="precalculated_data/moba_dic_100@10/fbeta.js"></script>
-
-<script src="precalculated_data/moba_dic_100@1/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@2/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@3/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@4/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@5/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@6/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@7/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@8/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@9/per_player.js"></script>
-<script src="precalculated_data/moba_dic_100@10/per_player.js"></script>
-
-<script src="precalculated_data/moba_bigru_100@0.001/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0025/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.005/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0075/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.01/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.025/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.05/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.075/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.1/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.25/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.5/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.75/tp.js"></script>
-<script src="precalculated_data/moba_bigru_100@1/tp.js"></script>
-
-<script src="precalculated_data/moba_bigru_100@0.001/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0025/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.005/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0075/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.01/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.025/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.05/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.075/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.1/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.25/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.5/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.75/fp.js"></script>
-<script src="precalculated_data/moba_bigru_100@1/fp.js"></script>
-
-<script src="precalculated_data/moba_bigru_100@0.001/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0025/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.005/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0075/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.01/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.025/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.05/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.075/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.1/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.25/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.5/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.75/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_100@1/fbeta.js"></script>
-
-<script src="precalculated_data/moba_bigru_100@0.001/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0025/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.005/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.0075/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.01/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.025/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.05/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.075/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.1/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.25/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.5/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@0.75/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_100@1/per_player.js"></script>
-
-<script src="precalculated_data/moba_bigru_embeddings_100@0.001/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.005/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.01/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.025/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.05/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.075/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.1/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.25/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.5/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.75/tp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@1/tp.js"></script>
-
-<script src="precalculated_data/moba_bigru_embeddings_100@0.001/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.005/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.01/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.025/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.05/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.075/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.1/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.25/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.5/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.75/fp.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@1/fp.js"></script>
-
-<script src="precalculated_data/moba_bigru_embeddings_100@0.001/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.005/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.01/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.025/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.05/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.075/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.1/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.25/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.5/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.75/fbeta.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@1/fbeta.js"></script>
-
-<script src="precalculated_data/moba_bigru_embeddings_100@0.001/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0025/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.005/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.0075/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.01/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.025/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.05/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.075/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.1/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.25/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.5/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@0.75/per_player.js"></script>
-<script src="precalculated_data/moba_bigru_embeddings_100@1/per_player.js"></script>
-
-<script>
 class Detector
 {
     constructor(detectorType,useSlidingThreshold,staticThresholds)
@@ -284,12 +117,12 @@ class Detector
             }
         }
 
-        console.log(best_threshold);
         return best_threshold;
     }
 
 }
 
+//Prepare all variables
 var allDetectors = []
 var beta = 1;
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
@@ -299,10 +132,40 @@ var thresholdsPerDetectorType = {'dic':[1,2,3,4,5,6,7,8,9,10],
 var currentTime = 0;
 var currentlySelectedDetectorIndex = 0;
 
+//Load all precalculated data
+loadJS('precalculated_data/target.js', document.body);
+
+var moba_dic_100_tp = [];
+var moba_dic_100_fp = [];
+var moba_dic_100_fbeta = {};
+var moba_dic_100_per_player = {};
+
+var moba_bigru_100_tp = [];
+var moba_bigru_100_fp = [];
+var moba_bigru_100_fbeta = {};
+var moba_bigru_100_per_player = {};
+
+var moba_bigru_embeddings_100_tp = [];
+var moba_bigru_embeddings_100_fp = [];
+var moba_bigru_embeddings_100_fbeta = {};
+var moba_bigru_embeddings_100_per_player = {};
+
+for (var [detectorType,thresholds] of Object.entries(thresholdsPerDetectorType))
+{
+    for (var threshold of thresholds)
+    {
+        for (var metric of ['tp','fp','fbeta','per_player'])
+        {
+            loadJS('precalculated_data/moba_'+detectorType+'_100@'+threshold+'/'+metric+'.js',document.body);
+        }
+    }
+}
+
+//What happens when you push buttons
 function addDetector(detectorType)
 {
-    //var detector = new Detector(detectorType,false,thresholdsPerDetectorType[detectorType]);
-    var detector = new Detector(detectorType,true,thresholdsPerDetectorType[detectorType]);
+    var detector = new Detector(detectorType,false,thresholdsPerDetectorType[detectorType]);
+    //var detector = new Detector(detectorType,true,thresholdsPerDetectorType[detectorType]);
 
     if (detectorType == 'dic')
     {
@@ -419,7 +282,7 @@ function updatePlayerVisualizations(time,detectorIndex)
             continue;
         }
 
-        var img_elem = document.getElementById('individual_player_visualizations').rows[conversation_index].cells[player_name].children[0];
+        var img_elem = document.getElementById('individual_player_visualizations').rows[conversation_index].cells[player_name+1].children[0];
 
         if (!img_elem)
         {
