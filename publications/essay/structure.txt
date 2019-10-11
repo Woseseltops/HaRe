@@ -43,6 +43,8 @@ Text:
 Interactive #5:
 * Same as interactive #3, but adds word embedding based classifier
 
+
+
 QUESTIONS
 =========
 * Why is BiGRU so much better than LSTM? Because of the Bi or the GRU?

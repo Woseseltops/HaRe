@@ -1,21 +1,15 @@
 TODO
 ====
-Interactive article now:
-* Develop: Showing individual players
-  * Select detector: it works, but generates errors every now and then
-  * At data generation:
-    * solve the problem with too many players
-  * More dynamic way to import all this data
-
 * Develop: sliding threshold option for detectors
   * Better indicate by hand, threshold doesn't go straight up
 
-* Experiment: can we remove the Bi of BiGru?
 * Experiment: can we get better results with casing?
+* Experiment: can we remove the Bi of BiGru?
 * Think/design: can we make the 'add detectors' part more guided/static?
   * Perhaps make it free in the final visualization
 
 After the experimental part is clear:
+* Develop: find conversations with clearest effects
 * Think/design: visualize neurons
   * I'm hoping for a casing detector
   * I'm hoping for similar words in one detector if I can use the detector
