@@ -4,6 +4,9 @@ TODO
   * Better indicate by hand, threshold doesn't go straight up
 
 * Experiment: can we get better results with casing?
+  * Start of the option was added but untested
+  * Processing of input text and multiple inputs to the network to be added
+
 * Experiment: can we remove the Bi of BiGru?
 * Think/design: can we make the 'add detectors' part more guided/static?
   * Perhaps make it free in the final visualization
