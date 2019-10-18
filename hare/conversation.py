@@ -82,9 +82,11 @@ def import_conversations(filename : str, cutoff_point : Optional[int] = None) ->
     conversations : List[Conversation] = []
     current_conversation : Conversation = Conversation()
 
+    line : str
+
     for line in open(filename):
 
-        line : str = line.strip()
+        line = line.strip()
 
         if len(line) == 0:
             continue
@@ -103,7 +105,7 @@ def import_conversations(filename : str, cutoff_point : Optional[int] = None) ->
 
         speaker, content = line.split('\t')
 
-        if cutoff_point == None or len(current_conversation.utterances) < cutoff_point:
+        if cutoff_point is None or len(current_conversation.utterances) < int(cutoff_point):
             current_conversation.add_utterance(speaker, content)
 
     return conversations

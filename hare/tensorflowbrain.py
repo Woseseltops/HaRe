@@ -148,14 +148,19 @@ class TensorFlowBrain(AbstractBrain):
 
     def get_embeddings(self,limit : int = 1000) -> Tuple[List[str],List[List[float]]]:
 
-        if self.model != None:
+        if self.tokenizer is not None and self.model is not None:
             return list(self.tokenizer.word_index.keys())[:limit], self.model.layers[0].get_weights()[0][:limit]
+        else:
+            raise UntrainedBrainError
 
     def visualize_neuron_specializations(self,layer_index : int, texts : List[str], list_length : int = 5):
 
         from tensorflow.keras.models import Model
 
-        intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
+        if self.model is not None:
+            intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
+        else:
+            raise UntrainedBrainError
 
         word_scores_per_neuron : List[List[Tuple[str,float]]] = []
 
@@ -165,7 +170,10 @@ class TensorFlowBrain(AbstractBrain):
             for word_index, activations in zip(text, intermediate_output_model.predict(text)):
 
                 try:
-                    current_word : str = self.tokenizer.index_word[word_index]
+                    if self.tokenizer is not None:
+                        current_word : str = self.tokenizer.index_word[word_index]
+                    else:
+                        raise UntrainedBrainError
                 except KeyError:
                     continue
 

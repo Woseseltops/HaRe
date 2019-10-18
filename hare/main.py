@@ -85,7 +85,7 @@ class Hare():
         self.update_status_history_for_conversation(id)
 
         conversation : Conversation = self.conversations[id]
-        status_history : List[Dict[str,int]] = self.status_per_conversation[id]
+        status_history : List[Dict[str,float]] = self.status_per_conversation[id]
 
         for utterance, status in zip(conversation.utterances,status_history):
 
@@ -353,17 +353,19 @@ def load_pretrained(location : str) -> Hare:
     if location[-1] != '/':
         location += '/'
 
+    brain : AbstractBrain
+
     if load(open(location+'metadata.json'))['brainType'] == 'BiGru':
 
         from hare.tensorflowbrain import BiGruBrain
 
-        brain: BiGruBrain = BiGruBrain()
+        brain = BiGruBrain()
         brain.load(location)
         brain.verbose = True
     elif load(open(location + 'metadata.json'))['brainType'] == 'LSTM':
         from hare.tensorflowbrain import LSTMBrain
 
-        brain: BiGruBrain = LSTMBrain()
+        brain = LSTMBrain()
         brain.load(location)
         brain.verbose = True
 

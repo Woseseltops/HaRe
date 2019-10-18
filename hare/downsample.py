@@ -1,7 +1,7 @@
-from typing import List
+from typing import List, Tuple, Dict
 from math import floor
 
-def downsample(texts : List[str], target : List[int], proportion_true : float) -> (List[str], List[int]):
+def downsample(texts : List[str], target : List[int], proportion_true : float) -> Tuple[List[str], List[int]]:
     
     text_per_target : Dict[int,List[str]] = {0: [], 1: []}
     
