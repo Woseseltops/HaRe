@@ -355,7 +355,7 @@ def load_pretrained(location : str) -> Hare:
 
     brain : AbstractBrain
 
-    settings = load(open(location+'metadata.json'))
+    settings : dict = load(open(location+'metadata.json'))
 
     if settings['brainType'] == 'BiGru':
 

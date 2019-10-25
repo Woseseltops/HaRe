@@ -53,7 +53,7 @@ class TensorFlowBrain(AbstractBrain):
 
         for text in texts:
 
-            current_vector = []
+            current_vector : List[List[int]] = []
 
             for word in split(r' |!|"|#|\$|%|&|\(|\)|\*|\+|,|-|\.|/|:|;|<|=|>|\?|@|\[|\|\]|\^|_|`|{|\||}|~|\t|\n',text):
                 try:
@@ -320,11 +320,11 @@ class BiGruBrain(TensorFlowBrain):
 
         #Add a separate 'entrance' for the casing information
         if self.include_casing_information:
-            word_model = Model(inputs=word_input, outputs=layers)
+            word_model : Model = Model(inputs=word_input, outputs=layers)
 
-            casing_input = Input(shape=(self._max_sequence_length,1))
+            casing_input : Input = Input(shape=(self._max_sequence_length,1))
 
-            casing_model = Model(inputs=casing_input, outputs=casing_input)
+            casing_model : Model = Model(inputs=casing_input, outputs=casing_input)
             layers = concatenate([word_model.output, casing_model.output])
 
         layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
@@ -337,9 +337,9 @@ class BiGruBrain(TensorFlowBrain):
         layers = Dense(1, activation='sigmoid')(layers)
 
         if self.include_casing_information:
-            model = Model([word_model.input,casing_model.input], layers)
+            model : Model  = Model([word_model.input,casing_model.input], layers)
         else:
-            model = Model(word_input, layers)
+            model : Model = Model(word_input, layers)
 
         #Compile the model
         optimizer : Adam = Adam(lr=self.learning_rate)

@@ -9,7 +9,7 @@ def load_embedding_dictionary(location : str) -> Dict[str,List[float]]:
 
         values : List[str] = line.split()
         word : str = values[0]
-        syntax_error_at_words = []
+        syntax_error_at_words : List[str] = []
 
         try:
             coefs : array = asarray(values[1:], dtype='float32')
