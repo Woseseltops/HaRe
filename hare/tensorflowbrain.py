@@ -56,7 +56,10 @@ class TensorFlowBrain(AbstractBrain):
             current_vector = []
 
             for word in split(r' |!|"|#|\$|%|&|\(|\)|\*|\+|,|-|\.|/|:|;|<|=|>|\?|@|\[|\|\]|\^|_|`|{|\||}|~|\t|\n',text):
-                current_vector.append(sum([1 for letter in word if letter.isupper()])/len(word))
+                try:
+                    current_vector.append([sum([1 for letter in word if letter.isupper()])/len(word)])
+                except ZeroDivisionError:
+                    current_vector.append([0])
 
             casing_vectors.append(current_vector)
 
@@ -75,10 +78,22 @@ class TensorFlowBrain(AbstractBrain):
 
     def classify_multiple(self,texts : List[str]) -> List[float]:
 
-        vectorized_texts : str = self.vectorize_texts(texts)
+        #Go from text to one or more inputs for the model
+        vectorized_texts: array = self.vectorize_texts(texts)
 
+        if self.include_casing_information:
+            casing_information : array = self.texts_to_casing_information(texts)
+            inp = [vectorized_texts,casing_information]
+        else:
+            inp = vectorized_texts
+
+        #Do the actual predictions
         if self.model is not None:
-            return [float(i[0]) for i in self.model.predict_proba(vectorized_texts)]
+
+            return [float(i[0]) for i in self.model.predict(inp)]
+
+            #This was what we used before the functional API
+            # return [float(i[0]) for i in self.model.predict_proba(vectorized_texts)]
         else:
             raise UntrainedBrainError
 
@@ -136,7 +151,9 @@ class TensorFlowBrain(AbstractBrain):
             pass
 
         #Save metadata
-        metadata : Dict[str,Any] = {'brainType':self.brain_type,'maxSequenceLength':self._max_sequence_length}
+        metadata : Dict[str,Any] = {'brainType':self.brain_type,
+                                    'maxSequenceLength':self._max_sequence_length,
+                                    'includeCasingInfomration':self.include_casing_information}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
@@ -264,6 +281,9 @@ class BiGruBrain(TensorFlowBrain):
 
         vectorized_texts : array = self.vectorize_texts(texts)
 
+        if self.include_casing_information:
+            casing_information : array = self.texts_to_casing_information(texts)
+
         if self.embedding_location == '':
             if self.verbose:
                 print('2. Skip (no embeddings)')
@@ -302,7 +322,7 @@ class BiGruBrain(TensorFlowBrain):
         if self.include_casing_information:
             word_model = Model(inputs=word_input, outputs=layers)
 
-            casing_input = Input(shape=(self._max_sequence_length,))
+            casing_input = Input(shape=(self._max_sequence_length,1))
 
             casing_model = Model(inputs=casing_input, outputs=casing_input)
             layers = concatenate([word_model.output, casing_model.output])
@@ -316,7 +336,10 @@ class BiGruBrain(TensorFlowBrain):
 
         layers = Dense(1, activation='sigmoid')(layers)
 
-        model = Model(word_input, layers)
+        if self.include_casing_information:
+            model = Model([word_model.input,casing_model.input], layers)
+        else:
+            model = Model(word_input, layers)
 
         #Compile the model
         optimizer : Adam = Adam(lr=self.learning_rate)
@@ -325,7 +348,15 @@ class BiGruBrain(TensorFlowBrain):
         if self.verbose:
             print('5. training the model')
 
-        history : History = model.fit(vectorized_texts,
+        if self.include_casing_information:
+
+            input = [vectorized_texts,casing_information]
+
+        else:
+
+            input = vectorized_texts
+
+        history : History = model.fit(input,
             target,
             epochs=self.learning_epochs,
             #validation_data=(test_vectors, test_target),

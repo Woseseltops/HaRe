@@ -355,19 +355,25 @@ def load_pretrained(location : str) -> Hare:
 
     brain : AbstractBrain
 
-    if load(open(location+'metadata.json'))['brainType'] == 'BiGru':
+    settings = load(open(location+'metadata.json'))
+
+    if settings['brainType'] == 'BiGru':
 
         from hare.tensorflowbrain import BiGruBrain
 
         brain = BiGruBrain()
         brain.load(location)
         brain.verbose = True
-    elif load(open(location + 'metadata.json'))['brainType'] == 'LSTM':
+
+    elif settings['brainType'] == 'LSTM':
         from hare.tensorflowbrain import LSTMBrain
 
         brain = LSTMBrain()
         brain.load(location)
         brain.verbose = True
+
+    if 'includeCasingInformation' in settings:
+        brain.include_casing_information = settings['includeCasingInformation']
 
     hare : Hare = Hare()
     hare.brain = brain
