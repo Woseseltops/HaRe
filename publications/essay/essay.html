@@ -11,6 +11,7 @@
     <button onclick="addDetector('dic')">Add word list based detector</button>
     <button onclick="addDetector('bigru')">Add neural net detector</button>
     <button onclick="addDetector('bigru_embeddings')">Add embeddings detector</button>
+    <button onclick="addDetector('bigru_casing')">Add casing detector</button>
     <div id="detectorArea"></div>
 
 
@@ -128,7 +129,9 @@ var beta = 1;
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
 var thresholdsPerDetectorType = {'dic':[1,2,3,4,5,6,7,8,9,10],
                                     'bigru':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                    'bigru_embeddings':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+                                    'bigru_embeddings':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                    'bigru_casing':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+
 var currentTime = 0;
 var currentlySelectedDetectorIndex = 0;
 
@@ -149,6 +152,11 @@ var moba_bigru_embeddings_100_tp = [];
 var moba_bigru_embeddings_100_fp = [];
 var moba_bigru_embeddings_100_fbeta = {};
 var moba_bigru_embeddings_100_per_player = {};
+
+var moba_bigru_casing_100_tp = [];
+var moba_bigru_casing_100_fp = [];
+var moba_bigru_casing_100_fbeta = {};
+var moba_bigru_casing_100_per_player = {};
 
 for (var [detectorType,thresholds] of Object.entries(thresholdsPerDetectorType))
 {
@@ -178,6 +186,10 @@ function addDetector(detectorType)
     else if (detectorType == 'bigru_embeddings')
     {
         detector.fscores = moba_bigru_embeddings_100_fbeta;
+    }
+    else if (detectorType == 'bigru_casing')
+    {
+        detector.fscores = moba_bigru_casing_100_fbeta;
     }
 
     allDetectors.push(detector);
@@ -220,7 +232,8 @@ function updateDetectorArea()
 {
     var detectorTemplates = {'dic':'<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
                               'bigru':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                            'bigru_embeddings':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
+                            'bigru_embeddings':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
+                            'bigru_casing':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Casing detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
                               };
 
     var detectorAreaHTML = '';
@@ -266,6 +279,10 @@ function updatePlayerVisualizations(time,detectorIndex)
     else if (detector.detectorType == 'bigru_embeddings')
     {
         var data_for_this_time = moba_bigru_embeddings_100_per_player[detector.getThreshold(time)][time];
+    }
+    else if (detector.detectorType == 'bigru_casing')
+    {
+        var data_for_this_time = moba_bigru_casing_100_per_player[detector.getThreshold(time)][time];
     }
 
     var player_names = Object.keys(data_for_this_time);
@@ -341,6 +358,12 @@ function updateGraphs()
             truePositiveData.push(moba_bigru_embeddings_100_tp[detector.getThreshold(currentTime)]);
             falsePositiveData.push(moba_bigru_embeddings_100_fp[detector.getThreshold(currentTime)]);
             fbetaData.push(moba_bigru_embeddings_100_fbeta[detector.getThreshold(currentTime)][beta]);
+        }
+        else if (detector.detectorType == 'bigru_casing')
+        {
+            truePositiveData.push(moba_bigru_casing_100_tp[detector.getThreshold(currentTime)]);
+            falsePositiveData.push(moba_bigru_casing_100_fp[detector.getThreshold(currentTime)]);
+            fbetaData.push(moba_bigru_casing_100_fbeta[detector.getThreshold(currentTime)][beta]);
         }
     }
 

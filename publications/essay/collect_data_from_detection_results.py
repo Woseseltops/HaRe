@@ -35,7 +35,8 @@ ESSAY_ROOT = HARE_ROOT+'publications/essay/'
 CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
 CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'moba_dic_100':[1,2,3,4,5,6,7,8,9,10],
                                               'moba_bigru_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'moba_bigru_embeddings_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+                                              'moba_bigru_embeddings_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'moba_bigru_casing_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
