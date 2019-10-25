@@ -14,12 +14,14 @@ moba_hare = Hare()
 for conversation in conversations:
     moba_hare.add_conversation(conversation)
 
-moba_hare.brain = BiGruBrain()
-moba_hare.brain.embedding_location = 'datasets/LoL/train_toxic_embeddings'
-moba_hare.brain.verbose = True
-moba_hare.brain.downsampling = True
-moba_hare.brain.learning_epochs = 10
-moba_hare.brain._max_sequence_length = 500
+brain = BiGruBrain()
+brain.embedding_location = 'datasets/LoL/train_toxic_embeddings'
+brain.verbose = True
+brain.downsampling = True
+brain.learning_epochs = 10
+brain._max_sequence_length = 500
+brain.include_casing = True
 
+moba_hare.brain = brain
 moba_hare.train()
-moba_hare.save('moba_bigru_embedding')
+moba_hare.save('moba_bigru_01')
