@@ -1,5 +1,6 @@
 from typing import List, Dict, Tuple, Optional, Any
 from os import mkdir
+from re import split
 from collections import Counter
 from numpy import array # type: ignore
 from hare.brain import AbstractBrain, UntrainedBrainError
@@ -24,6 +25,8 @@ class TensorFlowBrain(AbstractBrain):
 
         self.embedding_location : str = ''
 
+        self.include_casing_information = False
+
         self.learning_rate : float = 1e-3
         self.learning_epochs : int = 3
         self.learning_batch_size : int = 512
@@ -41,6 +44,23 @@ class TensorFlowBrain(AbstractBrain):
             raise UntrainedBrainError
 
         padded_vectors : array = sequence.pad_sequences(vectorized_texts, maxlen=self._max_sequence_length)
+
+        return padded_vectors
+
+    def texts_to_casing_information(self,texts : List[str]) -> array:
+
+        casing_vectors : List[List[float]] = []
+
+        for text in texts:
+
+            current_vector = []
+
+            for word in split(r' |!|"|#|\$|%|&|\(|\)|\*|\+|,|-|\.|/|:|;|<|=|>|\?|@|\[|\|\]|\^|_|`|{|\||}|~|\t|\n',text):
+                current_vector.append(sum([1 for letter in word if letter.isupper()])/len(word))
+
+            casing_vectors.append(current_vector)
+
+        padded_vectors : array = sequence.pad_sequences(casing_vectors, maxlen=self._max_sequence_length,dtype='float32')
 
         return padded_vectors
 
@@ -148,14 +168,19 @@ class TensorFlowBrain(AbstractBrain):
 
     def get_embeddings(self,limit : int = 1000) -> Tuple[List[str],List[List[float]]]:
 
-        if self.model != None:
+        if self.tokenizer is not None and self.model is not None:
             return list(self.tokenizer.word_index.keys())[:limit], self.model.layers[0].get_weights()[0][:limit]
+        else:
+            raise UntrainedBrainError
 
     def visualize_neuron_specializations(self,layer_index : int, texts : List[str], list_length : int = 5):
 
         from tensorflow.keras.models import Model
 
-        intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
+        if self.model is not None:
+            intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
+        else:
+            raise UntrainedBrainError
 
         word_scores_per_neuron : List[List[Tuple[str,float]]] = []
 
@@ -165,7 +190,10 @@ class TensorFlowBrain(AbstractBrain):
             for word_index, activations in zip(text, intermediate_output_model.predict(text)):
 
                 try:
-                    current_word : str = self.tokenizer.index_word[word_index]
+                    if self.tokenizer is not None:
+                        current_word : str = self.tokenizer.index_word[word_index]
+                    else:
+                        raise UntrainedBrainError
                 except KeyError:
                     continue
 
@@ -215,8 +243,8 @@ class BiGruBrain(TensorFlowBrain):
 
     def train(self, texts : List[str],target : List[int]) -> None:
 
-        from tensorflow.python.keras.models import Sequential #type: ignore
-        from tensorflow.python.keras.layers import Embedding, Dropout, GRU, Dense, Bidirectional, GlobalMaxPool1D #type: ignore
+        from tensorflow.python.keras.models import Model #type: ignore
+        from tensorflow.python.keras.layers import Input, Embedding, GRU, Dense, Bidirectional, GlobalMaxPool1D,concatenate #type: ignore
         from tensorflow.keras.optimizers import Adam #type: ignore
         from tensorflow.keras.callbacks import History #type: ignore
 
@@ -256,28 +284,39 @@ class BiGruBrain(TensorFlowBrain):
             print('4. Building up model')
 
         #Define a simple BiGru model with a pretrained embedding layer
-        model : Sequential = Sequential()
+        word_input : Input = Input(shape=(self._max_sequence_length,))
 
         if self.embedding_location == '':
             #Add an empty embedding layer if we have no pretrained embeddings
             EMPTY_EMBEDDING_LAYER_SIZE : int = 300
-            model.add(Embedding(len(vocabulary)+1,EMPTY_EMBEDDING_LAYER_SIZE))
+            layers = Embedding(len(vocabulary)+1,EMPTY_EMBEDDING_LAYER_SIZE)(word_input)
 
         else:
-            model.add(Embedding(input_dim=len(vocabulary)+1,
+            layers = Embedding(input_dim=len(vocabulary)+1,
                                output_dim=nr_of_embedding_features,
                                input_length=vectorized_texts.shape[1],
                                weights=[embedding_matrix],
-                               trainable=False))
+                               trainable=False)(word_input)
 
-        model.add(Bidirectional(GRU(16, activation='tanh', return_sequences=True)))
-        model.add(Bidirectional(GRU(16, activation='tanh', return_sequences=True)))
-        model.add(GlobalMaxPool1D())
+        #Add a separate 'entrance' for the casing information
+        if self.include_casing_information:
+            word_model = Model(inputs=word_input, outputs=layers)
 
-        model.add(Dense(256))
-        model.add(Dense(256))
+            casing_input = Input(shape=(self._max_sequence_length,))
 
-        model.add(Dense(1, activation='sigmoid'))
+            casing_model = Model(inputs=casing_input, outputs=casing_input)
+            layers = concatenate([word_model.output, casing_model.output])
+
+        layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
+        layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
+        layers = GlobalMaxPool1D()(layers)
+
+        layers = Dense(256)(layers)
+        layers = Dense(256)(layers)
+
+        layers = Dense(1, activation='sigmoid')(layers)
+
+        model = Model(word_input, layers)
 
         #Compile the model
         optimizer : Adam = Adam(lr=self.learning_rate)
