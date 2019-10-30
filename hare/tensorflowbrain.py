@@ -153,7 +153,7 @@ class TensorFlowBrain(AbstractBrain):
         #Save metadata
         metadata : Dict[str,Any] = {'brainType':self.brain_type,
                                     'maxSequenceLength':self._max_sequence_length,
-                                    'includeCasingInfomration':self.include_casing_information}
+                                    'includeCasingInformation':self.include_casing_information}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
