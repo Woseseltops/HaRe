@@ -16,7 +16,7 @@ for conversation in conversations:
     moba_hare.add_conversation(conversation)
 
 brain = BiGruBrain()
-##brain.embedding_location = DATA_ROOT+'train_toxic_embeddings'
+brain.embedding_location = DATA_ROOT+'train_toxic_embeddings'
 brain.verbose = True
 brain.downsampling = True
 brain.learning_epochs = 10
@@ -25,4 +25,4 @@ brain.include_casing_information = True
 
 moba_hare.brain = brain
 moba_hare.train()
-moba_hare.save('moba_bigru_01')
+moba_hare.save('m05')

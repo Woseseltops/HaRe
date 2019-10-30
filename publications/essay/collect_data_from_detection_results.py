@@ -33,10 +33,10 @@ HARE_ROOT = '/home/wessel/hare/'
 ESSAY_ROOT = HARE_ROOT+'publications/essay/'
 
 CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
-CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'moba_dic_100':[1,2,3,4,5,6,7,8,9,10],
-                                              'moba_bigru_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'moba_bigru_embeddings_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'moba_bigru_casing_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'m04_100':[1,2,3,4,5,6,7,8,9,10],
+                                              'm01_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'm02_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'm03_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
@@ -138,7 +138,7 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
             for b in BETA_VALUES:
                 fbeta[b].append(fbeta_score(true,predicted,b))
 
-        open(folder_name+'per_player.js','w').write(conv_hist_file+'_per_player['+str(threshold)+'] = '+dumps(per_player))
-        open(folder_name+'tp.js','w').write(conv_hist_file+'_tp['+str(threshold)+'] = '+dumps(tp))
-        open(folder_name+'fp.js','w').write(conv_hist_file+'_fp['+str(threshold)+'] = '+dumps(fp))
-        open(folder_name+'fbeta.js','w').write(conv_hist_file+'_fbeta['+str(threshold)+'] = '+dumps(fbeta))
+        open(folder_name+'per_player.js','w').write('bool_per_player["'+conv_hist_file+'"]['+str(threshold)+'] = '+dumps(per_player))
+        open(folder_name+'tp.js','w').write('tp["'+conv_hist_file+'"]['+str(threshold)+'] = '+dumps(tp))
+        open(folder_name+'fp.js','w').write('fp["'+conv_hist_file+'"]['+str(threshold)+'] = '+dumps(fp))
+        open(folder_name+'fbeta.js','w').write('fbeta["'+conv_hist_file+'"]['+str(threshold)+'] = '+dumps(fbeta))

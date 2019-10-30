@@ -8,10 +8,10 @@
 
 <div class="interactive_panel">
     <h2>1. Add one or more detectors</h2>
-    <button onclick="addDetector('dic')">Add word list based detector</button>
-    <button onclick="addDetector('bigru')">Add neural net detector</button>
-    <button onclick="addDetector('bigru_embeddings')">Add embeddings detector</button>
-    <button onclick="addDetector('bigru_casing')">Add casing detector</button>
+    <button onclick="addDetector(detectorTypes[0])">Add word list based detector</button>
+    <button onclick="addDetector(detectorTypes[1])">Add neural net detector</button>
+    <button onclick="addDetector(detectorTypes[2])">Add embeddings detector</button>
+    <button onclick="addDetector(detectorTypes[3])">Add casing detector</button>
     <div id="detectorArea"></div>
 
 
@@ -61,14 +61,37 @@ var loadJS = function(url, location)
     location.appendChild(scriptTag);
 };
 
+class DetectorType
+{
+	constructor(identifier,name,description,modelIdentifier,possibleThresholds)
+	{
+		this.identifier = identifier;
+		this.name = name;
+		this.description = description;
+		this.modelIdentifier = modelIdentifier;
+		this.possibleThresholds = possibleThresholds;
+	}	
+}
+
+class PrecalculatedResults
+{
+	constructor(tp,fp,fbeta,bool_per_player)
+	{
+		this.tp = tp;
+		this.fp = fp;
+		this.fbeta = fbeta;
+		this.bool_per_player = bool_per_player;
+	}	
+}
+
 class Detector
 {
-    constructor(detectorType,useSlidingThreshold,staticThresholds)
+    constructor(detectorType,useSlidingThreshold)
     {
         this.detectorType = detectorType;
         this.useSlidingThreshold = useSlidingThreshold;
 
-        this.staticThresholds = staticThresholds;
+        this.staticThresholds = detectorType.possibleThresholds;
 
         //If using the sliding threshold
         this.fscores = [];
@@ -127,71 +150,51 @@ class Detector
 var allDetectors = []
 var beta = 1;
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
-var thresholdsPerDetectorType = {'dic':[1,2,3,4,5,6,7,8,9,10],
-                                    'bigru':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                    'bigru_embeddings':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                    'bigru_casing':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+var detectorTypes = [new DetectorType('dic','Word list detector','This is a description','m04',[1,2,3,4,5,6,7,8,9,10]),
+					 new DetectorType('bigru','Neural network detector','This is a description','m03',[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]),
+					 new DetectorType('bigru_embeddings','Embeddings detector','This is a description','m02',[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]),
+					 new DetectorType('bigru_casing','Casing detector','This is a description','m01',[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1])]
 
 var currentTime = 0;
 var currentlySelectedDetectorIndex = 0;
 
 //Load all precalculated data
 loadJS('precalculated_data/target.js', document.body);
+var precalculatedResultsPerDetectorType = {};
 
-var moba_dic_100_tp = [];
-var moba_dic_100_fp = [];
-var moba_dic_100_fbeta = {};
-var moba_dic_100_per_player = {};
+var tp = {};
+var fp = {};
+var fbeta = {};
+var bool_per_player = {};
 
-var moba_bigru_100_tp = [];
-var moba_bigru_100_fp = [];
-var moba_bigru_100_fbeta = {};
-var moba_bigru_100_per_player = {};
-
-var moba_bigru_embeddings_100_tp = [];
-var moba_bigru_embeddings_100_fp = [];
-var moba_bigru_embeddings_100_fbeta = {};
-var moba_bigru_embeddings_100_per_player = {};
-
-var moba_bigru_casing_100_tp = [];
-var moba_bigru_casing_100_fp = [];
-var moba_bigru_casing_100_fbeta = {};
-var moba_bigru_casing_100_per_player = {};
-
-for (var [detectorType,thresholds] of Object.entries(thresholdsPerDetectorType))
+for (var detectorType of detectorTypes)
 {
-    for (var threshold of thresholds)
+    tp[detectorType.modelIdentifier+'_100'] = {};
+    fp[detectorType.modelIdentifier+'_100'] = {};
+    fbeta[detectorType.modelIdentifier+'_100'] = {};
+    bool_per_player[detectorType.modelIdentifier+'_100'] = {};
+
+    for (var threshold of detectorType.possibleThresholds)
     {
         for (var metric of ['tp','fp','fbeta','per_player'])
         {
-            loadJS('precalculated_data/moba_'+detectorType+'_100@'+threshold+'/'+metric+'.js',document.body);
+            loadJS('precalculated_data/'+detectorType.modelIdentifier+'_100@'+threshold+'/'+metric+'.js',document.body);
         }
     }
+
+    precalculatedResultsPerDetectorType[detectorType.identifier] = new PrecalculatedResults(tp[detectorType.modelIdentifier+'_100'],
+                                                                                 fp[detectorType.modelIdentifier+'_100'],
+                                                                                 fbeta[detectorType.modelIdentifier+'_100'],
+                                                                                 bool_per_player[detectorType.modelIdentifier+'_100']);
 }
+
+console.log(precalculatedResultsPerDetectorType)
 
 //What happens when you push buttons
 function addDetector(detectorType)
 {
-    var detector = new Detector(detectorType,false,thresholdsPerDetectorType[detectorType]);
-    //var detector = new Detector(detectorType,true,thresholdsPerDetectorType[detectorType]);
-
-    if (detectorType == 'dic')
-    {
-        detector.fscores = moba_dic_100_fbeta;
-    }
-    else if (detectorType == 'bigru')
-    {
-        detector.fscores = moba_bigru_100_fbeta;
-    }
-    else if (detectorType == 'bigru_embeddings')
-    {
-        detector.fscores = moba_bigru_embeddings_100_fbeta;
-    }
-    else if (detectorType == 'bigru_casing')
-    {
-        detector.fscores = moba_bigru_casing_100_fbeta;
-    }
-
+    var detector = new Detector(detectorType,false);
+    detector.fscores = precalculatedResultsPerDetectorType[detectorType.identifier].fbeta;
     allDetectors.push(detector);
 
     updateDetectorArea();
@@ -230,18 +233,14 @@ function moveFbetaSlider(beta_index)
 
 function updateDetectorArea()
 {
-    var detectorTemplates = {'dic':'<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">Word list detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                              'bigru':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Neural net detector</div><div class="detectorDescription">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                            'bigru_embeddings':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Embeddings detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>',
-                            'bigru_casing':'<div class="detector detector_{{ index }}" detectorIndex="{{ index }}"><div class="detectorTitle">Casing detector</div><div class="detectorDescription" detectorIndex="{{ index }}">This is a description</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>'
-                              };
+	var detectorHTMLTemplate = '<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">{{ name }}</div><div class="detectorDescription">{{ description }}</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>';
 
     var detectorAreaHTML = '';
 
     for (detectorIndex in allDetectors)
     {
         var detector = allDetectors[detectorIndex];
-        detectorAreaHTML += detectorTemplates[detector.detectorType].replace(/{{ threshold }}/g,detector.getThreshold(currentTime)).replace(/{{ index }}/g,detectorIndex);
+        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,detector.getThreshold(currentTime)).replace(/{{ index }}/g,detectorIndex).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description);
     }
 
     document.getElementById('detectorArea').innerHTML = detectorAreaHTML;
@@ -267,24 +266,8 @@ function updateDetectorArea()
 function updatePlayerVisualizations(time,detectorIndex)
 {
     var detector = allDetectors[detectorIndex];
-
-    if (detector.detectorType == 'dic')
-    {
-        var data_for_this_time = moba_dic_100_per_player[detector.getThreshold(time)][time];
-    }
-    else if (detector.detectorType == 'bigru')
-    {
-        var data_for_this_time = moba_bigru_100_per_player[detector.getThreshold(time)][time];
-    }
-    else if (detector.detectorType == 'bigru_embeddings')
-    {
-        var data_for_this_time = moba_bigru_embeddings_100_per_player[detector.getThreshold(time)][time];
-    }
-    else if (detector.detectorType == 'bigru_casing')
-    {
-        var data_for_this_time = moba_bigru_casing_100_per_player[detector.getThreshold(time)][time];
-    }
-
+    var precalculatedResults = precalculatedResultsPerDetectorType[detector.detectorType.identifier];
+    var data_for_this_time = precalculatedResults.bool_per_player[detector.getThreshold(time)][time];
     var player_names = Object.keys(data_for_this_time);
     player_names.sort();
 
@@ -340,31 +323,11 @@ function updateGraphs()
     for (var detector_index in allDetectors)
     {
         var detector = allDetectors[detector_index];
+        var precalculatedResults = precalculatedResultsPerDetectorType[detector.detectorType.identifier];
 
-        if (detector.detectorType == 'dic')
-        {
-            truePositiveData.push(moba_dic_100_tp[detector.getThreshold(currentTime)]);
-            falsePositiveData.push(moba_dic_100_fp[detector.getThreshold(currentTime)]);
-            fbetaData.push(moba_dic_100_fbeta[detector.getThreshold(currentTime)][beta]);
-        }
-        else if (detector.detectorType == 'bigru')
-        {
-            truePositiveData.push(moba_bigru_100_tp[detector.getThreshold(currentTime)]);
-            falsePositiveData.push(moba_bigru_100_fp[detector.getThreshold(currentTime)]);
-            fbetaData.push(moba_bigru_100_fbeta[detector.getThreshold(currentTime)][beta]);
-        }
-        else if (detector.detectorType == 'bigru_embeddings')
-        {
-            truePositiveData.push(moba_bigru_embeddings_100_tp[detector.getThreshold(currentTime)]);
-            falsePositiveData.push(moba_bigru_embeddings_100_fp[detector.getThreshold(currentTime)]);
-            fbetaData.push(moba_bigru_embeddings_100_fbeta[detector.getThreshold(currentTime)][beta]);
-        }
-        else if (detector.detectorType == 'bigru_casing')
-        {
-            truePositiveData.push(moba_bigru_casing_100_tp[detector.getThreshold(currentTime)]);
-            falsePositiveData.push(moba_bigru_casing_100_fp[detector.getThreshold(currentTime)]);
-            fbetaData.push(moba_bigru_casing_100_fbeta[detector.getThreshold(currentTime)][beta]);
-        }
+        truePositiveData.push(precalculatedResults.tp[detector.getThreshold(currentTime)]);
+        falsePositiveData.push(precalculatedResults.fp[detector.getThreshold(currentTime)]);
+        fbetaData.push(precalculatedResults.fbeta[detector.getThreshold(currentTime)][beta]);
     }
 
    drawGraph(document.getElementById('true_positives'),truePositiveData,10,currentTime);

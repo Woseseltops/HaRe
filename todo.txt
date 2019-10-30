@@ -1,18 +1,5 @@
 TODO
 ====
-* Restructure models
-  * Make overview: numbers with descriptions. _01 = casing
-  * collect_data_from_detection_results works with the numbers
-  * essay.html works with the numbers
-  * take into account difference between model and result file
-
-* Refactor model defs in Javascript:
-  * detector template could be more convenient
-  * Two or three other locations where models are defined... couldn't this be all at the same place?
-
-* Develop: sliding threshold option for detectors
-  * Better indicate by hand, threshold doesn't go straight up
-
 * Experiment: can we get better results with casing?
   * Start of the option was added but untested
   * Processing of input text and multiple inputs to the network to be added
