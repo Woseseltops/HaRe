@@ -26,6 +26,7 @@ class TensorFlowBrain(AbstractBrain):
         self.embedding_location : str = ''
 
         self.include_casing_information = False
+        self.bidirectional = True
 
         self.learning_rate : float = 1e-3
         self.learning_epochs : int = 3
@@ -153,7 +154,8 @@ class TensorFlowBrain(AbstractBrain):
         #Save metadata
         metadata : Dict[str,Any] = {'brainType':self.brain_type,
                                     'maxSequenceLength':self._max_sequence_length,
-                                    'includeCasingInformation':self.include_casing_information}
+                                    'includeCasingInformation':self.include_casing_information,
+                                    'bidirectional':self.bidirectional}
         json.dump(metadata,open(location+'metadata.json','w'))
 
         #Save tokenizer
@@ -327,8 +329,13 @@ class BiGruBrain(TensorFlowBrain):
             casing_model : Model = Model(inputs=casing_input, outputs=casing_input)
             layers = concatenate([word_model.output, casing_model.output])
 
-        layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
-        layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
+        if self.bidirectional:
+            layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
+            layers = Bidirectional(GRU(16, activation='tanh', return_sequences=True))(layers)
+        else:
+            layers = GRU(16, activation='tanh', return_sequences=True)(layers)
+            layers = GRU(16, activation='tanh', return_sequences=True)(layers)
+
         layers = GlobalMaxPool1D()(layers)
 
         layers = Dense(256)(layers)

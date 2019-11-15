@@ -375,6 +375,9 @@ def load_pretrained(location : str) -> Hare:
     if 'includeCasingInformation' in settings:
         brain.include_casing_information = settings['includeCasingInformation']
 
+    if 'bidirectional' in settings:
+        brain.bidirectional = settings['bidirectional']
+
     hare : Hare = Hare()
     hare.brain = brain
 
