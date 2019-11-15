@@ -10,8 +10,8 @@ print('Importing conversations')
 conversations = import_conversations(CONVERSATIONS_FILE)
 
 print('Loading pretrained model')
-exp_hare = load_pretrained(ROOT+'hare/pretrained/moba_bigru_01')
-result_file = open('results/small_experiments/moba_bigru_01','w')
+exp_hare = load_pretrained(ROOT+'hare/pretrained/m06')
+result_file = open('results/small_experiments/m06_100','w')
 
 for n, conversation in enumerate(conversations[:100]):
 

@@ -1,15 +1,9 @@
 TODO
 ====
-* Experiment: can we get better results with casing?
-  * Start of the option was added but untested
-  * Processing of input text and multiple inputs to the network to be added
-
-* Experiment: can we remove the Bi of BiGru?
-* Think/design: can we make the 'add detectors' part more guided/static?
-  * Perhaps make it free in the final visualization
-
-After the experimental part is clear:
+Continue article development
 * Develop: find conversations with clearest effects
+  * For all conversations and a list of detectors, see if there are results missing... if so create them
+  * For all conversations and a list of detectors, calculate the F-score at 3 points in the conversation and store with tabs between them
 * Think/design: visualize neurons
   * I'm hoping for a casing detector
   * I'm hoping for similar words in one detector if I can use the detector

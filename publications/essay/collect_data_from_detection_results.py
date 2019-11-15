@@ -4,6 +4,7 @@ from hare.conversation import import_conversations
 from sklearn.metrics import fbeta_score
 
 from os import mkdir
+from os.path import isdir
 from shutil import rmtree
 from json import loads, dumps
 from random import shuffle
@@ -36,7 +37,11 @@ CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
 CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'m04_100':[1,2,3,4,5,6,7,8,9,10],
                                               'm01_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
                                               'm02_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'm03_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1]}
+                                              'm03_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'm05_100': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
+                                                          0.25, 0.5, 0.75, 1],
+                                              'm06_100': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
+                                                          0.25, 0.5, 0.75, 1]}
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
@@ -87,10 +92,11 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
         detector_name = conv_hist_file+'@'+str(threshold)
         folder_name = OUTPUT_FOLDER+detector_name+'/'
 
-        try:
-            rmtree(folder_name)
-        except FileNotFoundError:
-            pass
+        if isdir(folder_name):
+            print('skipping',folder_name)
+            continue
+        else:
+            print('doing',folder_name)
 
         mkdir(folder_name)
 
