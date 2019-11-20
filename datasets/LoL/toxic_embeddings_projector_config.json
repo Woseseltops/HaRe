@@ -1,0 +1,13 @@
+{
+  "embeddings": [
+    {
+      "tensorName": "Toxic embeddings",
+      "tensorShape": [
+        998,
+        100
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/Woseseltops/HaRe/master/datasets/LoL/toxic_embeddings_for_visualizer.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/Woseseltops/HaRe/master/datasets/LoL/toxic_labels_for_visualizer.tsv"
+    }
+  ]
+}
