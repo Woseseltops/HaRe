@@ -3,25 +3,24 @@ from hare.conversation import import_conversations
 from json import loads
 from sklearn.metrics import fbeta_score
 
-def find_optimal_conversation(all_scores):
+def find_optimal_conversation(main_detector,other_detector,all_scores):
 
-    DETECTOR = 'm02'
+    best_conversations_per_threshold = {}
 
-    best_score_per_conversation = []
+    for threshold, scores_per_threshold in all_scores[main_detector].items():
 
-    for threshold, scores_per_threshold in all_scores[DETECTOR].items():
+        best_conversations_per_threshold[threshold] = []
+
         for convo_index, conversation_scores in enumerate(scores_per_threshold):
-            cumulative_score = sum(conversation_scores)
 
-            try:
-                if cumulative_score > best_score_per_conversation[convo_index]['cumulative_score']:
-                    best_score_per_conversation[convo_index] = {'cumulative_score':cumulative_score,'threshold':threshold,'index':convo_index}
-            except IndexError:
-                best_score_per_conversation.append({'cumulative_score':cumulative_score,'threshold':threshold,'index':convo_index})
+            cumulative_score_main = sum(conversation_scores)
+            all_scores_other_detector = [sum(all_scores[other_detector][t][convo_index]) for t in range(1,10)]
 
-    best_score_per_conversation = sorted(best_score_per_conversation,reverse=True,key= lambda x: x['cumulative_score'])
+            best_conversations_per_threshold[threshold].append({'cumulative_score':cumulative_score_main,'cumulative_other_score':max(all_scores_other_detector),'convo_index':convo_index})
 
-    return best_score_per_conversation
+        best_conversations_per_threshold[threshold] = sorted(best_conversations_per_threshold[threshold],reverse=True,key= lambda x: x['cumulative_score']-x['cumulative_other_score'])
+
+    return best_conversations_per_threshold
 
 ROOT = '../../'
 CONVERSATION_HISTORY_FOLDER = 'results/full_results/'
@@ -30,7 +29,7 @@ CONVERSATION_LENGTH = 200
 PRINT_OUTPUT = False
 
 INTERESTING_POINTS_IN_CONVERSATION = [10,50,100,150]
-DETECTOR_THRESHOLDS = {'m02':[0.001,0.01,0.05,0.075,0.1,0.25,0.5,1]}
+DETECTOR_THRESHOLDS = {'m02':[0.001,0.01,0.05,0.075,0.1,0.25,0.5,1],'m04':[1,2,3,4,5,6,7,8,9,10]}
 open_conversation_history_files = {}
 all_scores = {}
 
@@ -72,13 +71,13 @@ for convo_index, conversation in enumerate(conversations):
 
             all_scores[detector][threshold].append(scores_for_this_conversation[-len(INTERESTING_POINTS_IN_CONVERSATION):])
 
-
-    if convo_index == 0 and PRINT_OUTPUT:
-        print('convo_id',' '.join(headers))
-
     if PRINT_OUTPUT:
+
+        if convo_index == 0 and PRINT_OUTPUT:
+            print('convo_id',' '.join(headers))
+
         print(convo_index,' '.join([str(s) for s in scores_for_this_conversation]))
 
-    if convo_index%100 == 0:
+    if convo_index > 0 and convo_index%100 == 0:
         print(convo_index)
-        find_optimal_conversation(all_scores)
+        find_optimal_conversation('m02','m04',all_scores)

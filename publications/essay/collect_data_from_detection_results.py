@@ -30,29 +30,29 @@ def false_positives(true, predicted):
     return result
 
 #General settings
-HARE_ROOT = '/home/wessel/hare/'
+HARE_ROOT = '../../'
 ESSAY_ROOT = HARE_ROOT+'publications/essay/'
 
-CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/small_experiments/'
-CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'m04_100':[1,2,3,4,5,6,7,8,9,10],
-                                              'm01_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'm02_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'm03_100':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
-                                              'm05_100': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
+CONV_HISTORY_FOLDER = ESSAY_ROOT+'results/full_results/'
+CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS = {'m04':[1,2,3,4,5,6,7,8,9,10],
+                                              'm01':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'm02':[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1],
+                                              'm05': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
                                                           0.25, 0.5, 0.75, 1],
-                                              'm06_100': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
+                                              'm06': [0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1,
                                                           0.25, 0.5, 0.75, 1]}
 
 BETA_VALUES = [0.001,0.01,0.1,1,10,100,1000]
 
 CONVERSATIONS_FILE = HARE_ROOT+'datasets/LoL/heldout_conversations_anon.txt'
 CONVERSATION_LENGTH = 200
-NR_OF_CONVERSATIONS = 10
+IDS_OF_CONVERSATIONS = [349,222,420,666,856,763,284,614,380,625]
 
 OUTPUT_FOLDER = ESSAY_ROOT+'precalculated_data/'
 
 #From all heldout conversations, load the first 10
-conversations = import_conversations(CONVERSATIONS_FILE, cutoff_point=CONVERSATION_LENGTH)[:NR_OF_CONVERSATIONS]
+all_conversations = import_conversations(CONVERSATIONS_FILE, cutoff_point=CONVERSATION_LENGTH)
+conversations = [all_conversations[i] for i in IDS_OF_CONVERSATIONS]
 
 #Cut away utterances by some speakers
 
@@ -63,7 +63,7 @@ for conversation in conversations:
 
     speakers = list(conversation.all_speakers)
     activity_per_speaker = conversation.calculate_activity_per_speaker()
-    speakers.sort(key=lambda x: activity_per_speaker[x],reverse=True)
+    shuffle(speakers)
     aliases_per_conversation.append({speaker:speaker_index for speaker_index, speaker in enumerate(speakers)})
     temp = 0
 
@@ -76,11 +76,9 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
     #For each conversation, read the status at every point during the conversation
     status_per_conversation = []
 
-    for n, line in enumerate(open(CONV_HISTORY_FOLDER+conv_hist_file)):
-        if n == NR_OF_CONVERSATIONS:
-            break
-
-        status_per_conversation.append(loads(line))
+    lines = open(CONV_HISTORY_FOLDER+conv_hist_file).readlines()
+    for conv_index in IDS_OF_CONVERSATIONS:
+        status_per_conversation.append(loads(lines[conv_index]))
 
     #Cut away utterances by some speakers
 
@@ -117,7 +115,7 @@ for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.ite
 
             state_per_player = {}
 
-            for conversation_index in range(NR_OF_CONVERSATIONS):
+            for conversation_index in range(len(IDS_OF_CONVERSATIONS)):
 
                 try:
                     current_status = h.status_per_conversation[conversation_index][utterance_index]
