@@ -1,3 +1,5 @@
+Using neural networks to detect online harassment
+
 Digital harassment is a problem in many corners of the internet. According to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.
 
 The best solution to this problem might be to use human moderators that read everything take action when somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, the game League of Legends has been called "[x]". This is a typical conversation from the game:
