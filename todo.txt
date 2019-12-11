@@ -4,10 +4,13 @@ Continue article development
 * Develop: find conversations with clearest effects
   * For all conversations and a list of detectors, see if there are results missing... if so create them
   * For all conversations and a list of detectors, calculate the F-score at 3 points in the conversation and store with tabs between them
-* Think/design: visualize neurons
+* Developer: visualize neurons
   * I'm hoping for a casing detector
-  * I'm hoping for similar words in one detector if I can use the detector
-
+  * I'm hoping for similar words in one detector
+  * visualize_neuron_specializations: alle soorten modellen accepteren
+    * https://twitter.com/realdonaldtrump/status/640131477179645952
+    * https://twitter.com/realdonaldtrump/status/630901938608017413
+    
 Code
 * Fix type hinting
 * Visualize module: too much duplicate code

@@ -21,8 +21,9 @@ brain.verbose = True
 brain.downsampling = True
 brain.learning_epochs = 10
 brain._max_sequence_length = 500
-brain.include_casing_information = True
+brain.include_casing_information = False
+brain.bidirectional = False
 
 moba_hare.brain = brain
 moba_hare.train()
-moba_hare.save('m05')
+moba_hare.save('m06')
