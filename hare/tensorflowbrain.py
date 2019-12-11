@@ -196,6 +196,8 @@ class TensorFlowBrain(AbstractBrain):
 
         from tensorflow.keras.models import Model
 
+        VISUALIZE : bool = False
+
         if self.model is not None:
             intermediate_output_model : Model = Model(inputs=self.model.input, outputs=self.model.layers[layer_index].output)
         else:
@@ -206,7 +208,9 @@ class TensorFlowBrain(AbstractBrain):
         #For now only processes the first text
         for text in self.vectorize_texts(texts):
 
-            for word_index, activations in zip(text, intermediate_output_model.predict(text)):
+            text = array([text])
+
+            for word_index, activations in zip(text[0], intermediate_output_model.predict(text)[0]):
 
                 try:
                     if self.tokenizer is not None:
@@ -216,42 +220,46 @@ class TensorFlowBrain(AbstractBrain):
                 except KeyError:
                     continue
 
-                for neuron_index, neuron_activation in enumerate(activations[0]):
+                for neuron_index, neuron_activation in enumerate(activations):
 
                     if len(word_scores_per_neuron) <= neuron_index:
                         word_scores_per_neuron.append([])
 
                     word_scores_per_neuron[neuron_index].append((current_word,neuron_activation))
 
-        for neuron_scores in word_scores_per_neuron:
+        if VISUALIZE: #This should be moved elsewhere
 
-            sorted_words : List[Tuple[str,float]] = sorted(neuron_scores,key=lambda x:x[1])
+            for neuron_scores in word_scores_per_neuron:
 
-            lowest_words : List[str] = []
-            highest_words: List[str] = []
+                sorted_words : List[Tuple[str,float]] = sorted(neuron_scores,key=lambda x:x[1])
 
-            for word,activation in sorted_words:
-                lowest_words.append(word)
+                lowest_words : List[str] = []
+                highest_words: List[str] = []
 
-                if len(set(lowest_words)) > list_length:
-                    break
+                for word,activation in sorted_words:
+                    lowest_words.append(word)
 
-            for word, activation in reversed(sorted_words):
-                highest_words.append(word)
+                    if len(set(lowest_words)) > list_length:
+                        break
 
-                if len(set(highest_words)) > list_length:
-                    break
+                for word, activation in reversed(sorted_words):
+                    highest_words.append(word)
 
-            low_word_str = ''
-            high_word_str = ''
+                    if len(set(highest_words)) > list_length:
+                        break
 
-            for word in set(lowest_words):
-                low_word_str += word + ' (' + str(lowest_words.count(word)) + ')\t'
+                low_word_str = ''
+                high_word_str = ''
 
-            for word in set(highest_words):
-                high_word_str += word + ' (' + str(highest_words.count(word)) + ')\t'
+                for word in set(lowest_words):
+                    low_word_str += word + ' (' + str(lowest_words.count(word)) + ')\t'
 
-            print(low_word_str+'\t-\t'+high_word_str)
+                for word in set(highest_words):
+                    high_word_str += word + ' (' + str(highest_words.count(word)) + ')\t'
+
+                print(low_word_str+'\t-\t'+high_word_str)
+
+        return word_scores_per_neuron
 
 class BiGruBrain(TensorFlowBrain):
 

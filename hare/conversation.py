@@ -63,6 +63,10 @@ class Conversation():
         nr_of_utterances : int = len(self.utterances)
         return {speaker: freq/nr_of_utterances for speaker,freq in Counter([utterance.speaker for utterance in self.utterances]).most_common()}
 
+    def as_single_str(self,separator : str = 'LINEBREAK'):
+        separator : str = ' ' + separator + ' '
+        return separator.join([utterance.content for utterance in self.utterances])
+
     def __len__(self) -> int:
         return len(self.utterances)
 
