@@ -186,10 +186,7 @@ for (var detectorType of detectorTypes)
         }
     }
 
-    precalculatedResultsPerDetectorType[detectorType.identifier] = new PrecalculatedResults(tp[detectorType.modelIdentifier],
-                                                                                 fp[detectorType.modelIdentifier],
-                                                                                 fbeta[detectorType.modelIdentifier],
-                                                                                 bool_per_player[detectorType.modelIdentifier]);
+    precalculatedResultsPerDetectorType[detectorType.identifier] = new PrecalculatedResults(tp[detectorType.modelIdentifier],fp[detectorType.modelIdentifier],fbeta[detectorType.modelIdentifier],bool_per_player[detectorType.modelIdentifier]);
 }
 
 console.log(precalculatedResultsPerDetectorType)

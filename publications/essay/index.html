@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Catching cyberbullies in the act with neural networks</title>
+<script src="js/detector_visualization.js"></script>
+</head>
+<body>
+
+<h1>Catching cyberbullies in the act with neural networks</h1>
+
+<p>This is the first paragraph.</p>
+
+<p>Digital harassment is a problem in many corners of the internet. According to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
+
+<div id="dictionary_detectors"></div>
+<div id="neural_detectors"></div>
+<div id="playground"></div>
+
+<script>
+loadPrecalculatedData(function()
+{
+	var element = document.getElementById('dictionary_detectors');
+	var detectors = [['dic',1],['dic',3],['dic',5]];
+	initializeDetectorVisualization(element,'dictionary_detectors',detectors,false);
+
+	element = document.getElementById('neural_detectors');
+	detectors = [['dic',5],['bigru_embeddings',0.01],['bigru_embeddings',0.1],['bigru_embeddings',0.5]];
+	initializeDetectorVisualization(element,'neural_detectors',detectors,false);
+
+	element = document.getElementById('playground');
+	detectors = [];
+	initializeDetectorVisualization(element,'playground',detectors,true);
+});
+</script>
+
+</body>
+</html>
