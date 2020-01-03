@@ -58,17 +58,34 @@ conversations = [all_conversations[i] for i in IDS_OF_CONVERSATIONS]
 
 # Come up with speakers aliases (artistic effect to have toxic players at random positions)
 aliases_per_conversation = []
+who_is_speaking_per_conversation = []
 
 for conversation in conversations:
 
     speakers = list(conversation.all_speakers)
     activity_per_speaker = conversation.calculate_activity_per_speaker()
     shuffle(speakers)
-    aliases_per_conversation.append({speaker:speaker_index for speaker_index, speaker in enumerate(speakers)})
+    current_aliases = {speaker:speaker_index for speaker_index, speaker in enumerate(speakers)}
+    current_who_is_speaking = []
+    for utterance in conversation.utterances:
+
+        speaker_alias = current_aliases[utterance.speaker]
+
+        if speaker_alias > 9:
+            speaker_alias -= 9
+
+        current_who_is_speaking.append(speaker_alias)
+
+    aliases_per_conversation.append(current_aliases)
+    who_is_speaking_per_conversation.append(current_who_is_speaking)
+
     temp = 0
 
 #Save the true target data
 open(OUTPUT_FOLDER+'target.js','w').write('var target = '+dumps([aliases['TOXIC'] for aliases in aliases_per_conversation]))
+
+#Save who is speaking
+open(OUTPUT_FOLDER+'who_is_speaking.js','w').write('var who_is_speaking = '+dumps(who_is_speaking_per_conversation))
 
 #Go through all detectors, with all thresholds
 for conv_hist_file, thresholds in CONVERSATION_HISTORY_FILES_WITH_THRESHOLDS.items():

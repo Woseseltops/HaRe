@@ -1,21 +1,25 @@
 //The main function
 function initializeDetectorVisualization(element,identifier,detectors,adding_detectors_allowed)
 {
-    var vis_template = `<h3>The detectors</h3>
+    var vis_template = `<div class="interactive_panel"><h3>The detectors</h3>
     <div class="detectorArea"></div>
     <h3>The example conversations</h3>
-    <input class="time_slider" name="time_slider" type="range" min="0" max="199" value="0">
+    <div class="slider_area">
+    	<div>First message</div>
+	    <input class="time_slider" name="time_slider" type="range" min="0" max="199" value="0">
+	    <div>Last message</div>
+    </div>
     <table class="individual_player_visualizations">
-        <tr><td>Game 1</td><td><img src="svg/fn.svg"></td><td><img src="svg/fp.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 2</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 3</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 4</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 5</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 6</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 7</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 8</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 9</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
-        <tr><td>Game 10</td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td><td><img src="svg/tn.svg"></td></tr>
+        <tr><td>Game 1</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 2</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 3</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 4</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 5</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 6</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 7</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 8</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 9</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
+        <tr><td>Game 10</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
     </table>
 
     <h3>The evaluation</h2>
@@ -100,7 +104,7 @@ class DetectorVisualization
 	        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,detector.getThreshold(this.currentTime)).replace(/{{ index }}/g,detectorIndex).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description);
 	    }
 
-	    this.mainElement.getElementsByClassName('detectorArea')[0].innerHTML = detectorAreaHTML;
+	    this.mainElement.getElementsByClassName('detectorArea')[0].innerHTML = detectorAreaHTML +  '<br style="clear: left;" />';
 
 	    var allDetectorElements = this.mainElement.getElementsByClassName('detector');
 	    for (var elem of allDetectorElements)
@@ -146,26 +150,33 @@ class DetectorVisualization
 	            continue;
 	        }
 
+	        var speaking = 'quiet';
+
+	        if (who_is_speaking[conversation_index][time] == player_name)
+	        {
+	        	speaking = 'speaking';
+	        }
+
 	        if (target[conversation_index] == player_name)
 	        {
 	            if (data_for_this_time[player_names[player_index]])
 	            {
-	                img_elem.src = 'svg/tp.svg';
+	                img_elem.src = 'svg/tp_'+speaking+'.svg';
 	            }
 	            else
 	            {
-	                img_elem.src = 'svg/fn.svg';
+	                img_elem.src = 'svg/fn_'+speaking+'.svg';
 	            }
 	        }
 	        else
 	        {
 	            if (data_for_this_time[player_names[player_index]])
 	            {
-	                img_elem.src = 'svg/fp.svg';
+	                img_elem.src = 'svg/fp_'+speaking+'.svg';
 	            }
 	            else
 	            {
-	                img_elem.src = 'svg/tn.svg';
+	                img_elem.src = 'svg/tn_'+speaking+'.svg';
 	            }
 	        }
 	    }
@@ -335,6 +346,11 @@ function loadPrecalculatedData(successFunction)
 	            		nrOfExternalDataScriptsLoaded++;
 	            	});
 
+	loadJS('precalculated_data/who_is_speaking.js', document.body, function()
+	            	{
+	            		nrOfExternalDataScriptsLoaded++;
+	            	});
+
 	for (var detectorTypeName in detectorTypes)
 	{
 		var detectorType = detectorTypes[detectorTypeName];
@@ -352,7 +368,7 @@ function loadPrecalculatedData(successFunction)
             	{
             		nrOfExternalDataScriptsLoaded++;
 
-            		if (nrOfExternalDataScriptsLoaded == 93)
+            		if (nrOfExternalDataScriptsLoaded == 94)
             		{
             			successFunction();
             		}

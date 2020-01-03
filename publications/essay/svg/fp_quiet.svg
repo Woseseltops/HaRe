@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="20.829069mm"
-   height="20.987139mm"
+   width="73.803787"
+   height="74.363876"
    viewBox="0 0 73.803789 74.363877"
    id="svg5126"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="fp.svg">
+   sodipodi:docname="fp_quiet.svg">
   <defs
      id="defs5128" />
   <sodipodi:namedview
@@ -39,7 +39,8 @@
      inkscape:window-height="1026"
      inkscape:window-x="1745"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata5131">
     <rdf:RDF>
@@ -56,7 +57,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-78.793519,-212.21957)">
+     transform="translate(-78.793519,-212.21956)">
     <circle
        style="fill:#4eb44b;fill-opacity:1;fill-rule:evenodd;stroke:#337731;stroke-width:4.19999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path3336-626-9-2-6"
