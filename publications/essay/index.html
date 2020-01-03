@@ -2,18 +2,21 @@
 <head>
 <title>Catching cyberbullies in the act with neural networks</title>
 <script src="js/detector_visualization.js"></script>
-</head>
+<link rel="stylesheet" href="style.css"></head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap" rel="stylesheet">
 <body>
 
 <h1>Catching cyberbullies in the act with neural networks</h1>
 
-<p>This is the first paragraph.</p>
+<div class="main">
+	<p class="lead">Digital harassment is a problem in many corners of the internet. In this article you can play with techniques to automatically detect bad actors, preferably as early in the conversation as possible. We will see that neural networks work better than simple words lists, but also that they are black boxes; we attempt to give you some insights into what the various parts of the network use to come to their decisions.</p>
 
-<p>Digital harassment is a problem in many corners of the internet. According to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
+	<p><span id="first_character">A</span>ccording to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
 
-<div id="dictionary_detectors"></div>
-<div id="neural_detectors"></div>
-<div id="playground"></div>
+	<div id="dictionary_detectors"></div>
+	<div id="neural_detectors"></div>
+	<div id="playground"></div>
+</div>
 
 <script>
 loadPrecalculatedData(function()

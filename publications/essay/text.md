@@ -10,7 +10,7 @@ For this article, we will therefore use a dataset of conversations from this gam
 
 [first interaction]
 
-[As you can see, the detector with the low threshold detects all toxic players already halfway during the game, but has lots of false positives] .
+[As you can see, the detector with the low threshold detects all toxic players already halfway during the game, but has lots of false positives]. [Another thing you might have noticed is that the average toxic player speaks a lot more than the other players... this is also something that is not picked up with a simple word list based approach.]
 
 A better solution might be to use machine learning: we give thousands of examples of conversations with toxic players to a training algorithm and ask it to figure out how to recognize harassment by itself. The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together are also closer in meaning.
 
