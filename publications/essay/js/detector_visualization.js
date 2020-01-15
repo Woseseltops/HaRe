@@ -1,7 +1,7 @@
 //The main function
 function initializeDetectorVisualization(element,identifier,detectors,adding_detectors_allowed)
 {
-    var vis_template = `<div class="interactive_panel"><h3>The detectors</h3>
+    var vis_template = `<div class="interactive_panel detector_panel"><h3>The detectors</h3>
     <div class="detectorArea"></div>
     <h3>The example conversations</h3>
     <div class="slider_area">

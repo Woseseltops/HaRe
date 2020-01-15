@@ -15,6 +15,11 @@ p
     margin-top: 45px;
 }
 
+td
+{
+    padding: 6px;
+}
+
 .main
 {
     width: 800px;
@@ -29,11 +34,16 @@ p
 
 .interactive_panel
 {
-    width: 600px;
-    height: 1000px;
-    background-color: hsl(0, 0%, 90%);
-    padding: 65px;
+    padding: 20px;
+    width: 610px;
+    background-color: hsl(0, 0%, 95%);
     border-left: hsl(198, 37%, 53%) solid 6px;
+}
+
+.detector_panel
+{
+    height: 1200px;
+    padding: 50px;
 }
 
 .detector
@@ -159,7 +169,7 @@ p
     -webkit-appearance: none;
     appearance: none;
     background-color: hsl(198, 37%, 53%);
-    border-color: hsl(0, 0%, 90%);
+    border-color: hsl(0, 0%, 95%);
     border-width: 5px;
     border-style: solid;
     cursor: pointer;
@@ -172,6 +182,27 @@ p
 .time_slider:focus
 {
    outline: none;
+}
+
+.neuron_button
+{
+    outline-style: dashed;
+    outline-color: hsla(0, 0%, 80%, 1);
+    outline-width: 2px;
+    padding: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.neuron_button.selected
+{
+    background-color: red;    
+}
+
+.word
+{
+    float: left;
+    padding: 5px;
 }
 
 img
