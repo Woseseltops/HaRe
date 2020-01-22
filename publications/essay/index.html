@@ -56,11 +56,11 @@
 loadPrecalculatedData(function()
 {
 	var element = document.getElementById('dictionary_detectors');
-	var detectors = [['dic',1],['dic',3],['dic',5]];
+	var detectors = [['dic',0],['dic',1],['dic',2]];
 	initializeDetectorVisualization(element,'dictionary_detectors',detectors,false);
 
 	element = document.getElementById('neural_detectors');
-	detectors = [['dic',5],['bigru_embeddings',0.01],['bigru_embeddings',0.1],['bigru_embeddings',0.5]];
+	detectors = [['dic',1],['bigru_embeddings',4],['bigru_embeddings',8],['bigru_embeddings',10]];
 	initializeDetectorVisualization(element,'neural_detectors',detectors,false);
 
 	element = document.getElementById('playground');

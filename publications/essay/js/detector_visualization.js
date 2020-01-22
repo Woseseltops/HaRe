@@ -5,9 +5,9 @@ function initializeDetectorVisualization(element,identifier,detectors,adding_det
     <div class="detectorArea"></div>
     <h3>The example conversations</h3>
     <div class="slider_area">
-    	<div>First message</div>
+    	<div class="slider_explanation">First message</div>
 	    <input class="time_slider" name="time_slider" type="range" min="0" max="199" value="0">
-	    <div>Last message</div>
+	    <div class="slider_explanation">Last message</div>
     </div>
     <table class="individual_player_visualizations">
         <tr><td>Game 1</td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td><td><img src="svg/tn_quiet.svg"></td></tr>
@@ -23,8 +23,11 @@ function initializeDetectorVisualization(element,identifier,detectors,adding_det
     </table>
 
     <h3>The evaluation</h2>
-	<canvas class="true_positives" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
-    <canvas class="false_positives" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+    <table>
+    <tr><td><img class="label_illustration" src="svg/tp_quiet.svg">Toxic players correctly detected</td><td><img class="label_illustration" src="svg/fp_quiet.svg">False alarms</td></tr>
+	<tr><td><div class="axisArea"><div>10</div><div class="bottom_tick">0</div></div><canvas class="true_positives" width="300" height="150"></canvas></td>
+    <td><div class="axisArea"><div>30</div><div class="bottom_tick">0</div></div><canvas class="false_positives" width="300" height="150"></canvas></td>
+    </tr></table>
     </div>`
 
     element.innerHTML = vis_template;
@@ -51,10 +54,10 @@ class DetectorVisualization
 		}
 	}
 
-	addDetector(detectorType,threshold)
+	addDetector(detectorType,thresholdIndex)
 	{
 	    var detector = new Detector(detectorType,false);
-	    detector.threshold = threshold;
+	    detector.staticThresholdIndex = thresholdIndex;
 	    detector.fscores = precalculatedResultsPerDetectorType[detectorType.identifier].fbeta;
 	    this.detectors.push(detector);
 
@@ -94,32 +97,44 @@ class DetectorVisualization
 
 	updateDetectorArea()
 	{
-		var detectorHTMLTemplate = '<div class="detector detector_{{ index }} selected" detectorIndex="{{ index }}"><div class="detectorTitle">{{ name }}</div><div class="detectorDescription">{{ description }}</div><button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button></div>';
+		var detectorHTMLTemplate = '<div class="detector detector_{{ index }} {{ selected }} " detectorIndex="{{ index }}"><div class="descriptionArea"><div class="detectorTitle">{{ name }}</div><div class="detectorDescription">{{ description }}</div></div><div class="thresholdArea">{{ threshold }}</div></div>';
+
+		//Save button code for later
+		//<button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button>
 
 	    var detectorAreaHTML = '';
 
 	    for (var detectorIndex in this.detectors)
 	    {
 	        var detector = this.detectors[detectorIndex];
-	        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,detector.getThreshold(this.currentTime)).replace(/{{ index }}/g,detectorIndex).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description);
+	        var selected = '';
+
+	        if (detectorIndex == 0)
+	        {
+	        	selected = 'selected'
+	        }
+
+	        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,detector.getThreshold(this.currentTime)).replace(/{{ index }}/g,detectorIndex).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description).replace(/{{ selected }}/g,selected);
 	    }
 
 	    this.mainElement.getElementsByClassName('detectorArea')[0].innerHTML = detectorAreaHTML +  '<br style="clear: left;" />';
 
 	    var allDetectorElements = this.mainElement.getElementsByClassName('detector');
+	    var parent = this;
+
 	    for (var elem of allDetectorElements)
 	    {
 	        elem.onclick = function()
 	        {
-	            for (d of this.mainElement.getElementsByClassName('detector'))
+	            for (var d of allDetectorElements)
 	            {
 	                d.classList.remove('selected');
 	            }
 
 	            this.classList.add('selected')
 
-	            this.currentlySelectedDetectorIndex = this.getAttribute('detectorIndex');
-	            this.updatePlayerVisualizations(this.currentTime,this.currentlySelectedDetectorIndex);
+	            parent.currentlySelectedDetectorIndex = this.getAttribute('detectorIndex');
+	            parent.updatePlayerVisualizations(parent.currentTime,parent.currentlySelectedDetectorIndex);
 	        };
 	    }
 	}
@@ -201,8 +216,8 @@ class DetectorVisualization
 	    }
 
 	   this.drawGraph(this.mainElement.getElementsByClassName('true_positives')[0],truePositiveData,10,this.currentTime);
-	   this.drawGraph(this.mainElement.getElementsByClassName('false_positives')[0],falsePositiveData,100,this.currentTime);
-	   //this.drawGraph(this.mainElement.getElementsByClassName('fbeta'),fbetaData,1,this.currentTime);
+	   this.drawGraph(this.mainElement.getElementsByClassName('false_positives')[0],falsePositiveData,40,this.currentTime);
+	   //this.drawGraph(this.mainElement.getElementsByClassName('fbeta')[0],fbetaData,1,this.currentTime);
 	}
 
 	drawGraph(canvas,data,maxY,timeIndicatorPosition)
@@ -212,7 +227,7 @@ class DetectorVisualization
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 	    var horizontalTickSize = canvas.width / (data[0].length-1);
 
-	    var colors = ["31a5a5","a34734","59a334","a335a4"];
+	    var colors = ["c59781","91c581","8981c5","c58182"];
 
 	    //The graph
 	    ctx.setLineDash([5, 3]);
@@ -323,7 +338,6 @@ class Detector
 
         return best_threshold;
     }
-
 }
 
 var loadJS = function(url, location, successFunction)
@@ -383,8 +397,8 @@ function loadPrecalculatedData(successFunction)
 
 //Define some general stuff
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];
-var detectorTypes = {'dic':new DetectorType('dic','Word list detector','This is a description','m04',[1,2,3,4,5,6,7,8,9,10]),
-					 'bigru_embeddings':new DetectorType('bigru_embeddings','Embeddings detector','This is a description','m02',[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1])}
+var detectorTypes = {'dic':new DetectorType('dic','Word list detector','A player is toxic above this number of bad words','m04',[1,2,3,4,5,6,7,8,9,10]),
+					 'bigru_embeddings':new DetectorType('bigru_embeddings','Neural net detector','A player is toxic above this confidence','m02',[0.001,0.0025,0.005,0.0075,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1])}
 
 var precalculatedResultsPerDetectorType = {};
 var allDetectorVisualizations = {};

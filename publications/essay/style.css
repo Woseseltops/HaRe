@@ -35,7 +35,7 @@ td
 .interactive_panel
 {
     padding: 20px;
-    width: 610px;
+    width: 725px;
     background-color: hsl(0, 0%, 95%);
     border-left: hsl(198, 37%, 53%) solid 6px;
 }
@@ -43,93 +43,116 @@ td
 .detector_panel
 {
     height: 1200px;
-    padding: 50px;
+    padding: 45px;
 }
 
 .detector
 {
-    width: 250px;
-    border-width: 3px;
-    border-style: solid;
-    padding: 10px;
+    width: 340px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: hsla(0, 0%, 50%, 0.4);
     margin: 10px;
     float: left;
     cursor: pointer;
 }
 
-.detector_0
+.detector.selected
 {
-    border-color: hsla(180, 54%, 42%, 0.25);
+    background-color: white;
+    border-style: solid;
+    border-color: hsl(0, 0%, 95%);    
 }
 
-.detector_0.selected
+.detector_0 .thresholdArea
 {
-    border-color: hsla(180, 54%, 42%, 1);
-    background-color: hsla(180, 54%, 42%, 0.05);
+    background: linear-gradient(90deg, hsl(19, 15%, 64%) 49%, hsl(19, 15%, 60%) 50%);
+}
+
+.detector_0.selected .thresholdArea
+{
+    background: linear-gradient(90deg, hsl(19, 37%, 64%) 49%, hsl(19, 37%, 60%) 50%);
 }
 
 .detector_0 .detectorTitle, .detector_0 .detectorThreshold
 {
-    color: hsl(180, 54%, 42%);
+    color: hsl(19, 37%, 64%);
 }
 
-.detector_1
+.detector_1 .thresholdArea
 {
-    border-color: hsla(10, 54%, 42%, 0.25);
+    background: linear-gradient(90deg, hsl(106, 15%, 64%) 49%, hsl(106, 15%, 60%) 50%);
 }
 
-.detector_1.selected
+.detector_1.selected .thresholdArea
 {
-    border-color: hsla(10, 54%, 42%, 1);
-    background-color: hsla(10, 54%, 42%, 0.05);
+    background: linear-gradient(90deg, hsl(106, 37%, 64%) 49%, hsl(106, 37%, 60%) 50%);
 }
 
 .detector_1 .detectorTitle, .detector_1 .detectorThreshold
 {
-    color: hsl(10, 54%, 42%);
+    color: hsl(106, 37%, 64%);
 }
 
-.detector_2
+.detector_2 .thresholdArea  
 {
-    border-color: hsla(100, 54%, 42%, 0.25);
+    background: linear-gradient(90deg, hsl(247, 15%, 64%) 49%, hsl(247, 15%, 60%) 50%);
 }
 
-.detector_2.selected
+.detector_2.selected .thresholdArea  
 {
-    border-color: hsla(100, 54%, 42%, 1);
-    background-color: hsla(100, 54%, 42%, 0.05);
+    background: linear-gradient(90deg, hsl(247, 37%, 64%) 49%, hsl(247, 37%, 60%) 50%);
 }
 
 .detector_2 .detectorTitle, .detector_2 .detectorThreshold
 {
-    color: hsl(100, 54%, 42%);
+    color: hsl(247, 37%, 64%);
 }
 
-.detector_3
+.detector_3 .thresholdArea
 {
-    border-color: hsla(300, 54%, 42%, 0.25);
+    background: linear-gradient(90deg, hsl(359, 15%, 64%) 49%, hsl(359, 15%, 60%) 50%);
 }
 
-.detector_3.selected
+.detector_3.selected .thresholdArea
 {
-    border-color: hsla(300, 54%, 42%, 1);
-    background-color: hsla(300, 54%, 42%, 0.05);
+    background: linear-gradient(90deg, hsl(359, 37%, 64%) 49%, hsl(359, 37%, 60%) 50%);
 }
 
 .detector_3 .detectorTitle, .detector_3 .detectorThreshold
 {
-    color: hsl(300, 54%, 42%);
+    color: hsl(359, 37%, 64%);
 }
 
 .detectorTitle
 {
-    font-weight: 1000;
+    font-weight: 600;
+    font-size: 19px;
+    margin-bottom: 6px;
 }
 
 .detectorDescription
 {
     font-size: 13px;
     color: hsla(0, 0%, 0%, 0.55);
+}
+
+.descriptionArea
+{
+    float: left;
+    padding: 12px;
+    width: 230px;
+}
+
+.thresholdArea
+{
+    float: right;
+    width: 81px;
+    height: 61px;
+    color: white;
+    text-align: center;
+    padding-top: 26px;
+    font-size: 30px;
 }
 
 .detectorThreshold
@@ -145,16 +168,21 @@ td
     height: 2rem;    
 }
 
+.slider_explanation
+{
+    font-size: 10px;
+    width: 75px;
+    float: left;
+}
+
 .time_slider
 {
     background-color: #f5f5f5;
-    width: calc(100% - 2rem);
-    position: absolute;
-    left: 1rem;
-    top: 4%;
-    float: none;
-    margin: 0 auto;
+    float: left;
+    width: 500px;
     -webkit-appearance: none;    
+    margin-right: 10px;
+    margin-top: 4px;
 }
 
 .time_slider::-webkit-slider-runnable-track
@@ -182,6 +210,28 @@ td
 .time_slider:focus
 {
    outline: none;
+}
+
+canvas
+{
+    background-color: white;
+    float: left;
+}
+
+.axisArea
+{
+    float: left;
+    font-size: 10px;
+}
+
+.bottom_tick
+{
+    margin-top: 125px;    
+}
+
+.label_illustration
+{
+    vertical-align: middle;
 }
 
 .neuron_button
