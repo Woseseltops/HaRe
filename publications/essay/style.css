@@ -20,6 +20,13 @@ td
     padding: 6px;
 }
 
+a
+{
+    color: hsl(198, 37%, 53%);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .main
 {
     width: 800px;

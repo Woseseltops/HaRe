@@ -1,0 +1,53 @@
+<head>
+	<script src='embedding_tsne.js'></script>
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</head>
+
+<body>
+	<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+	<script>
+		var strings = []
+		var trace1 = {
+			x:tsne_x, y:tsne_y, z:tsne_z,
+		  hoverinfo: 'text',
+			mode: 'markers',
+			marker: {
+				size: 4,
+				line: {
+				color: 'rgba(217, 217, 217, 0.14)',
+				width: 0.5},
+				opacity: 0.8},
+			type: 'scatter3d',
+		  text: labels
+		};
+
+		var data = [trace1];
+		var layout = {margin: {
+			l: 0,
+			r: 0,
+			b: 0,
+			t: 0
+		  }};
+		Plotly.newPlot('myDiv', data, layout, {displaylogo: false});	
+
+		var colors = []
+		var index = 0;
+
+		for (var x in tsne_x)
+		{
+			if (x < 10)
+			{
+				colors.push('rgba(100,0,0, 0.8)')			
+			}
+			else
+			{
+				colors.push('rgba(0,100,0, 0.8)')
+			}
+
+			index++;
+		}
+
+		var recolor = {marker:{color: colors}};
+		Plotly.restyle('myDiv', recolor,[0]);
+	</script>
+</body>

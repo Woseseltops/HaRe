@@ -3,7 +3,11 @@
 <title>Catching cyberbullies in the act with neural networks</title>
 <script src="js/detector_visualization.js"></script>
 <script src="js/activations_visualization.js"></script>
+<script src="js/embedding_visualization.js"></script>
+
+<script src='precalculated_data/embedding_tsne.js'></script>
 <script src="precalculated_data/activations.js"></script>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <link rel="stylesheet" href="style.css"></head>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&amp;display=swap" rel="stylesheet">
 <body>
@@ -29,9 +33,9 @@
 
 	<p>The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned exactly. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together are also closer in meaning.</p>
 
-	<div>3D</div>
+	<div id="embedding_visualization"></div>
 
-	<p>We see that...</p>
+	<p>As you explore the 3D space, you will find many interesting clusters of words that indeed are related in meaning. For example, there is a cluster of words related to time <a onclick="highlightScatterPointsWithIndices([378,439,649,702,709,724,753],998)">(highlight)</a>, a number cluster <a onclick="highlightScatterPointsWithIndices([94,120,128,176,180,296,337,367,431,432,563,737,764,819,827,876,986],998)">(highlight)</a>, a cluster of adjectives to rate something <a onclick="highlightScatterPointsWithIndices([47,55,66,481,643,839,882,885,889,967],998)">(highlight)</a>, but also (and more useful to the current task) a cluster of insults <a onclick="highlightScatterPointsWithIndices([112,280,295,407,443,644,703,783,818,826,836,858,900,908,960,961,988],998)">(highlight)</a> and a cluster of variants of the word <em>fuck</em> <a onclick="highlightScatterPointsWithIndices([61,67,259,476,495,502,519,636,740,833,905,954,968,970,989,990],998)">(highlight)</a>.</p>
 
 	<p>Another thing we can look at is what the individual <em>neurons</em> do; you can think of a neuron as an individual worker that during the training phase tries to find a simple meaningful task for itself. A neural network is basically a collection of these workers, all doing simple but different tasks. What really sets a neural network apart from a simple word list based detector is that these workers are organized in <em>layers</em>. Neurons in the lower layers typically pick up a small concrete task, like recognizing particular words, while the higher layers do something increasingly more abstract, like monitoring the temperature of the conversation as a whole. In the interactive visualization below, you can see where in the conversation which neurons activate.</p>
 
@@ -53,6 +57,7 @@
 </div>
 
 <script>
+//Detector visualizations
 loadPrecalculatedData(function()
 {
 	var element = document.getElementById('dictionary_detectors');
@@ -68,10 +73,16 @@ loadPrecalculatedData(function()
 	initializeDetectorVisualization(element,'playground',detectors,true);
 });
 
+//Neuron activation visualization
 var neuronActivationsVisualization = new NeuronActivationsVisualization(document.getElementById('neuron_activations'),
 															activations,[0,1,2],[3,4,5]);
 
+//3D embedding visualization
+initializeEmbeddingVisualization(tsne_x,tsne_y,tsne_z,labels);
+
 </script>
+
+
 
 </body>
 </html>
