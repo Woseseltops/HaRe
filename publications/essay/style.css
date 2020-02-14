@@ -256,6 +256,11 @@ canvas
     background-color: red;    
 }
 
+.sentence
+{
+    height: 35px;   
+}
+
 .word
 {
     float: left;
@@ -277,4 +282,26 @@ img
   padding-top: 4px;
   padding-right: 8px;
   padding-left: 3px;
+}
+
+.arrowButton
+{
+    width: 33px;
+    height: 11px;
+    border: none;
+    background-color: transparent; 
+    display: block;
+    margin-left: 25px;  
+    cursor: pointer;
+}
+
+.upArrow
+{
+    background-image: url('svg/arrow_up.svg');       
+    margin-top: -12px;
+}
+
+.downArrow
+{
+    background-image: url('svg/arrow_down.svg');    
 }

@@ -1,7 +1,15 @@
 //The main function
-function initializeDetectorVisualization(element,identifier,detectors,adding_detectors_allowed)
+function initializeDetectorVisualization(element,identifier,detectors,staticDetectors)
 {
+	var addDetectorButtons = '';
+
+	if (!staticDetectors)
+	{
+		addDetectorButtons = '<button onclick="addDetectorToPlayground(\'dic\')"></button><button onclick="addDetectorToPlayground(\'bigru_embeddings\')"></button>'
+	}
+
     var vis_template = `<div class="interactive_panel detector_panel"><h3>The detectors</h3>
+    `+addDetectorButtons+`
     <div class="detectorArea"></div>
     <h3>The example conversations</h3>
     <div class="slider_area">
@@ -31,20 +39,21 @@ function initializeDetectorVisualization(element,identifier,detectors,adding_det
     </div>`
 
     element.innerHTML = vis_template;
-    allDetectorVisualizations[identifier] = new DetectorVisualization(detectors,element);
+    allDetectorVisualizations[identifier] = new DetectorVisualization(detectors,element,staticDetectors);
     allDetectorVisualizations[identifier].slider.oninput = function() {allDetectorVisualizations[identifier].moveTimeSlider(allDetectorVisualizations[identifier].slider.value)};
 }
 
 //Classes to make it all clearer and better structured
 class DetectorVisualization
 {
-	constructor(detectors,element)
+	constructor(detectors,element,staticDetectors)
 	{
 		this.currentTime = 0;
 		this.beta = 1;
 		this.currentlySelectedDetectorIndex = 0;
 		this.mainElement = element;	
 		this.slider = this.mainElement.getElementsByClassName('time_slider')[0];
+		this.staticDetectors = staticDetectors;
 
 		this.detectors = [];
 		for (var detector of detectors)
@@ -97,7 +106,16 @@ class DetectorVisualization
 
 	updateDetectorArea()
 	{
-		var detectorHTMLTemplate = '<div class="detector detector_{{ index }} {{ selected }} " detectorIndex="{{ index }}"><div class="descriptionArea"><div class="detectorTitle">{{ name }}</div><div class="detectorDescription">{{ description }}</div></div><div class="thresholdArea">{{ threshold }}</div></div>';
+		var upArrow = '';
+		var downArrow = '';
+
+		if (!this.staticDetectors)
+		{
+			upArrow = '<button class="arrowButton upArrow" onclick="changePlaygroundDetectorThreshold({{ index }},1)"></button>';
+			downArrow = '<button class="arrowButton downArrow" onclick="changePlaygroundDetectorThreshold({{ index }},-1)"></button>';
+		}
+
+		var detectorHTMLTemplate = '<div class="detector detector_{{ index }} {{ selected }} " detectorIndex="{{ index }}"><div class="descriptionArea"><div class="detectorTitle">{{ name }}</div><div class="detectorDescription">{{ description }}</div></div><div class="thresholdArea">'+upArrow+'{{ threshold }}'+downArrow+'</div></div>';
 
 		//Save button code for later
 		//<button onClick="changeDetectorThreshold({{ index }},-1)">Lower</button><div class="detectorThreshold">{{ threshold }}</div><button onClick="changeDetectorThreshold({{ index }},1)">Higher</button>
@@ -114,7 +132,10 @@ class DetectorVisualization
 	        	selected = 'selected'
 	        }
 
-	        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,detector.getThreshold(this.currentTime)).replace(/{{ index }}/g,detectorIndex).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description).replace(/{{ selected }}/g,selected);
+	        var thresholdString = detector.getThreshold(this.currentTime) + '';
+	        thresholdString = thresholdString.replace('0.','.');
+
+	        detectorAreaHTML += detectorHTMLTemplate.replace(/{{ threshold }}/g,thresholdString).replace(/{{ index }}/g,detectorIndex%4).replace(/{{ name }}/g,detector.detectorType.name).replace(/{{ description }}/g,detector.detectorType.description).replace(/{{ selected }}/g,selected);
 	    }
 
 	    this.mainElement.getElementsByClassName('detectorArea')[0].innerHTML = detectorAreaHTML +  '<br style="clear: left;" />';
@@ -131,9 +152,9 @@ class DetectorVisualization
 	                d.classList.remove('selected');
 	            }
 
-	            this.classList.add('selected')
-
 	            parent.currentlySelectedDetectorIndex = this.getAttribute('detectorIndex');
+	            allDetectorElements[parent.currentlySelectedDetectorIndex].classList.add('selected')
+
 	            parent.updatePlayerVisualizations(parent.currentTime,parent.currentlySelectedDetectorIndex);
 	        };
 	    }
@@ -235,7 +256,7 @@ class DetectorVisualization
 	    for (var series_index in data)
 	    {
 	       ctx.beginPath();
-	        ctx.strokeStyle = "#"+colors[series_index];
+	        ctx.strokeStyle = "#"+colors[series_index%4];
 	        ctx.moveTo(0, canvas.height - (data[series_index]/maxY*canvas.height));
 
 	        for (var datapoint_index in data[series_index])
@@ -394,6 +415,29 @@ function loadPrecalculatedData(successFunction)
 	}
 }
 
+function addDetectorToPlayground(detectorType)
+{
+	allDetectorVisualizations['playground'].addDetector(detectorTypes[detectorType],0);	
+}
+
+function changePlaygroundDetectorThreshold(detectorIndex,thresholdIndexDelta)
+{
+	var playground = allDetectorVisualizations['playground'];
+	var detector = playground.detectors[detectorIndex];
+
+	if (thresholdIndexDelta == -1)
+	{
+		detector.previousThreshold();
+	}
+	else if (thresholdIndexDelta == 1)
+	{
+		detector.nextThreshold();
+	}
+
+	playground.updateDetectorArea();
+	playground.updateGraphs();
+	playground.updatePlayerVisualizations(playground.currentTime,playground.currentlySelectedDetectorIndex);
+}
 
 //Define some general stuff
 var allBetaValues = [0.001,0.01,0.1,1,10,100,1000];

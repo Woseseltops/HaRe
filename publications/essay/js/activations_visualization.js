@@ -1,25 +1,26 @@
 class NeuronActivationsVisualization
 {
-	constructor(element,activations,interesting_neurons_layer_0,interesting_neurons_layer_1)
+	constructor(element,activations,interesting_neurons_layer_1,interesting_neurons_layer_2)
 	{
 		this.activations = activations;
 		this.lastHoveredWordIndex = 0;
+		this.showLinebreaks = true;
 
 		//Create the static button area
 		var innerHTML = '<div id="button_area"><table><tr><td>Layer 1</td>';
 		var buttonIndex = 0;
 
-		for (var neuron_index in interesting_neurons_layer_0)
+		for (var neuron_index of interesting_neurons_layer_1)
 		{
-			innerHTML += '<td><div class="neuron_button" button_index='+buttonIndex+' layer_index=0 neuron_index='+neuron_index+'>Example neuron '+neuron_index+'</div></td>';
+			innerHTML += '<td><div class="neuron_button" button_index='+buttonIndex+' layer_index=1 neuron_index='+neuron_index+'>Example neuron '+neuron_index+'</div></td>';
 			buttonIndex++;
 		}
 
 		innerHTML += '</tr><tr><td>Layer 2</td>'
 
-		for (var neuron_index in interesting_neurons_layer_1)
+		for (var neuron_index of interesting_neurons_layer_2)
 		{
-			innerHTML += '<td><div class="neuron_button" button_index='+buttonIndex+' layer_index=1 neuron_index='+neuron_index+'>Example neuron '+neuron_index+'</div></td>';
+			innerHTML += '<td><div class="neuron_button" button_index='+buttonIndex+' layer_index=2 neuron_index='+neuron_index+'>Example neuron '+neuron_index+'</div></td>';
 			buttonIndex++;
 		}
 
@@ -41,7 +42,7 @@ class NeuronActivationsVisualization
 
 		this.clickButton(0);
 		this.updateButtonColors(0);
-		this.updateActivations(0,interesting_neurons_layer_0[0]);
+		this.updateActivations(1,interesting_neurons_layer_1[0]);
 	}
 
 	updateActivations(layer,neuron)
@@ -60,7 +61,7 @@ class NeuronActivationsVisualization
 			word = activation[0];
 			hue = this.activationToHue(activation[neuron+1]);
 
-			if (word == 'linebreak' && showLinebreaks)
+			if (word == 'linebreak' && this.showLinebreaks)
 			{
 				innerHTML += '</div><div class="sentence">';
 			}
@@ -87,6 +88,7 @@ class NeuronActivationsVisualization
 
 	clickButton(clickButtonIndex)
 	{
+		console.log(clickButtonIndex);
 		var clickButtonIndex = parseInt(clickButtonIndex);
 		var buttonIndex = 0;
 
@@ -132,8 +134,8 @@ class NeuronActivationsVisualization
 
 	activationToHue(activation)
 	{
-		var hueRange = 130;
-		var normalized_activation = (activation+0.5)*0.5;
+		var hueRange = 125;
+		var normalized_activation = (activation*0.5)+0.5;
 		return normalized_activation*hueRange;
 	}
 }

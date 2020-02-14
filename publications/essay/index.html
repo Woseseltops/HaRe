@@ -35,13 +35,17 @@
 
 	<div id="embedding_visualization"></div>
 
-	<p>As you explore the 3D space, you will find many interesting clusters of words that indeed are related in meaning. For example, there is a cluster of words related to time <a onclick="highlightScatterPointsWithIndices([378,439,649,702,709,724,753],998)">(highlight)</a>, a number cluster <a onclick="highlightScatterPointsWithIndices([94,120,128,176,180,296,337,367,431,432,563,737,764,819,827,876,986],998)">(highlight)</a>, a cluster of adjectives to rate something <a onclick="highlightScatterPointsWithIndices([47,55,66,481,643,839,882,885,889,967],998)">(highlight)</a>, but also (and more useful to the current task) a cluster of insults <a onclick="highlightScatterPointsWithIndices([112,280,295,407,443,644,703,783,818,826,836,858,900,908,960,961,988],998)">(highlight)</a> and a cluster of variants of the word <em>fuck</em> <a onclick="highlightScatterPointsWithIndices([61,67,259,476,495,502,519,636,740,833,905,954,968,970,989,990],998)">(highlight)</a>.</p>
+	<p>As you explore the 3D space, you will find many interesting clusters of words that indeed are related in meaning. For example, there is a cluster of words related to time <a onclick="highlightScatterPointsWithIndices([378,439,649,702,709,724,753],998)">(highlight)</a>, a number cluster <a onclick="highlightScatterPointsWithIndices([94,120,128,176,180,296,337,367,431,432,563,737,764,819,827,876,986],998)">(highlight)</a>, a cluster of adjectives to rate something <a onclick="highlightScatterPointsWithIndices([47,55,66,481,643,839,882,885,889,967],998)">(highlight)</a>, but also (and more useful to the current task) a cluster of insults <a onclick="highlightScatterPointsWithIndices([112,280,295,407,443,644,703,783,818,826,836,858,900,908,960,961,988],998)">(highlight)</a> and a cluster of variants of the word <em>fuck</em> <a onclick="highlightScatterPointsWithIndices([61,67,259,476,495,502,519,636,740,833,905,954,968,970,989,990],998)">(highlight)</a>. And the system learned all of this just by analyzing a lot of gaming conversations!</p>
 
 	<p>Another thing we can look at is what the individual <em>neurons</em> do; you can think of a neuron as an individual worker that during the training phase tries to find a simple meaningful task for itself. A neural network is basically a collection of these workers, all doing simple but different tasks. What really sets a neural network apart from a simple word list based detector is that these workers are organized in <em>layers</em>. Neurons in the lower layers typically pick up a small concrete task, like recognizing particular words, while the higher layers do something increasingly more abstract, like monitoring the temperature of the conversation as a whole. In the interactive visualization below, you can see where in the conversation which neurons activate.</p>
 
 	<div class="interactive_panel" id="neuron_activations"></div>
 
-	<p>We see that the neurons at the lower level have learned to activate on 1 or more words. [example] . The neurons at the higher levels, on the other hand, activate on such words but then slowly fade out, as if encountering such a word makes them more suspicious for some time.</p>
+	<p>In the first layer, we see that example neuron 1 has developed an interest in several abbreviations like 'gj' (good job), 'gw' (good work), 'ty' (thank you) and to a lesser extent 'kk' (okay) and brb 'be right back'. Example neuron 12 focuses on a number of unfriendly words, activating on 'stupid','dumb', 'faggot' and 'piece of shit', and also somewhat for 'dirty cunt'. Neuron 16 activates on 'mia' (missing in action), which is typically used to notify your team mates of possible danger... and thus a sign that this person is collaborative and probably not toxic.
+
+	<p>The neurons in the second layer monitor the conversation on a higher level, with the colors generally fading instead of the abrupt changes from the first layer. Example neuron 17 is a good example, where we see that the conversation is green in the beginning and slowly goes from yellow to orange, and then later back to green again. Several neurons, like neuron 6 in the second layer find the repetitive use of 'go' suspicious: they are activated more with each repetition.</p>
+
+	<p>xxx losing surrender</p>
 
 	<p>The big question of course is whether a harassment detector using a neural network instead of word list performs better. Below you can compare the previous word list based approach against three neural networks with different thresholds. The threshold now is the network's <em>confidence</em>: a number between 0 and 1 indicating how sure the network is a particular player is toxic.</p>
 
@@ -62,20 +66,18 @@ loadPrecalculatedData(function()
 {
 	var element = document.getElementById('dictionary_detectors');
 	var detectors = [['dic',0],['dic',1],['dic',2]];
-	initializeDetectorVisualization(element,'dictionary_detectors',detectors,false);
+	initializeDetectorVisualization(element,'dictionary_detectors',detectors,true);
 
 	element = document.getElementById('neural_detectors');
 	detectors = [['dic',1],['bigru_embeddings',4],['bigru_embeddings',8],['bigru_embeddings',10]];
-	initializeDetectorVisualization(element,'neural_detectors',detectors,false);
+	initializeDetectorVisualization(element,'neural_detectors',detectors,true);
 
 	element = document.getElementById('playground');
-	detectors = [];
-	initializeDetectorVisualization(element,'playground',detectors,true);
+	initializeDetectorVisualization(element,'playground',[],false);
 });
 
 //Neuron activation visualization
-var neuronActivationsVisualization = new NeuronActivationsVisualization(document.getElementById('neuron_activations'),
-															activations,[0,1,2],[3,4,5]);
+var neuronActivationsVisualization = new NeuronActivationsVisualization(document.getElementById('neuron_activations'),activations,[1,12,16],[6,16,17]);
 
 //3D embedding visualization
 initializeEmbeddingVisualization(tsne_x,tsne_y,tsne_z,labels);
