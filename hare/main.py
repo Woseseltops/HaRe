@@ -3,7 +3,7 @@ from json import load,dump
 from typing import Dict, List, Tuple, Optional
 from typing.io import TextIO
 from os import mkdir
-from os.path import dirname, abspath, isdir
+from os.path import dirname, abspath, isdir, realpath
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 
@@ -340,6 +340,10 @@ class Hare():
         return false_positives
 
 def load_pretrained(location : str) -> Hare:
+
+    #Not found? Perhaps in the default location
+    if not isdir(location):
+        location = dirname(realpath(__file__)) + '/pretrained/' + location
 
     #If this dir not exists, assume it's a file
     if not isdir(location):
