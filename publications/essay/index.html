@@ -12,24 +12,34 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&amp;display=swap" rel="stylesheet">
 <body>
 
-<h1>Catching cyberbullies in the act with neural networks</h1>
-
 <div class="main">
+	<h1>Catching cyberbullies in the act</h1>
+	<h2>Detecting online harassment with neural networks</h2>
+	<p class="authors">Wessel Stoop</h3>
+
 	<p class="lead">Digital harassment is a problem in many corners of the internet. In this article you can play with techniques to automatically detect bad actors, preferably as early in the conversation as possible. We will see that neural networks work better than simple words lists, but also that they are black boxes; we attempt to give you some insights into what the various parts of the network use to come to their decisions.</p>
 
-	<p><span id="first_character">A</span>ccording to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
+	<p><span id="first_character">A</span>ccording to a 2016 report 47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
 
-	<p>The best solution to this problem might be to use human moderators that read everything take action when somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, the game League of Legends has been called "[x]". This is a typical conversation from the game:</p>
+	<p>The best solution to this problem might be to use human moderators that read everything take action when somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, according to a survey by League of Legends player Celianna in 2020, 98% of League of Legend players have been flamed during a match, and 79% has been harassed afterwards. A typical conversation:</p>
 
 	<p></p>
 
-	<p>For this article, we will therefore use a dataset of conversations from this game and try to see if we can separate 'toxic' players from 'normal' players automatically. Let's take 10 conversations where 1 person misbehaves as an example, and see if we can pinpoint this 1 player, preferably early in the conversation. A first approach for an automated detector might be to use a simple list of swear words and insults like 'fuck','suck', 'noob' and 'fag', and label a player as toxic if s/he uses it more often than a particular threshold. Below, you can slide through a conversation and see how detectors with thresholds of 1, 2, 3 and 5 bad words perform.</p>
+	<p>For this article, we will therefore use a dataset of conversations from this game and try to see if we can separate 'toxic' players from 'normal' players automatically. To keep things simple, we'll take 10 conversations where 1 person misbehaves as an example, and see if we can think of a system that can pinpoint this 1 player, preferably early in the conversation.</p>
+
+	<h4>Can't we just use a list of bad words?</h4>
+
+	<p>A first approach for an automated detector might be to use a simple list of swear words and insults like 'fuck','suck', 'noob' and 'fag', and label a player as toxic if s/he uses it more often than a particular threshold. Below, you can slide through a conversation and see how detectors with thresholds of 1, 2, 3 and 5 bad words perform.</p>
 
 	<div id="dictionary_detectors"></div>
 
-	<p>As you can see, the detector with the low threshold detects all toxic players early in the game, but has lots of false positives. On the other hand, the detector with the high threshold does not have this problem, but misses a lot of toxic players (false negatives). This tension between false positive and false negatives is a problem any approach will have; our goal is to find approach where it is as small as possible.</p>
+	<p>As you can see, the detector with the low threshold detects all toxic players early in the game, but has lots of false positives. On the other hand, the detector with the high threshold does not have this problem, but misses a lot of toxic players (false negatives). This tension between false positive and false negatives is a problem any approach will have; our goal is to find an approach where it is as small as possible.</p>
 
-	<p>A better solution might be to use machine learning: we give thousands of examples of conversations with toxic players to a training algorithm and ask it to figure out how to recognize harassment by itself. Of course, such an algorithm will learn that swear words and insults are good predictors for toxicity, but it can also pick up more subtle word combinations and other phenomena. For example, you might have noticed that the average toxic player is speaking a lot more than the others.</p>
+	<h4>Teaching language to machines</h4>
+
+	<p>A better solution might be to use machine learning: we give thousands of examples of conversations with toxic players to a training algorithm and ask it to figure out how to recognize harassment by itself. Of course, such an algorithm will learn that swear words and insults are good predictors for toxicity, but it can also pick up more subtle word combinations and other phenomena. For example, you might have noticed that the average toxic player is speaking a lot more than the other players.</p>
+
+	<p class="pull_quote">The average toxic player is speaking a lot more than the other players</p>
 
 	<p>The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned exactly. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together are also closer in meaning.</p>
 
@@ -43,19 +53,29 @@
 
 	<p>In the first layer, we see that example neuron 1 has developed an interest in several abbreviations like 'gj' (good job), 'gw' (good work), 'ty' (thank you) and to a lesser extent 'kk' (okay) and brb 'be right back'. Example neuron 12 focuses on a number of unfriendly words, activating on 'stupid','dumb', 'faggot' and 'piece of shit', and also somewhat for 'dirty cunt'. Neuron 16 activates on 'mia' (missing in action), which is typically used to notify your team mates of possible danger... and thus a sign that this person is collaborative and probably not toxic.
 
+	<p class="pull_quote">The neurons in the second layer monitor the conversation on a higher level</p>
+
 	<p>The neurons in the second layer monitor the conversation on a higher level, with the colors generally fading instead of the abrupt changes from the first layer. Example neuron 17 is a good example, where we see that the conversation is green in the beginning and slowly goes from yellow to orange, and then later back to green again. Several neurons, like neuron 6 in the second layer find the repetitive use of 'go' suspicious: they are activated more with each repetition.</p>
 
 	<p>xxx losing surrender</p>
 
-	<p>The big question of course is whether a harassment detector using a neural network instead of word list performs better. Below you can compare the previous word list based approach against three neural networks with different thresholds. The threshold now is the network's <em>confidence</em>: a number between 0 and 1 indicating how sure the network is a particular player is toxic.</p>
+	<h4>But does it work?</h4>
+
+	<p>The big question of course is whether a harassment detector using a neural network instead of word list performs better. Below you can compare the previous word list based approach against three neural networks with different thresholds. The threshold now is not the number of bad words, but the network's <em>confidence</em>: a number between 0 and 1 indicating how sure the network is a particular player is toxic. Here you see the results for a neural network with three different threshold, compared to a word list based detector with treshold 2:</p>
 
 	<div id="neural_detectors"></div>
 
-	<p>We see that.</p>
+	<p>Like with the word list based approach, we see that a higher threshold means less false positives but also less true positives. However, we see that two of the neural network based detectors find way more toxic players during the conversation while having less false positives at the same time... progress!</p>
 
-	<p>Besides these technical challenges, there are a number of ethical questions too... do we only want to use this technique to study the toxicity within a community, or do we really want to put it in production and monitor conversations in real time? And if so, what does it mean for a person or a whole community have a real time watch dog robot, always looking over your shoulder? What should be done when it detects somebody? Should s/he be notified, warned, muted, banned? Related to that, the former director of Riot Games' Player Behavior Unit attributes most toxicity to 'the average person just having a bad day'... Is labeling a whole person as toxix or non-toxic not too simplistic?</p>
+	<h4>The bigger picture</h4>
 
-	<p>Ending</p>
+	<p>Be this problem is even more interesting: besides the technical challenge of detecting bad actors early, there are a number of ethical questions too: do we only want to use this technique to study the toxicity within a community, or do we really want to put it in production and monitor conversations in real time? And if so, what does it mean for a community to have a real time watch dog, always looking over your shoulder?</p>
+
+	<p>And say we have a system that can perfectly detect bad behavior in online conversations, what should be done when it detects somebody? Should s/he be notified, warned, muted, banned? And when exactly... how toxic is too toxic? The former director of Riot Games' Player Behavior Unit attributes most toxicity to 'the average person just having a bad day'... Is labeling a whole person as toxix or non-toxic not too simplistic?</p>
+
+	<p class="pull_quote">The best answer is probably not do nothing for all of the online communities that are fighting this problem</p>
+
+	<p>Whatever the answers to these questions might be, the best answer is probably not do nothing for all of the online communities that are fighting this problem, and automatic detection seems like a good first step. Below you can play with both detection techniques introduced in this article, and set the thresholds for yourself. What threshold do you think would make most sense in what usecase?</p>
 
 	<div id="playground"></div>
 </div>

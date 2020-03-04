@@ -5,7 +5,7 @@ function initializeDetectorVisualization(element,identifier,detectors,staticDete
 
 	if (!staticDetectors)
 	{
-		addDetectorButtons = '<button onclick="addDetectorToPlayground(\'dic\')"></button><button onclick="addDetectorToPlayground(\'bigru_embeddings\')"></button>'
+		addDetectorButtons = '<button class="addButton" onclick="addDetectorToPlayground(\'dic\')">Add word list detector</button><button class="addButton" onclick="addDetectorToPlayground(\'bigru_embeddings\')">Add neural net detector</button>'
 	}
 
     var vis_template = `<div class="interactive_panel detector_panel"><h3>The detectors</h3>
