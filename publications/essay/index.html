@@ -17,19 +17,27 @@
 	<h2>Detecting online harassment with neural networks</h2>
 	<p class="authors">Wessel Stoop</h3>
 
-	<p class="lead">Digital harassment is a problem in many corners of the internet. In this article you can play with techniques to automatically detect bad actors, preferably as early in the conversation as possible. We will see that neural networks work better than simple words lists, but also that they are black boxes; we attempt to give you some insights into what the various parts of the network use to come to their decisions.</p>
+	<p class="lead">Digital harassment is a problem in many corners of the internet. In this article you can play with techniques to automatically detect bad actors, preferably as early in the conversation as possible. We will see that neural networks work better than simple words lists, but also that they are black boxes; we attempt to give you some insights into how various parts of the networks come to their decisions. Also, we apologize in advance for all of the swear words :).</p>
 
 	<p><span id="first_character">A</span>ccording to a 2016 report 47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.</p>
 
-	<p>The best solution to this problem might be to use human moderators that read everything take action when somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, according to a survey by League of Legends player Celianna in 2020, 98% of League of Legend players have been flamed during a match, and 79% has been harassed afterwards. A typical conversation:</p>
+	<p>The best solution to this problem might be to use human moderators that read everything and take action if somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, according to a survey by League of Legends player Celianna in 2020, 98% of League of Legend players have been flamed during a match, and 79% have been harassed afterwards [3]. A conversation that is sadly not untypical for the game:</p>
 
-	<p></p>
+	<table>
+	<tr><td>Z</td><td>fukin bot n this team.... so cluelesss gdam</td></tr>
+	<tr><td>V</td><td>u cunt</td></tr>
+	<tr><td>Z</td><td>wow ....u jus let them kill me</td></tr>
+	<tr><td>V</td><td>ARE YOU RETARDED</td></tr>
+	<tr><td>V</td><td>U ULTED INTO 4 PEOPLE</td></tr>
+	<tr><td>Z</td><td>this game is like playign with noobs lol....complete clueless lewl</td></tr>
+	<tr><td>L</td><td>ur shyt zed</td></tr>
+	</table>
 
 	<p>For this article, we will therefore use a dataset of conversations from this game and try to see if we can separate 'toxic' players from 'normal' players automatically. To keep things simple, we'll take 10 conversations where 1 person misbehaves as an example, and see if we can think of a system that can pinpoint this 1 player, preferably early in the conversation.</p>
 
 	<h4>Can't we just use a list of bad words?</h4>
 
-	<p>A first approach for an automated detector might be to use a simple list of swear words and insults like 'fuck','suck', 'noob' and 'fag', and label a player as toxic if s/he uses it more often than a particular threshold. Below, you can slide through a conversation and see how detectors with thresholds of 1, 2, 3 and 5 bad words perform.</p>
+	<p>A first approach for an automated detector might be to use a simple list of swear words and insults like 'fuck','suck', 'noob' and 'fag', and label a player as toxic if s/he uses a word from the lis more often than a particular threshold. Below, you can slide through a conversation and see where in the conversations what players are labeled as toxic, by detectors with thresholds of 1, 2, 3 and 5 bad words.</p>
 
 	<div id="dictionary_detectors"></div>
 
@@ -41,11 +49,11 @@
 
 	<p class="pull_quote">The average toxic player is speaking a lot more than the other players</p>
 
-	<p>The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned exactly. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together are also closer in meaning.</p>
+	<p>The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned exactly. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together in terms of meaning, are also closer together in terms of distance.</p>
 
 	<div id="embedding_visualization"></div>
 
-	<p>As you explore the 3D space, you will find many interesting clusters of words that indeed are related in meaning. For example, there is a cluster of words related to time <a onclick="highlightScatterPointsWithIndices([378,439,649,702,709,724,753],998)">(highlight)</a>, a number cluster <a onclick="highlightScatterPointsWithIndices([94,120,128,176,180,296,337,367,431,432,563,737,764,819,827,876,986],998)">(highlight)</a>, a cluster of adjectives to rate something <a onclick="highlightScatterPointsWithIndices([47,55,66,481,643,839,882,885,889,967],998)">(highlight)</a>, but also (and more useful to the current task) a cluster of insults <a onclick="highlightScatterPointsWithIndices([112,280,295,407,443,644,703,783,818,826,836,858,900,908,960,961,988],998)">(highlight)</a> and a cluster of variants of the word <em>fuck</em> <a onclick="highlightScatterPointsWithIndices([61,67,259,476,495,502,519,636,740,833,905,954,968,970,989,990],998)">(highlight)</a>. And the system learned all of this just by analyzing a lot of gaming conversations!</p>
+	<p>As you explore the 3D space, you will find many interesting clusters of words that indeed are related in meaning. For example, there is a cluster of words related to time <a onclick="highlightScatterPointsWithIndices([378,439,649,702,709,724,753],998)">(highlight)</a>, a number cluster <a onclick="highlightScatterPointsWithIndices([94,120,128,176,180,296,337,367,431,432,563,737,764,819,827,876,986],998)">(highlight)</a>, a cluster of adjectives to rate something <a onclick="highlightScatterPointsWithIndices([47,55,66,481,643,839,882,885,889,967],998)">(highlight)</a>, but also (and more useful to the current task) a cluster of insults <a onclick="highlightScatterPointsWithIndices([112,280,295,407,443,644,703,783,818,826,836,858,900,908,960,961,988],998)">(highlight)</a> and a cluster of variants of the word <em>fuck</em> <a onclick="highlightScatterPointsWithIndices([61,67,259,476,495,502,519,636,740,833,905,954,968,970,989,990],998)">(highlight)</a>. And the system figured all of this out just by analyzing a lot of gaming conversations!</p>
 
 	<p>Another thing we can look at is what the individual <em>neurons</em> do; you can think of a neuron as an individual worker that during the training phase tries to find a simple meaningful task for itself. A neural network is basically a collection of these workers, all doing simple but different tasks. What really sets a neural network apart from a simple word list based detector is that these workers are organized in <em>layers</em>. Neurons in the lower layers typically pick up a small concrete task, like recognizing particular words, while the higher layers do something increasingly more abstract, like monitoring the temperature of the conversation as a whole. In the interactive visualization below, you can see where in the conversation which neurons activate.</p>
 
@@ -57,11 +65,9 @@
 
 	<p>The neurons in the second layer monitor the conversation on a higher level, with the colors generally fading instead of the abrupt changes from the first layer. Example neuron 17 is a good example, where we see that the conversation is green in the beginning and slowly goes from yellow to orange, and then later back to green again. Several neurons, like neuron 6 in the second layer find the repetitive use of 'go' suspicious: they are activated more with each repetition.</p>
 
-	<p>xxx losing surrender</p>
-
 	<h4>But does it work?</h4>
 
-	<p>The big question of course is whether a harassment detector using a neural network instead of word list performs better. Below you can compare the previous word list based approach against three neural networks with different thresholds. The threshold now is not the number of bad words, but the network's <em>confidence</em>: a number between 0 and 1 indicating how sure the network is a particular player is toxic. Here you see the results for a neural network with three different threshold, compared to a word list based detector with treshold 2:</p>
+	<p>The big question of course is whether a harassment detector using a neural network instead of word list performs better. Below you can compare the previous word list based approach against three neural networks with different thresholds. The threshold now is not the number of bad words, but the network's <em>confidence</em>: a number between 0 and 1 indicating how sure the network is a particular player is toxic. Here you see the results for a neural network with three different thresholds, compared to a word list based detector with treshold 2:</p>
 
 	<div id="neural_detectors"></div>
 
@@ -78,6 +84,13 @@
 	<p>Whatever the answers to these questions might be, the best answer is probably not do nothing for all of the online communities that are fighting this problem, and automatic detection seems like a good first step. Below you can play with both detection techniques introduced in this article, and set the thresholds for yourself. What threshold do you think would make most sense in what usecase?</p>
 
 	<div id="playground"></div>
+
+	<br>
+    <div class="footnote">[1] https://www.datasociety.net/pubs/oh/Online_Harassment_2016.pdf</div>
+    <div class="footnote">[2] https://blog.wikimedia.org/2017/02/07/scaling-understanding-of-harassment/</div>
+    <div class="footnote">[3] https://imgur.com/a/X6iR4WE#alloBvs</div>
+    <div class="footnote">[4] All of the confidence values in this article come out of the software package <a href="https://github.com/Woseseltops/HaRe">HaRe</a>, funded by the Language in Interaction project.</div>
+
 </div>
 
 <script>
@@ -103,7 +116,6 @@ var neuronActivationsVisualization = new NeuronActivationsVisualization(document
 initializeEmbeddingVisualization(tsne_x,tsne_y,tsne_z,labels);
 
 </script>
-
 
 
 </body>

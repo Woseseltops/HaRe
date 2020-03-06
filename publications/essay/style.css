@@ -52,6 +52,11 @@ a
     cursor: pointer;
 }
 
+table
+{
+    color: hsla(0, 0%, 0%, 0.5);    
+}
+
 .main
 {
     width: 800px;
@@ -369,4 +374,10 @@ img
 .addButton:hover
 {
     background-image: url('svg/add_button_hovered.svg');
+}
+
+.footnote
+{
+    font-size: 12px;
+    padding: 10px;    
 }
