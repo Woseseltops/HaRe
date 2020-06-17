@@ -5,6 +5,39 @@ HaRe (Harassment Recognizer) is a command line tool and Python library to automa
 
 ## 1. Using HaRe as command line tool
 
+The monitoring tool can be started by running `bin/hare monitor <pretrained_model_name>`, and listens on `localhost:11118`. If you want to run it on another address or port, you can add `<address>:<port>`, for example:
+
+```
+$bin/hare monitor moba localhost:1234
+Loading pretrained model moba...
+HaRe is listening on localhost:1234. To start monitoring the first conversation, send either an HTTP PUT request to localhost:1234/yourconvoid, or use the convenient clien tool: 'bin/hare client convo yourconvoid'
+```
+
+You can then send HTTP PUT, POST and GET requests to this process. For convenience, HaRe includes a separate tool `bin/hare client` to send these requests quickly from the command line. It will use `localhost:11118` by default, but this can be overridden by including the address and host somewhere in the arguments.
+
+Start a new conversation: 
+* `bin/hare client convo <yourconvoid>`
+* Does an HTTP PUT to address:port/yourconvoid
+* Example: `bin/hare client convo myconvo` does an HTTP PUT to `localhost:11118/myconvo`
+
+Add an utterance: 
+* `bin/hare client utterance <yourconvoid> <yourspeakerid> <the rest of the words are for the utterance>`
+* Does an HTTP POST to address:port/yourconvoid/speakerid/
+* Example: `bin/hare client utterance myconvo speakera good luck everyone` does an HTTP POST to `localhost:11118/myconvo/speakera` with this data:
+
+```JSON
+{"utterance":"good luck everyone"}
+```
+
+Check the status:
+* `bin/hare client status <yourconvoid>`
+* Does an HTTP GET to address:port/yourconvoid
+* Example: `bin/hare client status myconvo` does an HTTP GET to `localhost:11118/myconvo', and will return something in this format:
+
+`
+TODO
+`
+
 ## 2. Using HaRe as Python library
 
 ### 2.1 Basic usage
@@ -79,39 +112,6 @@ moba_hare.conversations_excluded_for_evaluation = [0]
 ### 2.3 Training
 
 At some point, you might want to do some training yourself. This can for example be the case because you are applying HaRe in another domain than the pretrained models, and harassment looks slightly different there, or because you even want to detect something different than harassment.
-
-#### 2.3.1 Recommended: transfer learning
-
-Whatever your goals are, it is probably most effective to repurpose the existing HaRe models ('transfer learning'). To achieve this, simply load the pretrained model that best matches your goal, add some conversations and label them, like we have done above. If you want to exclude conversations from training, add them to the `conversations_excluded_for_training` list:
-
-```python
-from hare import load_pretrained, Utterance
-
-moba_hare = load_pretrained('moba')
-
-moba_hare.start_conversation(conversation_id='convo_001')
-moba_hare.label_speaker('b',1)
-moba_hare.add_utterances([Utterance(speaker='a',content='good luck'),
-                          Utterance(speaker='b',content='ur all n00bs')])
-
-moba_hare.start_conversation(conversation_id='convo_002')
-moba_hare.label_speaker('b',1)
-moba_hare.add_utterances([Utterance(speaker='a',content='hi'),
-                          Utterance(speaker='b',content='SHUT UP!')])
-
-moba_hare.conversations_excluded_for_training = ['convo_002']
-```
-
-Then, use the `retrain` command to take the old model and refit it to you new dataset. You can then use `save` to store it as a pretrained model in the `models` folder. You can later access this model with `load_pretrained` like the other pretrained models in that same folder.
-
-```python
-moba_hare.retrain()
-moba_hare.save(name='moba_extended')
-```
-
-#### 2.3.2 Starting from scratch with word embeddings
-
-If you don't want to use transfer learning with an existing model, you can also start from scratch. The procedure is largely the same, except that you don't use the `load_pretrained` function, and use `train` instead of `retrain`:
 
 ```python
 from hare import Hare, Utterance
