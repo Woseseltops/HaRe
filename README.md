@@ -23,7 +23,7 @@ Start a new conversation:
 Add an utterance: 
 * `bin/hare client utterance <yourconvoid> <yourspeakerid> <the rest of the words are for the utterance>`
 * Does an HTTP POST to address:port/yourconvoid
-* Example: `bin/hare client utterance myconvo speakera good luck everyone` does an HTTP POST to `localhost:11118/myconvo/speakera` with this data:
+* Example: `bin/hare client utterance myconvo speakera good luck everyone` does an HTTP POST to `localhost:11118/myconvo` with this data:
 
 ```JSON
 {"utterance":"good luck everyone","speaker":"a"}
