@@ -4,20 +4,40 @@ from cherrypy import expose, quickstart, config, popargs, tools, request
 from requests import get, post, put
 from argparse import ArgumentParser, REMAINDER
 
+from hare import load_pretrained
+
 @popargs('conversation_id')
 class HareWebservice(object):
 
     exposed = True
 
+    def load_model(self,model_name):
+        self.hare = load_pretrained(model_name)
+        self.conversations = {}
+        self.conversation_indices = {}
+    
     @expose
     def default(self,conversation_id,speaker=None,utterance=None):
 
         if request.method == 'PUT':
+
+            if conversation_id in self.conversation_ids:
+                return 'Conversation id in use'
+        
+            convo = Conversation()
+            self.conversations[conversation_id] = convo
+            self.conversation_indices[conversation_id] = len(self.conversations)
+            
+            self.hare.add_conversation(convo)
+
             return f'Added conversation {conversation_id}'
         elif request.method == 'POST':
+            self.conversations[conversation_id].add_utterance(speaker=speaker,content=utterance)
+        
             return f'Added utterance by {speaker} to conversation {conversation_id}'
         else:
-            return f'Status for conversation {conversation_id}'
+            conversation_index = self.conversation_indices[conversation_id]
+            return f'Status for conversation {conversation_id}' + self.hare.get_status(conversation_index)
 
 parser = ArgumentParser()
 parser.add_argument('--destination',help='address:port, other than 127.0.0.1:11118',default='127.0.0.1:11118')
@@ -51,7 +71,10 @@ if args.mode == 'monitor':
 
     host,port = args.destination.split(':')
     config.update({'server.socket_host': host,'server.socket_port': int(port)})
-    quickstart(HareWebservice)
+
+    webservice = HareWebservice()
+    webservice.load_model(args.model)
+    quickstart(webservice)
 
 elif args.mode == 'client':
 
