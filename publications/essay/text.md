@@ -1,3 +1,5 @@
+Using neural networks to detect online harassment
+
 Digital harassment is a problem in many corners of the internet. According to a 2016 report '47% of internet users have experienced online harassment or abuse [1], and 27% of all American internet users self-censor what they say online because they are afraid of being harassed. On a similar note, a survey by The Wikimedia Foundation (behind Wikipedia and other things) showed that 38% of the editors had encountered harassment, and over half them said this lowered their motivation to contribute in the future [2]. If we want safe and productive online platforms where users do not chase each other away, something needs to be done.
 
 The best solution to this problem might be to use human moderators that read everything take action when somebody crosses a boundary, but this is not always feasable; for example, in popular online games hundreds of conversations are simultaneously happening all the time. At the same time, some online games are notorious for their toxic community. For example, the game League of Legends has been called "[x]". This is a typical conversation from the game:
@@ -8,7 +10,7 @@ For this article, we will therefore use a dataset of conversations from this gam
 
 [first interaction]
 
-[As you can see, the detector with the low threshold detects all toxic players already halfway during the game, but has lots of false positives] .
+[As you can see, the detector with the low threshold detects all toxic players already halfway during the game, but has lots of false positives]. [Another thing you might have noticed is that the average toxic player speaks a lot more than the other players... this is also something that is not picked up with a simple word list based approach.]
 
 A better solution might be to use machine learning: we give thousands of examples of conversations with toxic players to a training algorithm and ask it to figure out how to recognize harassment by itself. The most successful algorithms in tasks like this these days are so-called neural networks. While even experts have trouble fully understanding why exactly they are so successful, there are some techniques to look under the hood and see what the network has learned. For example, you can put all the words a network has learned something about in a 3D space in such a way that words that are (according to the network) closer together are also closer in meaning.
 
