@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+
+from cherrypy import expose, quickstart, config, popargs, tools, request
+from requests import get, post, put
+from argparse import ArgumentParser, REMAINDER
+
+@popargs('conversation_id')
+class HareWebservice(object):
+
+    exposed = True
+
+    @expose
+    def default(self,conversation_id,speaker=None,utterance=None):
+
+        if request.method == 'PUT':
+            return f'Added conversation {conversation_id}'
+        elif request.method == 'POST':
+            return f'Added utterance by {speaker} to conversation {conversation_id}'
+        else:
+            return f'Status for conversation {conversation_id}'
+
+parser = ArgumentParser()
+parser.add_argument('--destination',help='address:port, other than 127.0.0.1:11118',default='127.0.0.1:11118')
+
+mode = parser.add_subparsers(dest='mode')
+
+monitor_parser = mode.add_parser('monitor',help='Run the HaRe webservice, listening for RESTful requests.')
+monitor_parser.add_argument('model',type=str,help='The pretrained model to load')
+
+client_parser = mode.add_parser('client',help='Convenience tool to quickly send RESTful requests.')
+
+request_type = client_parser.add_subparsers(dest='request_type')
+
+status_parser = request_type.add_parser('status',help='Get the status of a conversation.')
+status_parser.add_argument('conversation_id',type=str,help='The ID of the conversation you want to know the status of.')
+
+convo_parser = request_type.add_parser('convo',help='Add a new conversation.')
+convo_parser.add_argument('conversation_id',type=str,help='The ID of the conversation you want to create.')
+
+utterance_parser = request_type.add_parser('utterance',help='Add a new utterance.')
+utterance_parser.add_argument('conversation_id',type=str,help='The ID of the conversation you want to add an utterance to.')
+utterance_parser.add_argument('speaker_id',type=str,help='The ID of the speaker of the utterance (can be new).')
+utterance_parser.add_argument('words',nargs=REMAINDER)
+
+args = parser.parse_args()
+
+if args.mode == 'monitor':
+
+    print(f'Loading pretrained model {args.model}...')
+    print(f'HaRe is listening on port {args.destination}. To start monitoring the first conversation, send either an HTTP PUT request to {args.destination}/yourconvoid, or use the convenient client tool: \'bin/hare client convo yourconvoid\'')
+
+    host,port = args.destination.split(':')
+    config.update({'server.socket_host': host,'server.socket_port': int(port)})
+    quickstart(HareWebservice)
+
+elif args.mode == 'client':
+
+    if args.request_type == 'status':
+        url = f'http://{args.destination}/{args.conversation_id}'
+        print('Sending HTTP GET to',url)
+        print(get(url).text)
+
+    elif args.request_type == 'convo':
+        url = f'http://{args.destination}/{args.conversation_id}'
+        print('Sending HTTP PUT to',url)
+        print(put(url).text)
+
+    elif args.request_type == 'utterance':
+        url = f'http://{args.destination}/{args.conversation_id}'
+        arguments = {'speaker':args.speaker_id,'utterance':' '.join(args.words)}
+
+        print(f'Sending HTTP POST to {url} with arguments {arguments}.')
+        print(post(url,arguments).text)
