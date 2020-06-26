@@ -1,48 +1,70 @@
 #!/usr/bin/env python3
 
+from typing import Dict, List, Any
+
 from cherrypy import expose, quickstart, config, popargs, tools, request
 from requests import get, post, put
 from argparse import ArgumentParser, REMAINDER
 
-from hare import load_pretrained
+from hare import Hare, load_pretrained
+from hare.conversation import Conversation
+from hare.brain import AbstractBrain
+
+#The three lines below are needed because TensorFlow does not work together with Cherrypy
+import tensorflow
+global graph
+graph = tensorflow.get_default_graph()
 
 @popargs('conversation_id')
 class HareWebservice(object):
 
-    exposed = True
+    exposed : bool = True
 
-    def load_model(self,model_name):
-        self.hare = load_pretrained(model_name)
-        self.conversations = {}
-        self.conversation_indices = {}
+    def load_model(self,model_name : str):
+        self.hare : Hare = load_pretrained(model_name)
+        self.conversations : Dict[str,Conversation] = {}
+        self.conversation_indices : Dict[str,int] = {}
     
     @expose
-    def default(self,conversation_id,speaker=None,utterance=None):
+    def default(self,conversation_id : str ,speaker : str = None,utterance : str = None) -> str:
 
+        conversation_index : int
+    
         if request.method == 'PUT':
 
-            if conversation_id in self.conversation_ids:
+            if conversation_id in self.conversation_indices:
                 return 'Conversation id in use'
         
-            convo = Conversation()
+            convo : Conversation = Conversation()
             self.conversations[conversation_id] = convo
-            self.conversation_indices[conversation_id] = len(self.conversations)
+            self.conversation_indices[conversation_id] = len(self.conversations)-1
             
             self.hare.add_conversation(convo)
 
             return f'Added conversation {conversation_id}'
         elif request.method == 'POST':
-            self.conversations[conversation_id].add_utterance(speaker=speaker,content=utterance)
+            conversation_index = self.conversation_indices[conversation_id]
+
+            if speaker is not None and utterance is not None:
+                self.conversations[conversation_id].add_utterance(speaker=speaker,content=utterance)
+            elif speaker is None:
+                return 'No speaker index provided'
+            elif utterance is None:
+                return 'No utterance content provided'
+            
         
             return f'Added utterance by {speaker} to conversation {conversation_id}'
         else:
             conversation_index = self.conversation_indices[conversation_id]
-            return f'Status for conversation {conversation_id}' + self.hare.get_status(conversation_index)
+            
+            with graph.as_default():
+                return f'Status for conversation {conversation_id}: {self.hare.get_status(conversation_index)}'
 
-parser = ArgumentParser()
+parser : ArgumentParser = ArgumentParser()
 parser.add_argument('--destination',help='address:port, other than 127.0.0.1:11118',default='127.0.0.1:11118')
 
 mode = parser.add_subparsers(dest='mode')
+print(type(mode))
 
 monitor_parser = mode.add_parser('monitor',help='Run the HaRe webservice, listening for RESTful requests.')
 monitor_parser.add_argument('model',type=str,help='The pretrained model to load')
@@ -63,20 +85,23 @@ utterance_parser.add_argument('speaker_id',type=str,help='The ID of the speaker 
 utterance_parser.add_argument('words',nargs=REMAINDER)
 
 args = parser.parse_args()
+print(type(args))
 
 if args.mode == 'monitor':
 
     print(f'Loading pretrained model {args.model}...')
-    print(f'HaRe is listening on port {args.destination}. To start monitoring the first conversation, send either an HTTP PUT request to {args.destination}/yourconvoid, or use the convenient client tool: \'bin/hare client convo yourconvoid\'')
+    print(f'HaRe will be listening on port {args.destination}. To start monitoring the first conversation, send either an HTTP PUT request to {args.destination}/yourconvoid, or use the convenient client tool: \'bin/hare client convo yourconvoid\'')
 
     host,port = args.destination.split(':')
     config.update({'server.socket_host': host,'server.socket_port': int(port)})
 
-    webservice = HareWebservice()
+    webservice : HareWebservice = HareWebservice()
     webservice.load_model(args.model)
     quickstart(webservice)
 
 elif args.mode == 'client':
+
+    url : str
 
     if args.request_type == 'status':
         url = f'http://{args.destination}/{args.conversation_id}'
@@ -90,7 +115,7 @@ elif args.mode == 'client':
 
     elif args.request_type == 'utterance':
         url = f'http://{args.destination}/{args.conversation_id}'
-        arguments = {'speaker':args.speaker_id,'utterance':' '.join(args.words)}
+        arguments : Dict[str,Any] = {'speaker':args.speaker_id,'utterance':' '.join(args.words)}
 
         print(f'Sending HTTP POST to {url} with arguments {arguments}.')
         print(post(url,arguments).text)
