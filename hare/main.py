@@ -6,6 +6,7 @@ from os import mkdir
 from os.path import dirname, abspath, isdir, realpath
 from urllib.request import urlretrieve
 from zipfile import ZipFile
+import numpy as np
 
 from hare.brain import AbstractBrain
 from hare.conversation import Conversation
@@ -114,7 +115,7 @@ class Hare():
                 texts.append(' LINEBREAK '.join(conversation.get_all_utterances_for_speaker(speaker)))
                 target.append(label)
 
-        self.brain.train(texts,target)
+        self.brain.train(np.array(texts),np.array(target))
 
     def save(self, location : str):
         self.brain.save(location)
